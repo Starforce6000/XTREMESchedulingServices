@@ -1,0 +1,12 @@
+Functional:
+-Manager should be able to create an optimized schedule based off of desired employee schedules and manager constraints
+-Manager should be able to add, remove, and update the information of employees
+-System should be able to create a list of all employees
+-Employee should be able to make requests for various schedule changes (PTO, Overtime, etc.)
+-Manager should be able to approve or deny employee requests
+-Employee/Manager should be able to print out schedules
+
+Non-Functional:
+-Operations in the system must all happen in a timely manner
+-System should be able to accommodate any number of employees and schedules
+-User interface should be intuitive and allow for simple and fast navigation
