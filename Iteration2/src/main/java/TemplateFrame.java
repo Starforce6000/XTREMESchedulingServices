@@ -2,10 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TemplateFrame extends JFrame {
+    String[] adList = {"John", "Rebecca", "Gabe"};
+    ArrayList<String> adminList = new ArrayList<>(List.of(adList));
+
     JFrame frame = new JFrame("XTreme Schedule Processing");
-    Boolean logged = true;
+    Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
     void run(){
         login();
@@ -37,6 +42,13 @@ public class TemplateFrame extends JFrame {
         JMenuItem print = new JMenuItem("Print");
         JButton addSchedule = new JButton("Add Schedule");
         JButton request = new JButton("Pending Requests");
+        JButton makeReq = new JButton("Make PTO Request");
+
+        if(!admin){
+            request.setEnabled(false);
+        }
+
+
 
         // Logout
         logout.addActionListener(new ActionListener() {
@@ -160,6 +172,13 @@ public class TemplateFrame extends JFrame {
             }
         });
 
+        makeReq.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // NEED TO ADD
+            }
+        });
+
 
         menu.add(print);
         menu.add(logout);
@@ -167,6 +186,7 @@ public class TemplateFrame extends JFrame {
         menuBar.add(menu);
         menuBar.add(addSchedule);
         menuBar.add(request);
+        menuBar.add(makeReq);
 
         return menuBar;
     }
@@ -215,6 +235,9 @@ public class TemplateFrame extends JFrame {
                 Add info to check login information
                  */
                 logged = true;
+                if(adminList.contains(user.getText())){
+                    admin = true;
+                }
                 loginForm.setVisible(false);
                 initFrame();
             }
