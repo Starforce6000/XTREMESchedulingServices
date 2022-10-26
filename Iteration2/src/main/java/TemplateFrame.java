@@ -9,7 +9,7 @@ public class TemplateFrame extends JFrame {
     String[] adList = {"John", "Rebecca", "Gabe"};
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
 
-    JFrame frame = new JFrame("XTreme Schedule Processing");
+    JFrame frame = new JFrame("XTREME Schedule Processing");
     Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
     void run(){
@@ -99,10 +99,6 @@ public class TemplateFrame extends JFrame {
                 JLabel l7 = new JLabel("Thursday");
                 JLabel l8 = new JLabel("Friday");
                 JLabel l9 = new JLabel("Saturday");
-
-
-                JButton can = new JButton("Cancel");
-                JButton add = new JButton("Add");
 
                 JTextField f1 = new JTextField();
                 JTextField f2 = new JTextField();
@@ -231,7 +227,7 @@ public class TemplateFrame extends JFrame {
         logButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /**
+                /*
                 Add info to check login information
                  */
                 logged = true;
@@ -248,7 +244,7 @@ public class TemplateFrame extends JFrame {
 
     }
 
-    JFrame userBar(){
+    void userBar(){
         // CHANGE TO REFLECT REAL USERS
         String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
         JComboBox<String> userList = new JComboBox<>(list);
@@ -283,8 +279,6 @@ public class TemplateFrame extends JFrame {
 
         frame.add(userList);
         frame.add(conf);
-
-        return frame;
     }
 
     void goodbye(){
@@ -298,7 +292,7 @@ public class TemplateFrame extends JFrame {
     }
 
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         TemplateFrame tmp = new TemplateFrame();
         tmp.run();
     }
