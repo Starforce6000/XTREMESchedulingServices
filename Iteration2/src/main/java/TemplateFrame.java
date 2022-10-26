@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class TemplateFrame extends JFrame {
     JFrame frame = new JFrame("XTreme Schedule Processing");
     Boolean logged = true;
+    SpringLayout layout = new SpringLayout();
     void run(){
         login();
     }
@@ -14,11 +15,13 @@ public class TemplateFrame extends JFrame {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,600);
+        frame.setLayout(layout);
 
 
         // Set the Main Menu
         if(logged) {
             frame.setJMenuBar(initHead());
+            userBar();
 
             //Set the Main Content
             //frame.add(initContent());
@@ -32,6 +35,8 @@ public class TemplateFrame extends JFrame {
         JMenu menu = new JMenu("Menu");
         JMenuItem logout = new JMenuItem("Logout");
         JMenuItem print = new JMenuItem("Print");
+        JButton addSchedule = new JButton("Add Schedule");
+        JButton request = new JButton("Pending Requests");
 
         // Logout
         logout.addActionListener(new ActionListener() {
@@ -67,7 +72,6 @@ public class TemplateFrame extends JFrame {
         });
 
 
-        JButton addSchedule = new JButton("Add Schedule");
         addSchedule.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -149,12 +153,20 @@ public class TemplateFrame extends JFrame {
             }
         });
 
+        request.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // NEED TO ADD
+            }
+        });
+
 
         menu.add(print);
         menu.add(logout);
 
         menuBar.add(menu);
         menuBar.add(addSchedule);
+        menuBar.add(request);
 
         return menuBar;
     }
@@ -213,9 +225,43 @@ public class TemplateFrame extends JFrame {
 
     }
 
-    JComponent initComponent(){
-        JPanel jp = new JPanel();
-        return jp;
+    JFrame userBar(){
+        // CHANGE TO REFLECT REAL USERS
+        String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
+        JComboBox<String> userList = new JComboBox<>(list);
+        JButton conf = new JButton("Find Employee");
+        conf.setSize(30,40);
+        userList.setSize(50,40);
+
+        conf.setVisible(true);
+        conf.setEnabled(false);
+        layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, userList);
+
+        userList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(userList.getSelectedItem().toString().equals("Employee")){
+                    conf.setEnabled(false);
+                }
+                else {
+                    conf.setEnabled(true);
+                }
+                // NEED TO FIX
+            }
+        });
+
+        conf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // NEED TO ADD FUNCTION
+            }
+        });
+
+        frame.add(userList);
+        frame.add(conf);
+
+        return frame;
     }
 
     void goodbye(){
