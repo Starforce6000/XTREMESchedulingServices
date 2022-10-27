@@ -9,6 +9,9 @@ public class TemplateFrame extends JFrame {
     String[] adList = {"John", "Rebecca", "Gabe"};
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
 
+    MyTableModel model = new MyTableModel(this);
+    JTable theTable = new JTable(model);
+
     JFrame frame = new JFrame("XTREME Schedule Processing");
     Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
@@ -27,9 +30,7 @@ public class TemplateFrame extends JFrame {
         if(logged) {
             frame.setJMenuBar(initHead());
             userBar();
-
-            //Set the Main Content
-            //frame.add(initContent());
+            initContent();
         }
 
 
@@ -42,7 +43,7 @@ public class TemplateFrame extends JFrame {
         JMenuItem print = new JMenuItem("Print");
         JButton addSchedule = new JButton("Add Schedule");
         JButton request = new JButton("Pending Requests");
-        JButton makeReq = new JButton("Make PTO Request");
+        JButton makeReq = new JButton("Make Request");
 
         if(!admin){
             request.setEnabled(false);
@@ -187,11 +188,19 @@ public class TemplateFrame extends JFrame {
         return menuBar;
     }
 
-    /*
-    void initContent(){
 
+    void initContent(){
+        theTable.setSize(500, 100);
+        theTable.setVisible(true);
+        JScrollPane scrolly = new JScrollPane(theTable);
+        layout.putConstraint(SpringLayout.NORTH, scrolly, 60, SpringLayout.NORTH, frame.getContentPane());
+        layout.putConstraint(SpringLayout.WEST, scrolly, 15, SpringLayout.WEST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.EAST, scrolly, -15, SpringLayout.EAST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.SOUTH, scrolly, -10, SpringLayout.SOUTH, frame.getContentPane());
+
+        frame.add(scrolly);
     }
-     */
+
 
     void login(){
         JFrame loginForm = new JFrame("XTREME Scheduling Services Login");
@@ -247,15 +256,22 @@ public class TemplateFrame extends JFrame {
     void userBar(){
         // CHANGE TO REFLECT REAL USERS
         String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
-        JComboBox<String> userList = new JComboBox<>(list);
+        String[] def = {"Employee"};
+        String[] newList = {"Employee","Cerny", "Fry", "Booth", "Donahoo"};
+        String[] departments = {"Department", "Cashiers", "Back-of-House", "Dream Killers"};
+        JComboBox<String> userList = new JComboBox<>(def);
+        JComboBox<String> depList = new JComboBox<>(departments);
         JButton conf = new JButton("Find Employee");
         conf.setSize(30,40);
+        depList.setSize(50, 40);
         userList.setSize(50,40);
 
         conf.setVisible(true);
         conf.setEnabled(false);
+        depList.setVisible(true);
         layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
-        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, userList);
+        layout.putConstraint(SpringLayout.EAST, depList, -5, SpringLayout.WEST, userList);
+        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depList);
 
         userList.addActionListener(new ActionListener() {
             @Override
@@ -270,6 +286,28 @@ public class TemplateFrame extends JFrame {
             }
         });
 
+        depList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // NEED TO FIX
+                switch(depList.getSelectedItem().toString()){
+                    case "Dream Killers":
+                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>(newList);
+                        userList.setModel(temp);
+                        break;
+                    case "Department":
+                        ComboBoxModel<String> tmp = new DefaultComboBoxModel<>(def);
+                        userList.setModel(tmp);
+                        conf.setEnabled(false);
+                        break;
+                    default:
+                        ComboBoxModel<String> temp1 = new DefaultComboBoxModel<>(list);
+                        userList.setModel(temp1);
+                }
+            }
+        });
+
         conf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -278,6 +316,7 @@ public class TemplateFrame extends JFrame {
         });
 
         frame.add(userList);
+        frame.add(depList);
         frame.add(conf);
     }
 
