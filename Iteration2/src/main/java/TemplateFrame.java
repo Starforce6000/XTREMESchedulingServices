@@ -338,6 +338,16 @@ public class TemplateFrame extends JFrame {
         goodbye.add(bye);
         goodbye.setVisible(true);
         goodbye.setSize(450,300);
+        new Thread(){
+            @Override
+            public void run() {
+                try(InputStream in = TemplateFrame.class.getResourceAsStream("/Logout.mp3")){
+                    new Player(in).play();
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+            }
+        }.start();
         goodbye.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
     }
 
