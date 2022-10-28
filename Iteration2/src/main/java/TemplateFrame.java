@@ -1,9 +1,14 @@
+import javax.sound.sampled.AudioInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javazoom.jl.player.Player;
+
 
 public class TemplateFrame extends JFrame {
     String[] adList = {"John", "Rebecca", "Gabe"};
@@ -17,6 +22,16 @@ public class TemplateFrame extends JFrame {
     SpringLayout layout = new SpringLayout();
     void run(){
         login();
+        new Thread(){
+            @Override
+            public void run() {
+                try(InputStream in = TemplateFrame.class.getResourceAsStream("/Explosion.mp3")){
+                    new Player(in).play();
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+            }
+        }.start();
     }
 
     void initFrame(){
@@ -27,11 +42,7 @@ public class TemplateFrame extends JFrame {
 
 
         // Set the Main Menu
-        if(logged) {
-            frame.setJMenuBar(initHead());
-            userBar();
-            initContent();
-        }
+        if(logged) { frame.setJMenuBar(initHead()); userBar(); initContent(); }
 
 
     }
