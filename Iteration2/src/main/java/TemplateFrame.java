@@ -341,7 +341,7 @@ public class TemplateFrame extends JFrame {
         new Thread(){
             @Override
             public void run() {
-                try(InputStream in = TemplateFrame.class.getResourceAsStream("/Logout.mp3")){
+                try(InputStream in = TemplateFrame.class.getResourceAsStream("/ByeByey.mp3")){
                     new Player(in).play();
                 }catch (Exception e){
                     System.out.println(e);
