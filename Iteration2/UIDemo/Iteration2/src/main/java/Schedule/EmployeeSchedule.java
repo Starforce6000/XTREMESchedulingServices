@@ -1,6 +1,6 @@
 package Schedule;
 
-import Models.Employee;
+import Models.*;
 
 public class EmployeeSchedule {
     Employee employee;

@@ -1,7 +1,6 @@
 package Schedule;
 
-import Models.Employee;
-
+import Models.*;
 import java.util.LinkedList;
 import java.util.List;
 

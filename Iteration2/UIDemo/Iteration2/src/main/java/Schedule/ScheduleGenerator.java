@@ -3,6 +3,7 @@ import Models.Department;
 
 import java.util.LinkedList;
 import java.util.List;
+import Models.*;
 
 public class ScheduleGenerator {
     Department department;
