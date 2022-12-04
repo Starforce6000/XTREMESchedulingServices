@@ -27,9 +27,9 @@ import javazoom.jl.player.Player;
 public class TemplateFrame extends JFrame {
     // Gets all Employee data
     EmployeeDAO employeeDAO = new EmployeeDAO();
-    ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
-    DepartmentDAO departmentDAO = new DepartmentDAO(employees);
-    ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
+    ArrayList<Employee> employees = new ArrayList<>();
+    DepartmentDAO departmentDAO;//= new DepartmentDAO(employees);
+    ArrayList<Department> departments;// = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
 
     RequestDAO requestDAO = new RequestDAO(employees);
     ArrayList<Request> requests = requestDAO.loadRequestsFromFile(new File("requests.csv"));
@@ -49,6 +49,14 @@ public class TemplateFrame extends JFrame {
     SpringLayout layout = new SpringLayout();
 
     public TemplateFrame() throws IOException {
+        employees.addAll(employeeDAO.loadEmployeesFromFile(new File("employee.csv")));
+        departmentDAO = new DepartmentDAO(employees);
+        departments = new ArrayList<>();
+        departments.addAll(departmentDAO.loadDepartmentFromFile(new File("department.csv")));
+        System.out.println("abc: " + employees.size());
+        for(Employee e : employees){
+            System.out.println(e.getDepartment().getName());
+        }
     }
 
     void run(){
@@ -474,5 +482,6 @@ public class TemplateFrame extends JFrame {
     public static void main(String[] args) throws IOException {
         TemplateFrame tmp = new TemplateFrame();
         tmp.run();
+
     }
 }

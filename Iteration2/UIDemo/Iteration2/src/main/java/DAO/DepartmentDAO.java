@@ -35,6 +35,9 @@ public class DepartmentDAO {
                 ArrayList<String> employee_ids = new ArrayList(List.of(line_data[3].split(" ")));
                 employees.removeIf(e -> !employee_ids.contains(String.valueOf(e.getId())));
                 department.setEmployeeList(employees);
+//                for(Employee e : department.getEmployees()){
+//                    e.setDepartment(department);
+//                }
                 departments.add(department);
             }
 
