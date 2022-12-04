@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Schedule {
 
+    String name;
     List<EmployeeSchedule> employeeSchedules = new LinkedList<EmployeeSchedule>();
 
     public EmployeeSchedule getSchedule(Employee employee) {
@@ -21,7 +22,19 @@ public class Schedule {
         return employeeSchedule;
     }
 
+    public List<EmployeeSchedule> getFullSchedule() {
+        return employeeSchedules;
+    }
+
     public void addEmployeeSchedule(EmployeeSchedule eSchedule) {
         employeeSchedules.add(eSchedule);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
