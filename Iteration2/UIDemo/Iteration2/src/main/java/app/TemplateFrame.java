@@ -1,3 +1,5 @@
+package app;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +25,7 @@ public class TemplateFrame extends JFrame {
     MyTableModel model = new MyTableModel(this);
     JTable theTable = new JTable(model);
 
-    JFrame frame = new JFrame("XTREME Schedule Processing");
+    JFrame frame = new JFrame("XTREME app.Schedule Processing");
     Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
     void run(){
@@ -50,7 +52,7 @@ public class TemplateFrame extends JFrame {
         JMenu menu = new JMenu("Menu");
         JMenuItem logout = new JMenuItem("Logout");
         JMenuItem print = new JMenuItem("Print");
-        JButton addSchedule = new JButton("Add Schedule");
+        JButton addSchedule = new JButton("Add app.Schedule");
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
 
@@ -97,7 +99,7 @@ public class TemplateFrame extends JFrame {
         addSchedule.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame addSched = new JFrame("Adding Schedule");
+                JFrame addSched = new JFrame("Adding app.Schedule");
                 addSched.setLayout(new GridLayout(10,2));
                 addSched.setSize(500,450);
                 JLabel l1 = new JLabel("User");
@@ -359,13 +361,13 @@ public class TemplateFrame extends JFrame {
 
     void userBar(){
         // CHANGE TO REFLECT REAL USERS
-        String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
-        String[] def = {"Employee"};
-        String[] newList = {"Employee","Cerny", "Fry", "Booth", "Donahoo"};
-        String[] departments = {"Department", "Cashiers", "Back-of-House", "Dream Killers"};
+        String[] list = {"Models.Employee","Suzzie", "Mike", "John", "Rebecca"};
+        String[] def = {"Models.Employee"};
+        String[] newList = {"Models.Employee","Cerny", "Fry", "Booth", "Donahoo"};
+        String[] departments = {"app.Department", "Cashiers", "Back-of-House", "Dream Killers"};
         JComboBox<String> userList = new JComboBox<>(def);
         JComboBox<String> depList = new JComboBox<>(departments);
-        JButton conf = new JButton("Find Employee");
+        JButton conf = new JButton("Find Models.Employee");
         conf.setSize(30,40);
         depList.setSize(50, 40);
         userList.setSize(50,40);
@@ -380,7 +382,7 @@ public class TemplateFrame extends JFrame {
         userList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(userList.getSelectedItem().toString().equals("Employee")){
+                if(userList.getSelectedItem().toString().equals("Models.Employee")){
                     conf.setEnabled(false);
                 }
                 else {
@@ -400,7 +402,7 @@ public class TemplateFrame extends JFrame {
                         ComboBoxModel<String> temp = new DefaultComboBoxModel<>(newList);
                         userList.setModel(temp);
                         break;
-                    case "Department":
+                    case "app.Department":
                         ComboBoxModel<String> tmp = new DefaultComboBoxModel<>(def);
                         userList.setModel(tmp);
                         conf.setEnabled(false);

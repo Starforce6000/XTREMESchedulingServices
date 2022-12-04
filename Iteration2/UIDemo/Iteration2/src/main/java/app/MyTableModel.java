@@ -1,3 +1,5 @@
+package app;
+
 import javax.swing.table.AbstractTableModel;
 
 class MyTableModel extends AbstractTableModel {

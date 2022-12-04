@@ -9,7 +9,7 @@ public class Request {
     String reason;
     RequestDay day;
 
-    //EmployeeSchedule sched;
+    //app.EmployeeSchedule sched;
 
     public Request() {
         status = RequestStatus.PENDING;
