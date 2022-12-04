@@ -5,7 +5,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.List;
 
 
@@ -17,7 +20,7 @@ public class TemplateFrame extends JFrame {
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
     JButton left = new JButton("<");
     JButton right = new JButton(">");
-    JTextField week = new JTextField("Week of: ");
+    JTextField week = new JTextField("Week of: 12/04 - 12/10");
 
     MyTableModel model = new MyTableModel(this);
     JTable theTable = new JTable(model);
@@ -35,6 +38,7 @@ public class TemplateFrame extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,600);
         frame.setLayout(layout);
+        theTable.setRowHeight(400);
 
 
         // Set the Main Menu
@@ -227,6 +231,70 @@ public class TemplateFrame extends JFrame {
         frame.add(week);
         frame.add(right);
         frame.add(scrolly);
+
+
+        left.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd");
+                Calendar d = new GregorianCalendar();
+                String[] dates = new String[2];
+                String text = week.getText();
+                String newLine = "Week of: ";
+                text = text.replace("Week of: ", "");
+                text = text.replace(" - ", ",");
+                dates = text.split(",");
+                try {
+                    d.setTime(format.parse(dates[0]));
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
+                d.add(Calendar.DATE, -7);
+                newLine = newLine.concat(format.format(d.getTime()));
+                newLine = newLine.concat(" - ");
+                try{
+                    d.setTime(format.parse(dates[1]));
+                }catch (ParseException ex){
+                    throw new RuntimeException(ex);
+                }
+                d.add(Calendar.DATE, -7);
+                newLine = newLine.concat(format.format(d.getTime()));
+
+                week.setText(newLine);
+            }
+        });
+
+        right.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd");
+                Calendar d = new GregorianCalendar();
+                String[] dates = new String[2];
+                String text = week.getText();
+                String newLine = "Week of: ";
+                text = text.replace("Week of: ", "");
+                text = text.replace(" - ", ",");
+                dates = text.split(",");
+                try {
+                    d.setTime(format.parse(dates[0]));
+                } catch (ParseException ex) {
+                    throw new RuntimeException(ex);
+                }
+                d.add(Calendar.DATE, 7);
+                newLine = newLine.concat(format.format(d.getTime()));
+                newLine = newLine.concat(" - ");
+                try{
+                    d.setTime(format.parse(dates[1]));
+                }catch (ParseException ex){
+                    throw new RuntimeException(ex);
+                }
+                d.add(Calendar.DATE, 7);
+                newLine = newLine.concat(format.format(d.getTime()));
+
+                week.setText(newLine);
+            }
+        });
+
     }
 
 
