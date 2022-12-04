@@ -5,13 +5,17 @@ import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+
 import javazoom.jl.player.Player;
 
 
 public class TemplateFrame extends JFrame {
     String[] adList = {"John", "Rebecca", "Gabe"};
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
-    CalendarProgram calendar = new CalendarProgram();
+    JButton left = new JButton("<");
+    JButton right = new JButton(">");
+    JTextField week = new JTextField("Week of: ");
 
     MyTableModel model = new MyTableModel(this);
     JTable theTable = new JTable(model);
@@ -20,6 +24,7 @@ public class TemplateFrame extends JFrame {
     Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
     void run(){
+        week.setEditable(false);
         login();
     }
 
@@ -31,7 +36,7 @@ public class TemplateFrame extends JFrame {
 
 
         // Set the Main Menu
-        if(logged) { frame.setJMenuBar(initHead()); userBar(); initContent(); }
+        if(logged) { frame.setJMenuBar(initHead()); userBar(); initCalendar(); }
 
 
     }
@@ -189,14 +194,37 @@ public class TemplateFrame extends JFrame {
     }
 
 
-    void initContent(){
-        Container panel = calendar.getPane();
-        layout.putConstraint(SpringLayout.NORTH, panel, 60, SpringLayout.NORTH, frame.getContentPane());
-        layout.putConstraint(SpringLayout.WEST, panel, 15, SpringLayout.WEST, frame.getContentPane());
-        layout.putConstraint(SpringLayout.EAST, panel, -15, SpringLayout.EAST, frame.getContentPane());
-        layout.putConstraint(SpringLayout.SOUTH, panel, -10, SpringLayout.SOUTH, frame.getContentPane());
+    void initCalendar(){
+        theTable.setSize(500,100);
+        theTable.setVisible(true);
+        left.setSize(15,15);
+        left.setVisible(true);
+        right.setSize(15,15);
+        right.setVisible(true);
+        week.setSize(320,30);
+        week.setHorizontalAlignment(JTextField.CENTER);
+        week.setVisible(true);
+        JScrollPane scrolly = new JScrollPane(theTable);
 
-        frame.add(panel);
+        layout.putConstraint(SpringLayout.NORTH, left, 40, SpringLayout.NORTH, frame.getContentPane());
+        layout.putConstraint(SpringLayout.WEST, left, 15, SpringLayout.WEST, frame.getContentPane());
+
+        layout.putConstraint(SpringLayout.NORTH, right, 40, SpringLayout.NORTH, frame.getContentPane());
+        layout.putConstraint(SpringLayout.EAST, right, -15, SpringLayout.EAST, frame.getContentPane());
+
+        layout.putConstraint(SpringLayout.NORTH,week, 40, SpringLayout.NORTH, frame.getContentPane());
+        layout.putConstraint(SpringLayout.WEST, week, 10, SpringLayout.EAST, left);
+        layout.putConstraint(SpringLayout.EAST, week, -10, SpringLayout.WEST, right);
+
+        layout.putConstraint(SpringLayout.NORTH, scrolly, 10, SpringLayout.SOUTH, week);
+        layout.putConstraint(SpringLayout.WEST, scrolly, 15, SpringLayout.WEST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.EAST, scrolly, -15, SpringLayout.EAST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.SOUTH, scrolly, -10, SpringLayout.SOUTH, frame.getContentPane());
+
+        frame.add(left);
+        frame.add(week);
+        frame.add(right);
+        frame.add(scrolly);
     }
 
 

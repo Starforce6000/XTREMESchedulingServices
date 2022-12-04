@@ -4,6 +4,7 @@ import Enums.Shift;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+package DAO;
 
 public class EmployeeDAO {
     public ArrayList<Employee> loadEmployeesFromFile(File file) throws IOException {
