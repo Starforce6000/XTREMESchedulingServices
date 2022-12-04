@@ -3,7 +3,7 @@ package Requests;
 import Enums.Day;
 import Enums.RequestType;
 import Enums.Shift;
-class RequestHandler {
+public class RequestHandler {
     Request request;
 
     public RequestHandler() {
