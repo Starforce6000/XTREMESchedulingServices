@@ -13,6 +13,8 @@ public class Employee {
     String email;
     Availability availability;
 
+    Boolean isManager;
+
     public int getId() {
         return id;
     }
@@ -52,4 +54,11 @@ public class Employee {
         return availability;
     }
 
+    public Boolean getManager() {
+        return isManager;
+    }
+
+    public void setManager(Boolean manager) {
+        isManager = manager;
+    }
 }

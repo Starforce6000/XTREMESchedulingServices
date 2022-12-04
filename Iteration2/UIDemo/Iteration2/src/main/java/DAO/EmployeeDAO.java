@@ -48,6 +48,11 @@ public class EmployeeDAO {
                     days.add(day);
                 }
                 Availability availability = new Availability(days, shift);
+                if(data[5].equalsIgnoreCase("y")) {
+                    e.setManager(true);
+                } else if(data[5].equalsIgnoreCase("n")) {
+                    e.setManager(false);
+                }
                 e.setAvailability(availability);
                 employeeList.add(e);
             }
