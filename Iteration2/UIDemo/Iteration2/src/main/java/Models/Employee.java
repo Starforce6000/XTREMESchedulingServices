@@ -61,4 +61,8 @@ public class Employee {
     public void setManager(Boolean manager) {
         isManager = manager;
     }
+
+    public void printData() {
+        System.out.println(id + "," + name + "," + email);
+    }
 }
