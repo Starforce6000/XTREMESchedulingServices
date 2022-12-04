@@ -22,7 +22,6 @@ public class ScheduleGenerator {
     }
 
     public Schedule generateSchedule(Department d, int perShift, List<Day> days, List<Shift> shifts, List<Employee> exclude) {
-        d.printData();
         List<Employee> employeeList = d.getEmployees();
         List<List<List<Employee>>> scheduleList = new ArrayList<List<List<Employee>>>();
 
@@ -32,22 +31,32 @@ public class ScheduleGenerator {
         int dayCounter = 0;
         int shiftCounter = 0;
 
+        for(Shift shift : shifts) {
+            shiftLocation.put(shift, shiftCounter);
+            System.out.println(shift +  "," + shiftCounter);
+            shiftCounter++;
+        }
+
         for(Day day : days) {
+            shiftCounter = 0;
             dayLocation.put(day, dayCounter);
             scheduleList.add(new ArrayList<List<Employee>>());
             dayCounter++;
             for(Shift shift : shifts) {
-                shiftLocation.put(shift, shiftCounter);
                 scheduleList.get(dayLocation.get(day)).add(new ArrayList<Employee>());
                 shiftCounter++;
             }
         }
 
         for(Employee employee : employeeList) {
-            System.out.println("Employee: " + employee.getName());
+            System.out.println(employee.getName());
+            Shift s = employee.getAvailability().getShift();
+            int sl = shiftLocation.get(s);
+            for(Day day : employee.getAvailability().getDays()) {
+                int dl = dayLocation.get(day);
+                scheduleList.get(dl).get(sl).add(employee);
+            }
         }
-
-        System.out.println("Got here");
 
         return schedule;
     }
@@ -58,15 +67,12 @@ public class ScheduleGenerator {
         EmployeeDAO employeeDAO = new EmployeeDAO();
         ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
 
-        for(Employee e : employees) {
-            e.printData();
-        }
-
         DepartmentDAO departmentDAO = new DepartmentDAO(employees);
         ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
 
         List<Day> days = Arrays.asList(Day.values());
-        List<Shift> shifts = Arrays.asList(Shift.values());
+        ArrayList<Shift> shifts = new ArrayList<>(Arrays.asList(Shift.values()));
+        shifts.remove(0);
         List<Employee> exclude = new LinkedList<>();
         sg.generateSchedule(departments.get(0), 0, days, shifts, exclude);
     }
