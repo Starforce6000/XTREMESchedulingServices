@@ -57,16 +57,17 @@ public class EmployeeDAO {
         }
         return employeeList;
     }
-    public static void main(String[] args) throws IOException {
-        System.out.println("Hello World");
-        EmployeeDAO dao = new EmployeeDAO();
-        ArrayList<Models.Employee> temp = dao.loadEmployeesFromFile(new File("employee.csv"));
-        for(Models.Employee t : temp){
-            System.out.println(t.getId());
-            System.out.println(t.getName());
-            System.out.println(t.getEmail());
-            t.getAvailability().printAvailability();
-        }
-    }
+
+//    public static void main(String[] args) throws IOException {
+//        System.out.println("Hello World");
+//        EmployeeDAO dao = new EmployeeDAO();
+//        ArrayList<Models.Employee> temp = dao.loadEmployeesFromFile(new File("employee.csv"));
+//        for(Models.Employee t : temp){
+//            System.out.println(t.getId());
+//            System.out.println(t.getName());
+//            System.out.println(t.getEmail());
+//            t.getAvailability().printAvailability();
+//        }
+//    }
 }
 
