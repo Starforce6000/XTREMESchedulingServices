@@ -4,6 +4,7 @@ import Models.Department;
 import java.util.LinkedList;
 import java.util.List;
 import Models.*;
+import Enums.*;
 
 public class ScheduleGenerator {
 
@@ -17,5 +18,11 @@ public class ScheduleGenerator {
         for(Employee employee : department.getEmployees()) {
             EmployeeSchedule eSchedule = new EmployeeSchedule(employee, newSchedule);
         }
+    }
+
+    public Schedule generateSchedule(int perShift, List<Day> days, List<Shift> shifts, List<Employee> exclude) {
+        
+
+        return schedule;
     }
 }
