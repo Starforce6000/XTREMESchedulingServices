@@ -31,9 +31,6 @@ public class DepartmentDAO {
                 department.setId(Integer.parseInt(line_data[0]));
                 department.setName(line_data[1]);
                 department.setManagerId(Integer.parseInt(line_data[2]));
-                // Gets all Employee data
-                // EmployeeDAO employeeDAO = new EmployeeDAO();
-                //ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
                 // If the employee id is in the department keep them in the list
                 ArrayList<String> employee_ids = new ArrayList(List.of(line_data[3].split(" ")));
                 employees.removeIf(e -> !employee_ids.contains(String.valueOf(e.getId())));
