@@ -1,7 +1,7 @@
-id, username, requestedDaysOff
-1, Chuck Norris, 1 2 3 4 5 
-2, John Rambo, 6 7 8 9 
-3, Tomas Cerny, 
-4, Bruce Willis, 1 
-5, Bruce Lee, 2
-6, Jackie Chan, 30 29 28 27 26 
+id, username, request type, requestData
+1, Chuck Norris, 4, M W
+2, John Rambo, 2, M Bruce LEE TR
+3, Tomas Cerny, 3, M T W TR F
+4, Bruce Willis, 1, swing M W F
+5, Bruce Lee, 2, TR John Rambo M
+6, Jackie Chan, 3,  M W
