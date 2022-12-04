@@ -118,7 +118,7 @@ public class MakeRequest extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 handler.setWorkdays(when);
-                handler.sethours(time);
+                handler.setHours(time);
                 handler.setReason(reasonField.getText());
                 reqInfo.setVisible(false);
             }

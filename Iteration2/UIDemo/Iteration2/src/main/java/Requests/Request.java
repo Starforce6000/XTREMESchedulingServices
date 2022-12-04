@@ -63,4 +63,16 @@ public class Request {
     public void setDay(RequestDay day) {
         this.day = day;
     }
+
+    public String printRequest() {
+        String temp = "";
+
+        temp += status.toString().toUpperCase() + ",";
+        temp += type.toString() + ",";
+        temp += day.getDay().toString() + ",";
+        temp += day.getShift().toString() + ",";
+        temp += reason;
+
+        return temp;
+    }
 }

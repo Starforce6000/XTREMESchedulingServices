@@ -1,0 +1,6 @@
+status,request type,day,shift,reason
+PENDING,RESCHEDULE,MONDAY,Night,dentist appointment @ 9:30
+PENDING,OVERTIME,WEDNESDAY,Swing,previous event canceled, free time
+DENIED,SWAP,TUESDAY,Day,just felt like it
+APPROVED,PTO,SATURDAY,Night,pick up kids from school
+APPROVED,RESCHEDULE,FRIDAY,Swing,open whenever

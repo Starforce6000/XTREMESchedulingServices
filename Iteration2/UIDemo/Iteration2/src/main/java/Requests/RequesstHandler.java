@@ -3,7 +3,6 @@ package Requests;
 import Enums.Day;
 import Enums.RequestType;
 import Enums.Shift;
-
 class RequestHandler {
     Request request;
 
@@ -19,7 +18,7 @@ class RequestHandler {
         request.getDay().setDay(day);
     }
 
-    public void sethours(Shift shift) {
+    public void setHours(Shift shift) {
         request.getDay().setShift(shift);
     }
 
