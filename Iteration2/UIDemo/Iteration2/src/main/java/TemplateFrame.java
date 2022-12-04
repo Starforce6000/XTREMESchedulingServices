@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.random.RandomGenerator;
+
 import javazoom.jl.player.Player;
 
 
@@ -31,7 +33,7 @@ public class TemplateFrame extends JFrame {
 
 
         // Set the Main Menu
-        if(logged) { frame.setJMenuBar(initHead()); userBar(); initContent(); }
+        if(logged) { frame.setJMenuBar(initHead()); userBar(); initCalendar(); }
 
 
     }
@@ -189,14 +191,17 @@ public class TemplateFrame extends JFrame {
     }
 
 
-    void initContent(){
-        Container panel = calendar.getPane();
+    void initCalendar(){
+        /*
+        JPanel panel;
         layout.putConstraint(SpringLayout.NORTH, panel, 60, SpringLayout.NORTH, frame.getContentPane());
         layout.putConstraint(SpringLayout.WEST, panel, 15, SpringLayout.WEST, frame.getContentPane());
         layout.putConstraint(SpringLayout.EAST, panel, -15, SpringLayout.EAST, frame.getContentPane());
         layout.putConstraint(SpringLayout.SOUTH, panel, -10, SpringLayout.SOUTH, frame.getContentPane());
 
         frame.add(panel);
+
+         */
     }
 
 
