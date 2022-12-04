@@ -348,8 +348,8 @@ public class TemplateFrame extends JFrame {
         JLabel userL = new JLabel("Username: ");
         JLabel passL = new JLabel("Password: ");
 
-        JTextField user = new JTextField("Username");
-        JPasswordField pass = new JPasswordField("Password");
+        JTextField user = new JTextField("");
+        JPasswordField pass = new JPasswordField("");
         JButton canButton = new JButton("Cancel");
         JButton logButton = new JButton("Login");
 
