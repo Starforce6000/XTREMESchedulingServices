@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.List;
 
 
+import Requests.MakeRequest;
 import javazoom.jl.player.Player;
 
 
@@ -185,7 +186,8 @@ public class TemplateFrame extends JFrame {
         makeReq.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // NEED TO ADD
+                MakeRequest makeRequest = new MakeRequest();
+                makeRequest.initRequest();
             }
         });
 

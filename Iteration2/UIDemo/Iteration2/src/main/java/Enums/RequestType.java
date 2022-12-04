@@ -2,7 +2,7 @@ package Enums;
 
 public enum RequestType {
 
-    RESCHEDULE("re"), SWAP("swp"), OVERTIME("ot"), PTO("pto");
+    RESCHEDULE("re"), SWAP("swp"), OVERTIME("ot"), PTO("pto"), SELECT("---");
 
     public final String type;
 
