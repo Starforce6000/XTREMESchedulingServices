@@ -8,7 +8,7 @@ public class Schedule {
     List<EmployeeSchedule> employeeSchedules = new LinkedList<EmployeeSchedule>();
 
     public EmployeeSchedule getSchedule(Employee employee) {
-        EmployeeSchedule employeeSchedule = new EmployeeSchedule();
+        EmployeeSchedule employeeSchedule = null;
 
         for(EmployeeSchedule eSchedule : employeeSchedules) {
             Employee e = eSchedule.getEmployee();
