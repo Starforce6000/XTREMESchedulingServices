@@ -16,9 +16,11 @@ import java.util.List;
 
 import DAO.DepartmentDAO;
 import DAO.EmployeeDAO;
+import DAO.RequestDAO;
 import Models.Department;
 import Models.Employee;
 import Requests.MakeRequest;
+import Requests.Request;
 import javazoom.jl.player.Player;
 
 
@@ -28,6 +30,9 @@ public class TemplateFrame extends JFrame {
     ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
     DepartmentDAO departmentDAO = new DepartmentDAO(employees);
     ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
+
+    RequestDAO requestDAO = new RequestDAO(employees);
+    ArrayList<Request> requests = requestDAO.loadRequestsFromFile(new File("requests.csv"));
 
     String[] adList = {"John", "Rebecca", "Gabe"};
     String jav;
