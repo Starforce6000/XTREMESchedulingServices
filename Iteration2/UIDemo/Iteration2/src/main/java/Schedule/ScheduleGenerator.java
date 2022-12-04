@@ -22,7 +22,8 @@ public class ScheduleGenerator {
     }
 
     public Schedule generateSchedule(Department d, int perShift, List<Day> days, List<Shift> shifts, List<Employee> exclude) {
-        List<Employee> employeeList = department.getEmployees();
+        d.printData();
+        List<Employee> employeeList = d.getEmployees();
         List<List<List<Employee>>> scheduleList = new ArrayList<List<List<Employee>>>();
 
         Map<Day, Integer> dayLocation = new HashMap<>();
@@ -46,15 +47,21 @@ public class ScheduleGenerator {
             System.out.println("Employee: " + employee.getName());
         }
 
+        System.out.println("Got here");
+
         return schedule;
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Hello World");
         ScheduleGenerator sg = new ScheduleGenerator();
 
         EmployeeDAO employeeDAO = new EmployeeDAO();
         ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
+
+        for(Employee e : employees) {
+            e.printData();
+        }
+
         DepartmentDAO departmentDAO = new DepartmentDAO(employees);
         ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
 
