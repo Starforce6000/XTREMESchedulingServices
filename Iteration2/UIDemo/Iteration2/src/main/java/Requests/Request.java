@@ -67,7 +67,7 @@ public class Request {
 
     public void setEmp(Employee emp) { this.emp = emp; }
 
-    public Employee getEmp(Employee emp) { return emp; }
+    public Employee getEmp() { return emp; }
 
     public String printRequest() {
         String temp = "";
