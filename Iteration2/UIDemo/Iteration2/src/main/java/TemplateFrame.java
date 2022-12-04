@@ -11,6 +11,7 @@ import javazoom.jl.player.Player;
 public class TemplateFrame extends JFrame {
     String[] adList = {"John", "Rebecca", "Gabe"};
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
+    CalendarProgram calendar = new CalendarProgram();
 
     MyTableModel model = new MyTableModel(this);
     JTable theTable = new JTable(model);
@@ -189,15 +190,13 @@ public class TemplateFrame extends JFrame {
 
 
     void initContent(){
-        theTable.setSize(500, 100);
-        theTable.setVisible(true);
-        JScrollPane scrolly = new JScrollPane(theTable);
-        layout.putConstraint(SpringLayout.NORTH, scrolly, 60, SpringLayout.NORTH, frame.getContentPane());
-        layout.putConstraint(SpringLayout.WEST, scrolly, 15, SpringLayout.WEST, frame.getContentPane());
-        layout.putConstraint(SpringLayout.EAST, scrolly, -15, SpringLayout.EAST, frame.getContentPane());
-        layout.putConstraint(SpringLayout.SOUTH, scrolly, -10, SpringLayout.SOUTH, frame.getContentPane());
+        Container panel = calendar.getPane();
+        layout.putConstraint(SpringLayout.NORTH, panel, 60, SpringLayout.NORTH, frame.getContentPane());
+        layout.putConstraint(SpringLayout.WEST, panel, 15, SpringLayout.WEST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.EAST, panel, -15, SpringLayout.EAST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.SOUTH, panel, -10, SpringLayout.SOUTH, frame.getContentPane());
 
-        frame.add(scrolly);
+        frame.add(panel);
     }
 
 
