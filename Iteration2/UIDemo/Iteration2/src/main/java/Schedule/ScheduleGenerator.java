@@ -33,23 +33,19 @@ public class ScheduleGenerator {
 
         for(Shift shift : shifts) {
             shiftLocation.put(shift, shiftCounter);
-            System.out.println(shift +  "," + shiftCounter);
             shiftCounter++;
         }
 
         for(Day day : days) {
-            shiftCounter = 0;
             dayLocation.put(day, dayCounter);
             scheduleList.add(new ArrayList<List<Employee>>());
             dayCounter++;
             for(Shift shift : shifts) {
                 scheduleList.get(dayLocation.get(day)).add(new ArrayList<Employee>());
-                shiftCounter++;
             }
         }
 
         for(Employee employee : employeeList) {
-            System.out.println(employee.getName());
             Shift s = employee.getAvailability().getShift();
             int sl = shiftLocation.get(s);
             for(Day day : employee.getAvailability().getDays()) {
@@ -57,6 +53,8 @@ public class ScheduleGenerator {
                 scheduleList.get(dl).get(sl).add(employee);
             }
         }
+
+        for(Array)
 
         return schedule;
     }
