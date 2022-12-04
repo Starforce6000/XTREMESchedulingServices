@@ -50,11 +50,26 @@ public class ScheduleGenerator {
             int sl = shiftLocation.get(s);
             for(Day day : employee.getAvailability().getDays()) {
                 int dl = dayLocation.get(day);
-                if((perShift > 0 && perShift < scheduleList.get(dl).get(sl).size()) || perShift == 0 ) {
+                if((perShift > 0 && perShift > scheduleList.get(dl).get(sl).size()) || perShift == 0 ) {
                     scheduleList.get(dl).get(sl).add(employee);
                     System.out.println(employee.getName() + " added to " + day + ", " + s);
+                } else {
+                    System.out.println(employee.getName() + " was not added to shift.");
                 }
             }
+        }
+
+        int counterI = 0;
+        int counterJ;
+        for(List<List<Employee>> i : scheduleList) {
+            counterJ = 0;
+            for(List<Employee> j : i) {
+                if(perShift > 0 && j.size() < perShift) {
+                    System.out.println("Could not add enough people to shift: " + counterI + "," + counterJ);
+                }
+                counterJ++;
+            }
+            counterI++;
         }
 
         return schedule;
@@ -71,11 +86,12 @@ public class ScheduleGenerator {
 
         ArrayList<Day> days = new ArrayList<>(Arrays.asList(Day.values()));
         days.remove(6);
+        days.remove(6);
         days.remove(0);
         ArrayList<Shift> shifts = new ArrayList<>(Arrays.asList(Shift.values()));
         shifts.remove(0);
         List<Employee> exclude = new LinkedList<>();
-        sg.generateSchedule(departments.get(0), 0, days, shifts, exclude);
+        sg.generateSchedule(departments.get(0), 2, days, shifts, exclude);
     }
 }
 
