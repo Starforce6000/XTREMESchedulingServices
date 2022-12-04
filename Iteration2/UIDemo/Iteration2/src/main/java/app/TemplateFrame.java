@@ -22,7 +22,7 @@ public class TemplateFrame extends JFrame {
     MyTableModel model = new MyTableModel(this);
     JTable theTable = new JTable(model);
 
-    JFrame frame = new JFrame("XTREME app.Schedule Processing");
+    JFrame frame = new JFrame("XTREME Schedule.Schedule Processing");
     Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
     void run(){
@@ -48,7 +48,7 @@ public class TemplateFrame extends JFrame {
         JMenu menu = new JMenu("Menu");
         JMenuItem logout = new JMenuItem("Logout");
         JMenuItem print = new JMenuItem("Print");
-        JButton addSchedule = new JButton("Add app.Schedule");
+        JButton addSchedule = new JButton("Add Schedule.Schedule");
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
 
@@ -95,7 +95,7 @@ public class TemplateFrame extends JFrame {
         addSchedule.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame addSched = new JFrame("Adding app.Schedule");
+                JFrame addSched = new JFrame("Adding Schedule.Schedule");
                 addSched.setLayout(new GridLayout(10,2));
                 addSched.setSize(500,450);
                 JLabel l1 = new JLabel("User");
@@ -296,7 +296,7 @@ public class TemplateFrame extends JFrame {
         String[] list = {"Models.Employee","Suzzie", "Mike", "John", "Rebecca"};
         String[] def = {"Models.Employee"};
         String[] newList = {"Models.Employee","Cerny", "Fry", "Booth", "Donahoo"};
-        String[] departments = {"app.Department", "Cashiers", "Back-of-House", "Dream Killers"};
+        String[] departments = {"Models.Department", "Cashiers", "Back-of-House", "Dream Killers"};
         JComboBox<String> userList = new JComboBox<>(def);
         JComboBox<String> depList = new JComboBox<>(departments);
         JButton conf = new JButton("Find Models.Employee");
@@ -334,7 +334,7 @@ public class TemplateFrame extends JFrame {
                         ComboBoxModel<String> temp = new DefaultComboBoxModel<>(newList);
                         userList.setModel(temp);
                         break;
-                    case "app.Department":
+                    case "Models.Department":
                         ComboBoxModel<String> tmp = new DefaultComboBoxModel<>(def);
                         userList.setModel(tmp);
                         conf.setEnabled(false);

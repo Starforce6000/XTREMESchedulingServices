@@ -1,7 +1,6 @@
 package Models;
 
 import app.Availability;
-import app.Department;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,9 +1,8 @@
-<<<<<<< HEAD:Iteration2/UIDemo/Iteration2/src/main/java/app/ScheduleGenerator.java
-package app;
-=======
+package Schedule;
+import Models.Department;
+
 import java.util.LinkedList;
 import java.util.List;
->>>>>>> 9a0c738a7cc338bb7fe48ec071dd4d57598aaf4b:Iteration2/UIDemo/Iteration2/src/main/java/ScheduleGenerator.java
 
 public class ScheduleGenerator {
     Department department;
