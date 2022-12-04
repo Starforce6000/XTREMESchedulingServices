@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -12,11 +14,20 @@ import java.util.*;
 import java.util.List;
 
 
+import DAO.DepartmentDAO;
+import DAO.EmployeeDAO;
+import Models.Department;
+import Models.Employee;
 import Requests.MakeRequest;
 import javazoom.jl.player.Player;
 
 
 public class TemplateFrame extends JFrame {
+    // Gets all Employee data
+    EmployeeDAO employeeDAO = new EmployeeDAO();
+    ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
+    DepartmentDAO departmentDAO = new DepartmentDAO(employees);
+    ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
 
     String[] adList = {"John", "Rebecca", "Gabe"};
     String jav;
@@ -31,6 +42,10 @@ public class TemplateFrame extends JFrame {
     JFrame frame = new JFrame("XTREME Schedule.Schedule Processing");
     Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
+
+    public TemplateFrame() throws IOException {
+    }
+
     void run(){
         week.setEditable(false);
         login();
@@ -451,7 +466,7 @@ public class TemplateFrame extends JFrame {
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         TemplateFrame tmp = new TemplateFrame();
         tmp.run();
     }

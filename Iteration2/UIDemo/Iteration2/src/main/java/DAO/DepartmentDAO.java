@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentDAO {
+    // Gets all Employee data
+    private ArrayList<Employee> employees;
+    public DepartmentDAO(ArrayList<Employee> employees){
+        this.employees = employees;
+    }
     public ArrayList<Department> loadDepartmentFromFile(File file) throws IOException {
         ArrayList<Department> departments = new ArrayList<Department> ();
         BufferedReader reader = null;
@@ -27,8 +32,8 @@ public class DepartmentDAO {
                 department.setName(line_data[1]);
                 department.setManagerId(Integer.parseInt(line_data[2]));
                 // Gets all Employee data
-                EmployeeDAO temp = new EmployeeDAO();
-                ArrayList<Employee> employees = temp.loadEmployeesFromFile(new File("employee.csv"));
+                // EmployeeDAO employeeDAO = new EmployeeDAO();
+                //ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
                 // If the employee id is in the department keep them in the list
                 ArrayList<String> employee_ids = new ArrayList(List.of(line_data[3].split(" ")));
                 employees.removeIf(e -> !employee_ids.contains(String.valueOf(e.getId())));
