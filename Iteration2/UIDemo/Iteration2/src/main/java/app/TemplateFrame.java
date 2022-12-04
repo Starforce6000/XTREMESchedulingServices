@@ -34,7 +34,7 @@ public class TemplateFrame extends JFrame {
     RequestDAO requestDAO = new RequestDAO(employees);
     ArrayList<Request> requests = requestDAO.loadRequestsFromFile(new File("requests.csv"));
 
-    String[] adList = {"John", "Rebecca", "Gabe"};
+    String[] adList = {"tcerny@example.com", "ghamerly@example.com", "cfry@example.com", "dbooth@example.com"};
     String jav;
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
     JButton left = new JButton("<");
@@ -83,6 +83,10 @@ public class TemplateFrame extends JFrame {
 
         // Set the Main Menu
         if(logged) { frame.setJMenuBar(initHead()); userBar(); initCalendar(); }
+        else{
+            frame.setVisible(false);
+            goodbye();
+        }
 
 
     }
@@ -99,7 +103,6 @@ public class TemplateFrame extends JFrame {
         if(!admin){
             request.setEnabled(false);
         }
-
 
 
         // Logout
@@ -348,8 +351,8 @@ public class TemplateFrame extends JFrame {
         JLabel userL = new JLabel("Username: ");
         JLabel passL = new JLabel("Password: ");
 
-        JTextField user = new JTextField("Username");
-        JPasswordField pass = new JPasswordField("Password");
+        JTextField user = new JTextField("");
+        JPasswordField pass = new JPasswordField("");
         JButton canButton = new JButton("Cancel");
         JButton logButton = new JButton("Login");
 
@@ -376,7 +379,14 @@ public class TemplateFrame extends JFrame {
                 /*
                 Add info to check login information
                  */
-                logged = true;
+                logged = false;
+                for(Employee employee:employees){
+                    if(employee.getEmail().equals(user.getText())){
+                        if(employee.getPassword().equals(pass.getText())){
+                            logged = true;
+                        }
+                    }
+                }
                 if(adminList.contains(user.getText())){
                     admin = true;
                 }

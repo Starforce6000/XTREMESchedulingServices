@@ -13,7 +13,6 @@ import Enums.*;
 
 public class ScheduleGenerator {
 
-    Department department;
     Schedule schedule;
     List<EmployeeSchedule> employeeSchedules = new LinkedList<EmployeeSchedule>();
 
@@ -45,16 +44,45 @@ public class ScheduleGenerator {
             }
         }
 
+        List<Employee> working = new LinkedList<>();
+
         for(Employee employee : employeeList) {
             Shift s = employee.getAvailability().getShift();
             int sl = shiftLocation.get(s);
             for(Day day : employee.getAvailability().getDays()) {
                 int dl = dayLocation.get(day);
-                scheduleList.get(dl).get(sl).add(employee);
+                if((perShift > 0 && perShift > scheduleList.get(dl).get(sl).size()) || perShift == 0 ) {
+                    scheduleList.get(dl).get(sl).add(employee);
+                    System.out.println(employee.getName() + " added to " + day + ", " + s);
+                    if(!working.contains(employee)) {
+                        working.add(employee);
+                    }
+                } else {
+                    System.out.println(employee.getName() + " was not added to shift.");
+                }
             }
         }
 
-        for(Array)
+//        int counterI = 0;
+//        int counterJ;
+//        for(List<List<Employee>> i : scheduleList) {
+//            counterJ = 0;
+//            for(List<Employee> j : i) {
+//                if(perShift > 0 && j.size() < perShift) {
+//                    System.out.println("Could not add enough people to shift: " + counterI + "," + counterJ);
+//                }
+//                counterJ++;
+//            }
+//            counterI++;
+//        }
+
+        for(Employee e : employeeList) {
+            if(working.contains(e)) {
+                System.out.println(e.getName() + " working");
+
+                EmployeeSchedule newSchedule = new EmployeeSchedule(e, schedule);
+            }
+        }
 
         return schedule;
     }
@@ -68,11 +96,14 @@ public class ScheduleGenerator {
         DepartmentDAO departmentDAO = new DepartmentDAO(employees);
         ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
 
-        List<Day> days = Arrays.asList(Day.values());
+        ArrayList<Day> days = new ArrayList<>(Arrays.asList(Day.values()));
+        days.remove(6);
+        days.remove(6);
+        days.remove(0);
         ArrayList<Shift> shifts = new ArrayList<>(Arrays.asList(Shift.values()));
         shifts.remove(0);
         List<Employee> exclude = new LinkedList<>();
-        sg.generateSchedule(departments.get(0), 0, days, shifts, exclude);
+        sg.generateSchedule(departments.get(0), 1, days, shifts, exclude);
     }
 }
 

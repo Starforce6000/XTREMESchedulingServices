@@ -49,6 +49,12 @@ public class EmployeeDAO {
                 }
                 Availability availability = new Availability(days, shift);
                 e.setAvailability(availability);
+                if(data[5].equalsIgnoreCase("Y")){
+                    e.setManager(true);
+                }else{
+                    e.setManager(false);
+                }
+                e.setPassword(data[6]);
                 employeeList.add(e);
             }
 
