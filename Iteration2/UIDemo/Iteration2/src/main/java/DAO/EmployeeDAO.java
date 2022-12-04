@@ -1,10 +1,13 @@
+package DAO;
+
 import Enums.Day;
 import Enums.Shift;
+import Models.Employee;
+import app.Availability;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-package DAO;
 
 public class EmployeeDAO {
     public ArrayList<Employee> loadEmployeesFromFile(File file) throws IOException {
@@ -54,8 +57,8 @@ public class EmployeeDAO {
 //    public static void main(String[] args) throws IOException {
 //        System.out.println("Hello World");
 //        EmployeeDAO dao = new EmployeeDAO();
-//        ArrayList<Employee> temp = dao.loadEmployeesFromFile(new File("/Users/bradbuckingham/Desktop/Baylor-Semester-Courses/FA-22/SWE-1/Git-Repo/Group-Project/XTREMESchedulingServices/Iteration2/UIDemo/Iteration2/employee.csv"));
-//        for(Employee t : temp){
+//        ArrayList<Models.Employee> temp = dao.loadEmployeesFromFile(new File("/Users/bradbuckingham/Desktop/Baylor-Semester-Courses/FA-22/SWE-1/Git-Repo/Group-Project/XTREMESchedulingServices/Iteration2/UIDemo/Iteration2/employee.csv"));
+//        for(Models.Employee t : temp){
 //            System.out.println(t.getId());
 //            System.out.println(t.getName());
 //            System.out.println(t.getEmail());
