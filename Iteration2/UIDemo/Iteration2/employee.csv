@@ -1,10 +1,10 @@
 id,username,email,shift type,Working Day,Manager
-1,Tomas Cerny,tcerny@example.com,day,M W F,Y
-2,John Rambo,jrambo@example.com,swing,M W F,N
-3,Chuck Norris,cnorris@example.com,night,M W F,N
-4,Bruce Willis,bwillis@example.com,day,T TR,N
-5,Bruce Lee,blee@example.com,swing,T TR,N
-6,Jackie Chan,jchan@example.com,night,T TR,N
+1,Tomas Cerny,tcerny@example.com,day,M T W TR F,Y
+2,John Rambo,jrambo@example.com,swing,M T W TR F,N
+3,Chuck Norris,cnorris@example.com,night,M T W TR F,N
+4,Bruce Willis,bwillis@example.com,day,M T W TR F,N
+5,Bruce Lee,blee@example.com,swing,M T W TR F,N
+6,Jackie Chan,jchan@example.com,night,M T W TR F,N
 7,DR. DOCTOR Booth,dbooth@example.com,day,M W F,Y
 8,John Cena,jcena@example.com,swing,M W F,N
 9,Peter Parker,pparker@example.com,night,M W F,N

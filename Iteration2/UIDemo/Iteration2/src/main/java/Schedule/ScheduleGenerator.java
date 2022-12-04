@@ -50,11 +50,12 @@ public class ScheduleGenerator {
             int sl = shiftLocation.get(s);
             for(Day day : employee.getAvailability().getDays()) {
                 int dl = dayLocation.get(day);
-                scheduleList.get(dl).get(sl).add(employee);
+                if((perShift > 0 && perShift < scheduleList.get(dl).get(sl).size()) || perShift == 0 ) {
+                    scheduleList.get(dl).get(sl).add(employee);
+                    System.out.println(employee.getName() + " added to " + day + ", " + s);
+                }
             }
         }
-
-        for(Array)
 
         return schedule;
     }
@@ -68,7 +69,9 @@ public class ScheduleGenerator {
         DepartmentDAO departmentDAO = new DepartmentDAO(employees);
         ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
 
-        List<Day> days = Arrays.asList(Day.values());
+        ArrayList<Day> days = new ArrayList<>(Arrays.asList(Day.values()));
+        days.remove(6);
+        days.remove(0);
         ArrayList<Shift> shifts = new ArrayList<>(Arrays.asList(Shift.values()));
         shifts.remove(0);
         List<Employee> exclude = new LinkedList<>();
