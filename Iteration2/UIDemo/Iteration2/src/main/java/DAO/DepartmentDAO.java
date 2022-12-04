@@ -13,9 +13,9 @@ import java.util.List;
 
 public class DepartmentDAO {
     // Gets all Employee data
-    private ArrayList<Employee> employees;
+    private ArrayList<Employee> employees = new ArrayList<>();
     public DepartmentDAO(ArrayList<Employee> employees){
-        this.employees = employees;
+        this.employees.addAll(employees);
     }
     public ArrayList<Department> loadDepartmentFromFile(File file) throws IOException {
         ArrayList<Department> departments = new ArrayList<Department> ();

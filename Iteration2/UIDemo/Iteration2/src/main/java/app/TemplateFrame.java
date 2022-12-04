@@ -51,12 +51,21 @@ public class TemplateFrame extends JFrame {
     public TemplateFrame() throws IOException {
         employees.addAll(employeeDAO.loadEmployeesFromFile(new File("employee.csv")));
         departmentDAO = new DepartmentDAO(employees);
+
         departments = new ArrayList<>();
         departments.addAll(departmentDAO.loadDepartmentFromFile(new File("department.csv")));
-        System.out.println("abc: " + employees.size());
-        for(Employee e : employees){
-            System.out.println(e.getDepartment().getName());
+
+        for(Department d : departments) {
+            System.out.println(d.getId() + ": ");
+            for(Employee e : d.getEmployees()) {
+                e.printData();
+            }
         }
+
+        System.out.println("number of employees: " + employees.size());
+        /*for(Employee e : employees){
+            System.out.println(e.getDepartment().getName());
+        }*/
     }
 
     void run(){
