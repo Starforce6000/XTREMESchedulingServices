@@ -1,7 +1,7 @@
-id, username, email, shift type, Working Day
-1, Chuck Norris, cnorris@example.com, day, M W F
-2, John Rambo,  jrambo@example.com, swing, M W F
-3, Tomas Cerny, tcerrny@example.com, night, M W F
-4, Bruce Willis,  bwillis@example.com, day, T TR
-5, Bruce Lee, blee@example.com, swing, T TR
-6, Jackie Chan, jchan@example.com, night, T TR
+id,username,email,shift type,Working Day
+1,Chuck Norris,cnorris@example.com,day,M W F
+2,John Rambo,jrambo@example.com,swing,M W F
+3,Tomas Cerny,tcerrny@example.com,night,M W F
+4,Bruce Willis,bwillis@example.com,day,T TR
+5,Bruce Lee,blee@example.com,swing,T TR
+6,Jackie Chan,jchan@example.com,night,T TR

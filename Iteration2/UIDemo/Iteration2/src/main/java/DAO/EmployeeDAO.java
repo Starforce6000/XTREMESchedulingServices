@@ -7,6 +7,7 @@ import app.Availability;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class EmployeeDAO {
@@ -28,11 +29,11 @@ public class EmployeeDAO {
                 Shift shift = Shift.Day;
                 if (data[3].equalsIgnoreCase("night")){
                     shift = Shift.Night;
-                } else if (data[3].equalsIgnoreCase("swing")){
+                } else if (data[3].equalsIgnoreCase("swing")) {
                     shift = Shift.Swing;
                 }
-                List<Availability> availabilityList = e.getAvailability();
                 String[] shiftData = data[4].split(" ");
+                List<Day> days = new LinkedList<>();
                 for(String str : shiftData){
                     Day day = Day.FRIDAY;
                     if(str.equalsIgnoreCase("M")){
@@ -44,9 +45,10 @@ public class EmployeeDAO {
                     }else if(str.equalsIgnoreCase("TR")){
                         day = Day.THURSDAY;
                     }
-                    availabilityList.add(new Availability(day, shift));
+                    days.add(day);
                 }
-                e.setAvailabilityList(availabilityList);
+                Availability availability = new Availability(days, shift);
+                e.setAvailability(availability);
                 employeeList.add(e);
             }
 
@@ -55,15 +57,16 @@ public class EmployeeDAO {
         }
         return employeeList;
     }
-//    public static void main(String[] args) throws IOException {
-//        System.out.println("Hello World");
-//        EmployeeDAO dao = new EmployeeDAO();
-//        ArrayList<Models.Employee> temp = dao.loadEmployeesFromFile(new File("/Users/bradbuckingham/Desktop/Baylor-Semester-Courses/FA-22/SWE-1/Git-Repo/Group-Project/XTREMESchedulingServices/Iteration2/UIDemo/Iteration2/employee.csv"));
-//        for(Models.Employee t : temp){
-//            System.out.println(t.getId());
-//            System.out.println(t.getName());
-//            System.out.println(t.getEmail());
-//        }
-//    }
+    public static void main(String[] args) throws IOException {
+        System.out.println("Hello World");
+        EmployeeDAO dao = new EmployeeDAO();
+        ArrayList<Models.Employee> temp = dao.loadEmployeesFromFile(new File("employee.csv"));
+        for(Models.Employee t : temp){
+            System.out.println(t.getId());
+            System.out.println(t.getName());
+            System.out.println(t.getEmail());
+            t.getAvailability().printAvailability();
+        }
+    }
 }
 

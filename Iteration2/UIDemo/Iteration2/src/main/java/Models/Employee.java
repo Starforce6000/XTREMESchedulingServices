@@ -11,8 +11,7 @@ public class Employee {
     String name;
     Department department;
     String email;
-    List<Availability> availabilityList = new LinkedList<Availability>();
-
+    Availability availability;
 
     public int getId() {
         return id;
@@ -46,11 +45,11 @@ public class Employee {
         this.email = email;
     }
 
-    public void setAvailabilityList(List<Availability> availabilityList) {
-        this.availabilityList = availabilityList;
+    public void setAvailability(Availability availability) {
+        this.availability = availability;
     }
-    public List<Availability> getAvailability() {
-        return availabilityList;
+    public Availability getAvailability() {
+        return availability;
     }
 
 }
