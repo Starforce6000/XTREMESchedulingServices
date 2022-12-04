@@ -1,7 +1,25 @@
-id,username,email,shift type,Working Day
-1,Chuck Norris,cnorris@example.com,day,M W F
-2,John Rambo,jrambo@example.com,swing,M W F
-3,Tomas Cerny,tcerrny@example.com,night,M W F
-4,Bruce Willis,bwillis@example.com,day,T TR
-5,Bruce Lee,blee@example.com,swing,T TR
-6,Jackie Chan,jchan@example.com,night,T TR
+id,username,email,shift type,Working Day,Manager
+1,Tomas Cerny,tcerny@example.com,day,M W F,Y
+2,John Rambo,jrambo@example.com,swing,M W F,N
+3,Chuck Norris,cnorris@example.com,night,M W F,N
+4,Bruce Willis,bwillis@example.com,day,T TR,N
+5,Bruce Lee,blee@example.com,swing,T TR,N
+6,Jackie Chan,jchan@example.com,night,T TR,N
+7,DR. DOCTOR Booth,dbooth@example.com,day,M W F,Y
+8,John Cena,jcena@example.com,swing,M W F,N
+9,Peter Parker,pparker@example.com,night,M W F,N
+10,Bruce Wayne,bwyane@example.com,day,T TR,N
+11,Clark Kent,ckent@example.com,swing,T TR,N
+12,Flash Thompson,fthompson@example.com,night,T TR,N
+13,Cindy Fry,cfry@example.com,day,M W F,Y
+14,Joe Dirt,jdirt@example.com,swing,M W F,N
+15,John Wayne,jwayne@example.com,night,M W F,N
+16,Tom Holland,tholland@example.com,day,T TR,N
+17,Eddie Murphy,emurphy@example.com,swing,T TR,N
+18,Chris Tucker,ctucker@example.com,night,T TR,N
+19,Greg Hamerly,ghamerly@example.com,day,M W F,Y
+20,Marshall Mathers,mmathers@example.com,swing,M W F,N
+21,Lil Wayne,lwayne@example.com,night,M W F,N
+22,J Cole,jcole@example.com,day,T TR,N
+23,T Payne,tpayne@example.com,swing,T TR,N
+24,Mac Miller,mmiller@example.com,night,T TR,N
