@@ -54,6 +54,7 @@ public class EmployeeDAO {
                 }else{
                     e.setManager(false);
                 }
+                e.setPassword(data[6]);
                 employeeList.add(e);
             }
 
