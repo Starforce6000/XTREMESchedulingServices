@@ -4,6 +4,7 @@ import Enums.Day;
 import Enums.Shift;
 
 public class Availability {
+
     Day day;
     Shift shift;
     public Availability(Day day, Shift shift){

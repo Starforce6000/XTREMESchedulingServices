@@ -4,6 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 class MyTableModel extends AbstractTableModel {
     private final TemplateFrame lab7;
+
     private String[] columnNames = {"Sunday",
             "Monday",
             "Tuesday",

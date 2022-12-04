@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDAO {
+
     public ArrayList<Employee> loadEmployeesFromFile(File file) throws IOException {
         ArrayList<Employee> employeeList = new ArrayList<Employee> ();
         BufferedReader reader = null;

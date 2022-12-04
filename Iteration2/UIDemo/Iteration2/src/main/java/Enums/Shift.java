@@ -1,6 +1,7 @@
 package Enums;
 
 public enum Shift {
+
     Day("Day"), Night("Night"), Swing("Swing");
 
     public final String shift;

@@ -3,6 +3,7 @@ package Schedule;
 import Models.*;
 
 public class EmployeeSchedule {
+
     Employee employee;
     Schedule schedule;
 

@@ -4,6 +4,7 @@ import Enums.RequestStatus;
 import Enums.RequestType;
 
 public class Request {
+
     RequestStatus status;
     RequestType type;
     String reason;

@@ -6,6 +6,7 @@ import java.util.List;
 import Models.*;
 
 public class ScheduleGenerator {
+
     Department department;
     Schedule schedule;
     List<EmployeeSchedule> employeeSchedules = new LinkedList<EmployeeSchedule>();

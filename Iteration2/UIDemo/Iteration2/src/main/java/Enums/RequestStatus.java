@@ -1,6 +1,7 @@
 package Enums;
 
 public enum RequestStatus {
+
     APPROVED("Approved"), DENIED("Denied"), PENDING("Pending");
 
     public final String state;

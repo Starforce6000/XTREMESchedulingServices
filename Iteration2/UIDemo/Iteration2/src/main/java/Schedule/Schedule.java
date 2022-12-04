@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Schedule {
+
     List<EmployeeSchedule> employeeSchedules = new LinkedList<EmployeeSchedule>();
 
     public EmployeeSchedule getSchedule(Employee employee) {

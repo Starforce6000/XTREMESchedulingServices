@@ -16,6 +16,7 @@ import javazoom.jl.player.Player;
 
 
 public class TemplateFrame extends JFrame {
+
     String[] adList = {"John", "Rebecca", "Gabe"};
     String jav;
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
