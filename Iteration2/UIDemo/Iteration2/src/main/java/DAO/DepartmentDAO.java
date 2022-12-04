@@ -1,10 +1,8 @@
 package DAO;
 
-import Enums.Day;
-import Enums.Shift;
 import Models.Department;
 import Models.Employee;
-import app.Availability;
+
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +30,7 @@ public class DepartmentDAO {
                 EmployeeDAO temp = new EmployeeDAO();
                 ArrayList<Employee> employees = temp.loadEmployeesFromFile(new File("employee.csv"));
                 // If the employee id is in the department keep them in the list
-                ArrayList<String> employee_ids = new ArrayList(List.of(line_data[4].split(" ")));
+                ArrayList<String> employee_ids = new ArrayList(List.of(line_data[3].split(" ")));
                 employees.removeIf(e -> !employee_ids.contains(String.valueOf(e.getId())));
                 department.setEmployeeList(employees);
                 departments.add(department);
@@ -44,5 +42,12 @@ public class DepartmentDAO {
         return departments;
     }
 
-
+//    public static void main(String[] args) throws IOException {
+//        System.out.println("Hello World");
+//        DepartmentDAO dao = new DepartmentDAO();
+//        ArrayList<Department> temp = dao.loadDepartmentFromFile(new File("department.csv"));
+//        for(Department t : temp){
+//            t.printData();
+//        }
+//    }
 }

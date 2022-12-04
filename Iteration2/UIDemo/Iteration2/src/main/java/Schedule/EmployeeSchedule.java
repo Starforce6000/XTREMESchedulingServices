@@ -1,11 +1,16 @@
 package Schedule;
 
 import Models.*;
+import Enums.*;
+
+import java.util.List;
 
 public class EmployeeSchedule {
 
     Employee employee;
     Schedule schedule;
+    List<Day> workdays;
+    Shift shift;
 
     public EmployeeSchedule() {}
 

@@ -43,4 +43,14 @@ public class Department {
     public void setEmployeeList(List<Employee> employeeList) {
         this.employeeList = employeeList;
     }
+
+    public void printData(){
+        System.out.println(getId());
+        System.out.println(getName());
+        System.out.println(getManagerId());
+        for(Employee e: getEmployees()){
+            System.out.println(e.id);
+            System.out.println(e.name);
+        }
+    }
 }
