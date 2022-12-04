@@ -56,7 +56,7 @@ public class TemplateFrame extends JFrame {
         departments.addAll(departmentDAO.loadDepartmentFromFile(new File("department.csv")));
 
         for(Department d : departments) {
-            System.out.println(d.getId() + ": ");
+            System.out.println(d.getName() + ": ");
             for(Employee e : d.getEmployees()) {
                 e.printData();
             }

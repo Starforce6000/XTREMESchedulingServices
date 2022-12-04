@@ -13,7 +13,7 @@ public class Employee {
     String email;
     Availability availability;
 
-    Boolean isManager;
+    Boolean isManager = false;
 
     public int getId() {
         return id;
@@ -63,6 +63,12 @@ public class Employee {
     }
 
     public void printData() {
-        System.out.println(id + "," + name + "," + email);
+        String temp = id + "," + name + "," + email + ",";
+        if(isManager) {
+            temp += "Y";
+        } else {
+            temp += "N";
+        }
+        System.out.println(temp);
     }
 }

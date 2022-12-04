@@ -19,6 +19,8 @@ public class DepartmentDAO {
     }
     public ArrayList<Department> loadDepartmentFromFile(File file) throws IOException {
         ArrayList<Department> departments = new ArrayList<Department> ();
+        ArrayList<Employee> temp = new ArrayList<>();
+        //temp.addAll(employees);
         BufferedReader reader = null;
         try{
             reader = new BufferedReader(new FileReader(file));
@@ -33,8 +35,9 @@ public class DepartmentDAO {
                 department.setManagerId(Integer.parseInt(line_data[2]));
                 // If the employee id is in the department keep them in the list
                 ArrayList<String> employee_ids = new ArrayList(List.of(line_data[3].split(" ")));
-                employees.removeIf(e -> !employee_ids.contains(String.valueOf(e.getId())));
-                department.setEmployeeList(employees);
+                temp.addAll(employees);
+                temp.removeIf(e -> !employee_ids.contains(String.valueOf(e.getId())));
+                department.setEmployeeList(temp);
 //                for(Employee e : department.getEmployees()){
 //                    e.setDepartment(department);
 //                }
