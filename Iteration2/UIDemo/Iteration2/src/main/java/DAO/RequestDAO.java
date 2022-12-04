@@ -4,6 +4,7 @@ import Enums.Day;
 import Enums.RequestStatus;
 import Enums.RequestType;
 import Enums.Shift;
+import Models.Employee;
 import Requests.Request;
 import Requests.RequestDay;
 
@@ -14,6 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RequestDAO {
+    private ArrayList<Employee> employees;
+
+    public RequestDAO(ArrayList<Employee> employees){
+        this.employees = employees;
+    }
     public ArrayList<Request> loadRequestsFromFile(File file) throws IOException {
         ArrayList<Request> requestList = new ArrayList<>();
         BufferedReader reader = null;
@@ -30,13 +36,19 @@ public class RequestDAO {
                 Request r = new Request();
                 String[] data = line.split(",");
 
-                r.setStatus(RequestStatus.valueOf(data[0]));
-                r.setType(RequestType.valueOf(data[1]));
+                int userID = Integer.valueOf(data[0]);
+                for(Employee e : employees) {
+                    if(e.getId() == userID) {
+                        r.setEmp(e);
+                    }
+                }
+                r.setStatus(RequestStatus.valueOf(data[1]));
+                r.setType(RequestType.valueOf(data[2]));
                 RequestDay reqD = new RequestDay();
-                reqD.setDay(Day.valueOf(data[2]));
-                reqD.setShift(Shift.valueOf(data[3]));
+                reqD.setDay(Day.valueOf(data[3]));
+                reqD.setShift(Shift.valueOf(data[4]));
                 r.setDay(reqD);
-                r.setReason(data[4]);
+                r.setReason(data[5]);
 
                 requestList.add(r);
             }

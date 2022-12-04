@@ -3,6 +3,7 @@ package Requests;
 import Enums.Day;
 import Enums.RequestStatus;
 import Enums.RequestType;
+import Models.Employee;
 
 public class Request {
 
@@ -11,7 +12,7 @@ public class Request {
     String reason;
     RequestDay day = new RequestDay();
 
-    //Schedule.EmployeeSchedule sched;
+    Employee emp;
 
     public Request() {
         status = RequestStatus.PENDING;
@@ -64,9 +65,14 @@ public class Request {
         this.day = day;
     }
 
+    public void setEmp(Employee emp) { this.emp = emp; }
+
+    public Employee getEmp(Employee emp) { return emp; }
+
     public String printRequest() {
         String temp = "";
 
+        temp += emp.getId() + ",";
         temp += status.toString().toUpperCase() + ",";
         temp += type.toString() + ",";
         temp += day.getDay().toString() + ",";
