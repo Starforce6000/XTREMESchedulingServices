@@ -72,11 +72,11 @@ public class InitFrame extends JFrame{
         frame.setSize(800,400);
         frame.setLayout(layout);
         theTable.setRowHeight(50);
+        theTable.getColumnModel().getColumn(0).setPreferredWidth(60);
         theTable.getColumnModel().getColumn(1).setPreferredWidth(120);
         for (int i = 2; i < theTable.getColumnCount(); i++) {
             theTable.getColumnModel().getColumn(i).setCellRenderer(new StatusColumnCellRenderer());
         }
-
 
         // Set the Main Menu
         if(logged) {
@@ -518,20 +518,29 @@ public class InitFrame extends JFrame{
                         counter = counter % 7;
                     }
 
-                    counter = 0;
+                    counter = 2;
                     for (String str : dayShift) {
-                        tableModel.setValueAt(str, 0, counter);
+                        tableModel.setValueAt(" ", 0, counter);
+                        tableModel.setValueAt(" ", 1, counter);
+                        tableModel.setValueAt(" ", 2, counter);
+                        if(str == "Swing") {
+                            tableModel.setValueAt(str, 1, counter);
+                        } else if(str.equals("Night")) {
+                            tableModel.setValueAt(str, 2, counter);
+                        } else {
+                            tableModel.setValueAt(str, 0, counter);
+                        }
                         counter++;
                     }
                 } else {
-                    counter = 0;
+                    counter = 2;
                     for (String str : dayShift) {
                         tableModel.setValueAt(str, 0, counter);
                         counter++;
                     }
                 }
             } else {
-                counter = 0;
+                counter = 2;
                 for (String str : dayShift) {
                     tableModel.setValueAt(str, 0, counter);
                     counter++;
