@@ -154,7 +154,7 @@ public class ManageRequests extends JPanel {
             ((DefaultTableModel)table.getModel()).addRow(new Object[]
                     {r.getStatus().toString(), r.getEmp().getName(),
                             r.getType().toString(), r.getDay().toString(),
-                            r.getStatus().toString(), r.getReason(),
+                            r.getDay().getShift().toString(), r.getReason(),
                             r.getId(), "View"});
         }
     }
