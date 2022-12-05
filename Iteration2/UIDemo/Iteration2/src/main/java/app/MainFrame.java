@@ -26,7 +26,6 @@ public class MainFrame extends JFrame {
     ArrayList<Request> requests = requestDAO.loadRequestsFromFile(new File("requests.csv"));
 
     String[] adList = {"tcerny@example.com", "ghamerly@example.com", "cfry@example.com", "dbooth@example.com"};
-    String jav;
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
 
     MyTableModel model = new MyTableModel(this);
@@ -49,10 +48,6 @@ public class MainFrame extends JFrame {
         LoginFrame loginFrame = new LoginFrame(logged, admin, employees, adminList, initFrame);
         loginFrame.login();
     }
-
-
-
-
 
     public static void main(String[] args) throws IOException {
         MainFrame tmp = new MainFrame();
