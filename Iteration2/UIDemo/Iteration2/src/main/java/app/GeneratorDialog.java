@@ -99,10 +99,35 @@ public class GeneratorDialog {
                 }
 
                 ScheduleGenerator generator = new ScheduleGenerator();
-                newSchedule = generator.generateSchedule(scheduleName.getText(), d, perShift, days, shifts, ignored);
-                d.addSchedule(newSchedule);
+                Boolean valid = true;
+                for(Schedule s : d.getSchedules()) {
+                    if(s.getName().equals(scheduleName.getText())) {
+                        valid = false;
+                    }
+                }
+                if(valid) {
+                    newSchedule = generator.generateSchedule(scheduleName.getText(), d, perShift, days, shifts, ignored);
+                    d.addSchedule(newSchedule);
 
-                frame.dispose();
+                    frame.dispose();
+                } else {
+                    JFrame errorDialog = new JFrame("Error");
+                    errorDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    errorDialog.setLayout(new GridLayout(2,1));
+                    JLabel msg = new JLabel("A schedule already exists with this name.");
+                    JButton ok = new JButton("OK");
+                    errorDialog.add(msg);
+                    errorDialog.add(ok);
+                    errorDialog.setSize(500,200);
+                    errorDialog.setVisible(true);
+
+                    ok.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            errorDialog.dispose();
+                        }
+                    });
+                }
             }
         });
         cancel.addActionListener(new ActionListener() {
