@@ -36,7 +36,7 @@ public class InitFrame extends JFrame{
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
     JComboBox<String> depCB;
     JComboBox<String> userList;
-    JButton conf = new JButton("Find Employee");
+    //JButton conf = new JButton("Find Employee");
     MyTableModel tableModel;
 
     ArrayList<Request> requests;
@@ -98,7 +98,7 @@ public class InitFrame extends JFrame{
             request.setEnabled(false);
             saveAll.setEnabled(false);
             addSchedule.setEnabled(false);
-            conf.setEnabled(false);
+            //conf.setEnabled(false);
             makeActive.setEnabled(false);
         }
 
@@ -291,29 +291,21 @@ public class InitFrame extends JFrame{
             deptNames.add(d.getName());
         }
         depCB = new JComboBox<>(deptNames.toArray(new String[0]));
-        conf.setSize(30,40);
+        //conf.setSize(30,40);
         depCB.setSize(50, 40);
         userList.setSize(50,40);
 
-        conf.setVisible(true);
-        conf.setEnabled(false);
+        //conf.setVisible(true);
+        //conf.setEnabled(false);
         depCB.setVisible(true);
         layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
         layout.putConstraint(SpringLayout.EAST, depCB, -5, SpringLayout.WEST, userList);
-        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
+        //layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
 
         userList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(userList.getSelectedItem().toString().equals("Employee")){
-                    conf.setEnabled(false);
-                }
-                else {
-                    if(admin) {
-                        conf.setEnabled(true);
-                    }
-                }
-                // NEED TO FIX
+                updateScheduleTable();
             }
         });
 
@@ -340,16 +332,16 @@ public class InitFrame extends JFrame{
             }
         });
 
-        conf.addActionListener(new ActionListener() {
+        /*conf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateScheduleTable();
             }
-        });
+        });*/
 
         frame.add(userList);
         frame.add(depCB);
-        frame.add(conf);
+        //frame.add(conf);
     }
     void goodbye(){
         JFrame goodbye = new JFrame();
