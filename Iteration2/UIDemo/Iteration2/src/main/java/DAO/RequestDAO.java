@@ -48,8 +48,8 @@ public class RequestDAO {
                 r.setId(Integer.parseInt(data[6]));
 
                 requestList.add(r);
-                reader.close();
             }
+            reader.close();
         }catch(IOException e) {
             throw e;
         }
