@@ -95,7 +95,7 @@ public class GeneratorDialog {
                 }
 
                 if(scheduleName.getText().equals("")) {
-                    scheduleName.setText("Unnammed Schedule");
+                    scheduleName.setText("Unnamed Schedule");
                 }
 
                 ScheduleGenerator generator = new ScheduleGenerator();
