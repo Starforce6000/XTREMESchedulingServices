@@ -11,10 +11,4 @@ public class GeneratorDialog {
 
         frame.setVisible(true);
     }
-
-    public static void main(String[] args){
-        Department testDept = new Department();
-
-        GeneratorDialog gd = new GeneratorDialog(testDept);
-    }
 }
