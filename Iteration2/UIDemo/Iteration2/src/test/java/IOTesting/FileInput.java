@@ -2,16 +2,23 @@ package IOTesting;
 
 import org.junit.jupiter.api.*;
 
+import java.io.*;
+
 public class FileInput {
+    BufferedReader stream;
 
     @BeforeEach
-    void init(){}
+    void init(){
+
+    }
 
     @Test
-    void somethingOld(){}
+    void somethingBroke(){
+        
+    }
 
     @Test
-    void somethingNew(){}
+    void somethingProper(){}
 
     @Test
     void somethingBorrowed(){}
