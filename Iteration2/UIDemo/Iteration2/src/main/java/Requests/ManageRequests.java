@@ -1,5 +1,6 @@
 package Requests;
 
+import DAO.RequestDAO;
 import Enums.RequestStatus;
 import Enums.RequestType;
 import Models.Employee;
@@ -17,6 +18,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ManageRequests extends JPanel {
@@ -25,7 +28,11 @@ public class ManageRequests extends JPanel {
 
     ArrayList<Request> requests = new ArrayList<>();
 
-    public ManageRequests(ArrayList<Request> reqs) {
+    ArrayList<Employee> employees = new ArrayList<>();
+
+    RequestDAO dao;
+
+    public ManageRequests() {
         super();
         JFrame manage = new JFrame("Manage Requests");
         manage.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -124,15 +131,23 @@ public class ManageRequests extends JPanel {
 
         scrollPane.add(filterHeader);
         add(scrollPane);
-        this.requests.addAll(reqs);
+        //this.requests.addAll(reqs);
+        dao = new RequestDAO(employees);
+        try {
+            requests = dao.loadRequestsFromFile(new File("requests.csv"));
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
         fillTable();
     }
 
-    public void init(ArrayList<Request> reqs) {
+    public void init(ArrayList<Employee> emps) throws IOException {
         JFrame frame = new JFrame("Manage Requests");
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ManageRequests newContentPane = new ManageRequests(reqs);
+        employees.addAll(emps);
+
+        ManageRequests newContentPane = new ManageRequests();
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
         JButton done = new JButton("Finished");

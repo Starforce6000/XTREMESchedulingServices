@@ -101,7 +101,7 @@ public class LoginFrame {
                 if(logged){
                     loginForm.setVisible(false);
                     initFrame.admin = admin;
-                    initFrame.initFrame();
+                    initFrame.initFrame(loggedUser);
                 }
             }
         });

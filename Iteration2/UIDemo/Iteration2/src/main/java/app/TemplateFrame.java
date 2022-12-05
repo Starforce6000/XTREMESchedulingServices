@@ -225,8 +225,12 @@ public class TemplateFrame extends JFrame {
         request.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ManageRequests manage = new ManageRequests(requests);
-                manage.init(requests);
+                ManageRequests manage = new ManageRequests();
+                try {
+                    manage.init(employees);
+                }catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -234,7 +238,14 @@ public class TemplateFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MakeRequest makeRequest = new MakeRequest();
-                makeRequest.initRequest();
+                /*
+                try {
+                    makeRequest.initRequest(employees);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                 */
             }
         });
 

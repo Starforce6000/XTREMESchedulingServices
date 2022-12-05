@@ -43,6 +43,8 @@ public class InitFrame extends JFrame{
     ArrayList<Department> departments;
     ArrayList<Employee> employees;
 
+    Employee user;
+
     public InitFrame(JFrame frame,
                      JTable theTable,
                      SpringLayout layout,
@@ -62,7 +64,9 @@ public class InitFrame extends JFrame{
         this.employees = employees;
         this.tableModel = tableModel;
     }
-    void initFrame(){
+    void initFrame(Employee user){
+        this.user = user;
+
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,300);
@@ -260,8 +264,12 @@ public class InitFrame extends JFrame{
         request.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ManageRequests manage = new ManageRequests(requests);
-                manage.init(requests);
+                ManageRequests manage = new ManageRequests();
+                try {
+                    manage.init(employees);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -269,7 +277,11 @@ public class InitFrame extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 MakeRequest makeRequest = new MakeRequest();
-                makeRequest.initRequest();
+                try {
+                    makeRequest.initRequest(employees, user);
+                }catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
