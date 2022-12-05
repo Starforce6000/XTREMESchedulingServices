@@ -196,7 +196,7 @@ public class InitFrame extends JFrame{
     }
     void userBar(){
         // CHANGE TO REFLECT REAL USERS
-        String[] def = {"Tomas Cerny", "John Rambo", "Chuck Norris", "Bruce Willis","Bruce Lee","Jackie Chan"};
+        String[] def = {"John Rambo", "Chuck Norris", "Bruce Willis","Bruce Lee","Jackie Chan"};
         JComboBox<String> userList = new JComboBox<>(def);
         ArrayList<String> deptNames = new ArrayList<>();
         for(Department d : departments) {
