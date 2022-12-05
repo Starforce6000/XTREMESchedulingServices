@@ -65,4 +65,8 @@ public class Department {
     public void addSchedule(Schedule s) {
         scheduleList.add(s);
     }
+
+    public List<Schedule> getSchedules() {
+        return scheduleList;
+    }
 }

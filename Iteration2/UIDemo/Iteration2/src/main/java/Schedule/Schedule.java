@@ -8,6 +8,7 @@ public class Schedule {
 
     String name;
     List<EmployeeSchedule> employeeSchedules = new LinkedList<EmployeeSchedule>();
+    Boolean active = false;
 
     public EmployeeSchedule getSchedule(Employee employee) {
         EmployeeSchedule employeeSchedule = null;
@@ -36,5 +37,13 @@ public class Schedule {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void changeActivity() {
+        active = !active;
+    }
+
+    public boolean getActive() {
+        return active;
     }
 }

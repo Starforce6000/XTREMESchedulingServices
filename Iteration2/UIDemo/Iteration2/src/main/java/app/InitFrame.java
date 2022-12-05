@@ -9,6 +9,7 @@ import Requests.MakeRequest;
 import Requests.ManageRequests;
 import Requests.Request;
 import javazoom.jl.player.Player;
+import Schedule.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,7 @@ public class InitFrame extends JFrame{
     JButton right = new JButton(">");
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
     JComboBox<String> depCB;
+    JButton conf = new JButton("Find Employee");
 
     ArrayList<Request> requests;
     ArrayList<Department> departments;
@@ -84,12 +86,56 @@ public class InitFrame extends JFrame{
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
         JMenuItem saveAll = new JMenuItem("Save All");
+        JMenuItem makeActive = new JMenuItem("Set Active");
 
         if(!admin){
             request.setEnabled(false);
             saveAll.setEnabled(false);
+            addSchedule.setEnabled(false);
+            conf.setEnabled(false);
+            makeActive.setEnabled(false);
         }
 
+        makeActive.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame scheduleActiveFrame = new JFrame("Set active schedule for departments");
+                scheduleActiveFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                scheduleActiveFrame.setLayout(new FlowLayout());
+                ArrayList<String> deptList = new ArrayList<>();
+                for(Department d : departments) {
+                    deptList.add(d.getName());
+                }
+                ArrayList<String> scheduleList = new ArrayList<>();
+                for(Schedule s : departments.get(0).getSchedules()) {
+                    scheduleList.add(s.getName());
+                }
+
+                JComboBox<String> departmentBox = new JComboBox<>(deptList.toArray(new String[0]));
+                JComboBox<String> scheduleBox = new JComboBox<>(scheduleList.toArray(new String[0]));
+
+                scheduleActiveFrame.add(departmentBox);
+                scheduleActiveFrame.add(scheduleBox);
+
+                scheduleActiveFrame.setSize(500,100);
+                scheduleActiveFrame.setVisible(true);
+
+                departmentBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        for(Object o : scheduleList) {
+                            scheduleList.remove(o);
+                        }
+                        for(Schedule s : departments.get(0).getSchedules()) {
+                            scheduleList.add(s.getName());
+                        }
+
+                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>(scheduleList.toArray(new String[0]));
+                        scheduleBox.setModel(temp);
+                    }
+                });
+            }
+        });
 
         // Logout
         logout.addActionListener(new ActionListener() {
@@ -189,6 +235,7 @@ public class InitFrame extends JFrame{
         menu.add(logout);
         menu.addSeparator();
         menu.add(saveAll);
+        menu.add(makeActive);
 
         menuBar.add(menu);
         menuBar.add(addSchedule);
@@ -209,7 +256,6 @@ public class InitFrame extends JFrame{
             deptNames.add(d.getName());
         }
         depCB = new JComboBox<>(deptNames.toArray(new String[0]));
-        JButton conf = new JButton("Find Employee");
         conf.setSize(30,40);
         depCB.setSize(50, 40);
         userList.setSize(50,40);
@@ -228,7 +274,9 @@ public class InitFrame extends JFrame{
                     conf.setEnabled(false);
                 }
                 else {
-                    conf.setEnabled(true);
+                    if(admin) {
+                        conf.setEnabled(true);
+                    }
                 }
                 // NEED TO FIX
             }

@@ -14,14 +14,17 @@ class StatusColumnCellRenderer extends DefaultTableCellRenderer {
         JLabel l = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
 
         //Get the status for the current row.
-        if (value.equals(Shift.Day)) {
+        if (value.equals("Day")) {
             l.setBackground(new Color(61,133,198));
-        } else if(value.equals(Shift.Swing)){
+            l.setForeground(new Color(61, 133, 198));
+        } else if(value.equals("Swing")){
             l.setBackground(new Color(11, 83, 148));
-        }else if(value.equals(Shift.Night)){
+            l.setForeground(new Color(11, 83, 148));
+        }else if(value.equals("Night")){
             l.setBackground(new Color(7, 55, 99));
+            l.setForeground(new Color(7, 55, 99));
         }else{
-            l.setBackground(Color.GREEN);
+            l.setBackground(Color.LIGHT_GRAY);
         }
 
         //Return the JLabel which renders the cell.
