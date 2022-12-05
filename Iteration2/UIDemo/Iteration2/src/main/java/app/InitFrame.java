@@ -69,10 +69,11 @@ public class InitFrame extends JFrame{
 
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,300);
+        frame.setSize(800,400);
         frame.setLayout(layout);
-        theTable.setRowHeight(100);
-        for (int i = 0; i < theTable.getColumnCount(); i++) {
+        theTable.setRowHeight(50);
+        theTable.getColumnModel().getColumn(1).setPreferredWidth(120);
+        for (int i = 2; i < theTable.getColumnCount(); i++) {
             theTable.getColumnModel().getColumn(i).setCellRenderer(new StatusColumnCellRenderer());
         }
 
