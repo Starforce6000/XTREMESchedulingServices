@@ -33,6 +33,7 @@ public class InitFrame extends JFrame{
     JButton right = new JButton(">");
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
     JComboBox<String> depCB;
+    JComboBox<String> userList;
     JButton conf = new JButton("Find Employee");
 
     ArrayList<Request> requests;
@@ -139,6 +140,8 @@ public class InitFrame extends JFrame{
                                 target.setActiveSchedule(s);
                             }
                         }
+
+                        updateScheduleTable();
                     }
                 });
 
@@ -277,7 +280,7 @@ public class InitFrame extends JFrame{
         for(Employee e : departments.get(0).getEmployees()) {
             initEmployees.add(e.getName());
         }
-        JComboBox<String> userList = new JComboBox<>(initEmployees.toArray(new String[0]));
+        userList = new JComboBox<>(initEmployees.toArray(new String[0]));
         ArrayList<String> deptNames = new ArrayList<>();
         for(Department d : departments) {
             deptNames.add(d.getName());
@@ -457,5 +460,37 @@ public class InitFrame extends JFrame{
             }
         });
         week.setEditable(false);
+    }
+
+    void updateScheduleTable() {
+        String activeDept = depCB.getSelectedItem().toString();
+        String activeEmployee = userList.getSelectedItem().toString();
+
+        Department targetDepartment = null;
+        Employee targetEmployee = null;
+        for(Department d : departments) {
+            if(d.getName().equals(activeDept)) {
+                targetDepartment = d;
+            }
+        }
+        for(Employee e : targetDepartment.getEmployees()) {
+            if(e.getName().equals(activeEmployee)) {
+                targetEmployee = e;
+            }
+        }
+
+        if(targetEmployee != null) {
+            System.out.println("Got here");
+            for(int i = 0; i < theTable.getColumnCount(); i++) {
+                for(int j = 0; j < theTable.getRowCount(); j++) {
+                    theTable.getModel().setValueAt("Day",j,i);
+                    System.out.println("Set value at " + j + "," + i + " to Day");
+                }
+            }
+
+            for (int i = 0; i < theTable.getColumnCount(); i++) {
+                theTable.getColumnModel().getColumn(i).setCellRenderer(new StatusColumnCellRenderer());
+            }
+        }
     }
 }
