@@ -3,6 +3,7 @@ package Requests;
 import Enums.RequestStatus;
 import Enums.RequestType;
 import Models.Employee;
+import app.ButtonColumn;
 import net.coderazzi.filters.gui.AutoChoices;
 import net.coderazzi.filters.gui.TableFilterHeader;
 
@@ -12,6 +13,8 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -70,10 +73,11 @@ public class ManageRequests extends JPanel {
 
                 //JPanel listPane = new JPanel();
                 JFrame manageWindow = new JFrame();
-                manageWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                manageWindow.setLayout(new BoxLayout(manageWindow,BoxLayout.Y_AXIS));
+                //manageWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                manageWindow.setLayout(new GridLayout(2,2));
                 manageWindow.setSize(500,200);
 
+                JLabel label = new JLabel("Reason for Request:");
                 JLabel reason = new JLabel((String) model.getValueAt(modelRow, 5));
 
                 JButton deny = new JButton("Deny Request");
@@ -81,6 +85,8 @@ public class ManageRequests extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         model.setValueAt("DENIED", modelRow, 0);
+                        manageWindow.setVisible(false);
+                        manageWindow.dispose();
                         //TODO: make the change reflected in the database
                     }
                 });
@@ -90,8 +96,11 @@ public class ManageRequests extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         model.setValueAt("APPROVED", modelRow, 0);
+                        manageWindow.setVisible(false);
+                        manageWindow.dispose();
                     }
                 });
+                manageWindow.add(label);
                 manageWindow.add(reason);
                 manageWindow.add(deny);
                 manageWindow.add(approve);
@@ -99,7 +108,8 @@ public class ManageRequests extends JPanel {
                 manageWindow.setVisible(true);
             }
         };
-        //ButtonCol
+        ButtonColumn viewButton = new ButtonColumn(table, view, 6);
+        viewButton.setMnemonic(KeyEvent.VK_D);
 
         scrollPane.add(filterHeader);
         add(scrollPane);
@@ -109,11 +119,20 @@ public class ManageRequests extends JPanel {
 
     public void init(ArrayList<Request> reqs) {
         JFrame frame = new JFrame("Manage Requests");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ManageRequests newContentPane = new ManageRequests(reqs);
         newContentPane.setOpaque(true);
         frame.setContentPane(newContentPane);
+        JButton done = new JButton("Finished");
+        done.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
+            }
+        });
+        frame.add(done);
 
         frame.pack();
         frame.setVisible(true);
@@ -127,4 +146,10 @@ public class ManageRequests extends JPanel {
                             r.getStatus().toString(), r.getReason(),"View"});
         }
     }
+    /*
+    public Request findReq() {
+
+    }
+
+     */
 }
