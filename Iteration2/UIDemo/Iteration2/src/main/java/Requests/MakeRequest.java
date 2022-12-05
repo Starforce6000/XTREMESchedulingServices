@@ -140,11 +140,14 @@ public class MakeRequest extends JFrame {
                 handler.setReason(reasonField.getText());
                 try {
                     ArrayList<Request> tempReqs = dao.loadRequestsFromFile(new File("requests.csv"));
+                    /*
                     for(Employee temp : emps) {
                         if(temp.getId() == user.getId()) {
                             handler.setEmployee(temp);
                         }
                     }
+                     */
+                    handler.setEmployee(user);
                     handler.request.setId(tempReqs.size() + 1);
                     tempReqs.add(handler.request);
                     dao.saveRequestsToFile(new File("requests.csv"), tempReqs);
