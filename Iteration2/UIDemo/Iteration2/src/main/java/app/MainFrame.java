@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
     MyTableModel model = new MyTableModel(this);
     JTable theTable = new JTable(model);
 
-    JFrame frame = new JFrame("XTREME Schedule.Schedule Processing");
+    JFrame frame = new JFrame("XTREME Schedule Processing");
     Boolean logged = true, admin = false;
     SpringLayout layout = new SpringLayout();
 
