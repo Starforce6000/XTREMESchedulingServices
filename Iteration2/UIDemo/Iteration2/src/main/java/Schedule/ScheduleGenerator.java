@@ -111,24 +111,4 @@ public class ScheduleGenerator {
 
         return schedule;
     }
-
-//    public static void main(String[] args) throws IOException {
-//        ScheduleGenerator sg = new ScheduleGenerator();
-//
-//        EmployeeDAO employeeDAO = new EmployeeDAO();
-//        ArrayList<Employee> employees = employeeDAO.loadEmployeesFromFile(new File("employee.csv"));
-//
-//        DepartmentDAO departmentDAO = new DepartmentDAO(employees);
-//        ArrayList<Department> departments = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
-//
-//        ArrayList<Day> days = new ArrayList<>(Arrays.asList(Day.values()));
-//        days.remove(6);
-//        days.remove(6);
-//        days.remove(0);
-//        ArrayList<Shift> shifts = new ArrayList<>(Arrays.asList(Shift.values()));
-//        shifts.remove(0);
-//        List<Employee> exclude = new LinkedList<>();
-//        sg.generateSchedule("Test Schedule", departments.get(0),    1, days, shifts, exclude);
-//    }
 }
-

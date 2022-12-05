@@ -8,10 +8,7 @@ import Models.Employee;
 import Requests.Request;
 import Requests.RequestDay;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class RequestDAO {
@@ -57,6 +54,18 @@ public class RequestDAO {
         }
 
         return requestList;
+    }
+
+    public void saveRequestsToFile(File file, ArrayList<Request> reqs) throws IOException {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(file));
+            for(Request r : reqs) {
+                writer.write(r.printRequest());
+            }
+        } catch(IOException e) {
+            throw e;
+        }
     }
 
     //testing DAO
