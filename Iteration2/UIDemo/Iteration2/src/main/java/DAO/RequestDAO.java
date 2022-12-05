@@ -63,6 +63,7 @@ public class RequestDAO {
             writer = new BufferedWriter(new FileWriter(file));
             for(Request r : reqs) {
                 writer.write(r.printRequest());
+                writer.write('\n');
             }
             writer.close();
         } catch(IOException e) {
