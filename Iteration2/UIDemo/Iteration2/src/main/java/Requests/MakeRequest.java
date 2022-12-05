@@ -1,14 +1,19 @@
 package Requests;
 
+import DAO.RequestDAO;
 import Enums.Day;
 import Enums.RequestType;
 import Enums.Shift;
+import Models.Employee;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class MakeRequest extends JFrame {
     Object[] days = {Day.SELECT, Day.MONDAY, Day.TUESDAY, Day.WEDNESDAY, Day.THURSDAY,
@@ -27,11 +32,20 @@ public class MakeRequest extends JFrame {
 
     JTextField reasonField;
 
+    RequestDAO dao;
 
-    public void initRequest() {
+    ArrayList<Employee> emps = new ArrayList<>();
+    Employee user;
+
+
+    public void initRequest(ArrayList<Employee> employees, Employee user) throws IOException{
         JFrame makeReq = new JFrame("Make Request");
         makeReq.setLayout(new GridLayout(2,2));
         makeReq.setSize(500,200);
+
+        emps.addAll(employees);
+        dao = new RequestDAO(emps);
+        this.user = user;
 
         reqType = new JLabel("What type of request?");
 
@@ -65,7 +79,11 @@ public class MakeRequest extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 handler = new RequestHandler();
                 makeReq.setVisible(false);
-                getReqDetails();
+                try {
+                    getReqDetails();
+                }catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
@@ -73,7 +91,7 @@ public class MakeRequest extends JFrame {
         makeReq.add(confirm);
     }
 
-    public void getReqDetails() {
+    public void getReqDetails() throws IOException{
         JFrame reqInfo = new JFrame("Enter Request Details");
         reqInfo.setLayout(new GridLayout(4,2));
         reqInfo.setSize(500,200);
@@ -120,6 +138,19 @@ public class MakeRequest extends JFrame {
                 handler.setWorkdays(when);
                 handler.setHours(time);
                 handler.setReason(reasonField.getText());
+                try {
+                    ArrayList<Request> tempReqs = dao.loadRequestsFromFile(new File("requests.csv"));
+                    for(Employee temp : emps) {
+                        if(temp.getId() == user.getId()) {
+                            handler.setEmployee(temp);
+                        }
+                    }
+                    handler.request.setId(tempReqs.size() + 1);
+                    tempReqs.add(handler.request);
+                    dao.saveRequestsToFile(new File("requests.csv"), tempReqs);
+                }catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 reqInfo.setVisible(false);
             }
         });

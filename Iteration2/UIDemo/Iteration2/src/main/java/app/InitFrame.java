@@ -256,8 +256,12 @@ public class InitFrame extends JFrame{
         request.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ManageRequests manage = new ManageRequests(requests);
-                manage.init(requests);
+                ManageRequests manage = new ManageRequests();
+                try {
+                    manage.init(employees);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
