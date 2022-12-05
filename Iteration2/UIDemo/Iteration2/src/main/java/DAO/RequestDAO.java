@@ -15,16 +15,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class RequestDAO {
-    private ArrayList<Employee> employees;
+    private ArrayList<Employee> employees = new ArrayList<>();
 
     public RequestDAO(ArrayList<Employee> employees){
-        this.employees = employees;
+        this.employees.addAll(employees);
     }
     public ArrayList<Request> loadRequestsFromFile(File file) throws IOException {
         ArrayList<Request> requestList = new ArrayList<>();
         BufferedReader reader = null;
 
-        //TODO: implement lol
         try {
             reader = new BufferedReader(new FileReader(file));
             String line = "";
@@ -36,7 +35,7 @@ public class RequestDAO {
                 Request r = new Request();
                 String[] data = line.split(",");
 
-                int userID = Integer.valueOf(data[0]);
+                int userID = Integer.parseInt(data[0]);
                 for(Employee e : employees) {
                     if(e.getId() == userID) {
                         r.setEmp(e);

@@ -92,8 +92,14 @@ public class ManageRequests extends JPanel {
                         model.setValueAt("APPROVED", modelRow, 0);
                     }
                 });
+                manageWindow.add(reason);
+                manageWindow.add(deny);
+                manageWindow.add(approve);
+                manageWindow.pack();
+                manageWindow.setVisible(true);
             }
         };
+        //ButtonCol
 
         scrollPane.add(filterHeader);
         add(scrollPane);

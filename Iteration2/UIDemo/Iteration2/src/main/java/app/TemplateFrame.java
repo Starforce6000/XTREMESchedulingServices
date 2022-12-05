@@ -20,6 +20,7 @@ import DAO.RequestDAO;
 import Models.Department;
 import Models.Employee;
 import Requests.MakeRequest;
+import Requests.ManageRequests;
 import Requests.Request;
 import javazoom.jl.player.Player;
 
@@ -31,8 +32,8 @@ public class TemplateFrame extends JFrame {
     DepartmentDAO departmentDAO;//= new DepartmentDAO(employees);
     ArrayList<Department> departments;// = departmentDAO.loadDepartmentFromFile(new File("department.csv"));
 
-    RequestDAO requestDAO = new RequestDAO(employees);
-    ArrayList<Request> requests = requestDAO.loadRequestsFromFile(new File("requests.csv"));
+    RequestDAO requestDAO;// = new RequestDAO(employees);
+    ArrayList<Request> requests;// = requestDAO.loadRequestsFromFile(new File("requests.csv"));
 
     String[] adList = {"tcerny@example.com", "ghamerly@example.com", "cfry@example.com", "dbooth@example.com"};
     String jav;
@@ -51,15 +52,23 @@ public class TemplateFrame extends JFrame {
     public TemplateFrame() throws IOException {
         employees.addAll(employeeDAO.loadEmployeesFromFile(new File("employee.csv")));
         departmentDAO = new DepartmentDAO(employees);
+        requestDAO = new RequestDAO(employees);
 
         departments = new ArrayList<>();
         departments.addAll(departmentDAO.loadDepartmentFromFile(new File("department.csv")));
+
+        requests = new ArrayList<>();
+        requests.addAll(requestDAO.loadRequestsFromFile(new File("requests.csv")));
 
         for(Department d : departments) {
             System.out.println(d.getName() + ": ");
             for(Employee e : d.getEmployees()) {
                 e.printData();
             }
+        }
+
+        for(Request r : requests) {
+            System.out.println(r.printRequest());
         }
 
         System.out.println("number of employees: " + employees.size());
@@ -219,7 +228,8 @@ public class TemplateFrame extends JFrame {
         request.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // NEED TO ADD
+                ManageRequests manage = new ManageRequests(requests);
+                manage.init(requests);
             }
         });
 
