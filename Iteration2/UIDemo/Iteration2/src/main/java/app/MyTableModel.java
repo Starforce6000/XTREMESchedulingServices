@@ -4,6 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 class MyTableModel extends AbstractTableModel {
     private final TemplateFrame lab7;
+    private final MainFrame mainFrame;
 
     private String[] columnNames = {"Sunday",
             "Monday",
@@ -17,6 +18,11 @@ class MyTableModel extends AbstractTableModel {
 
     public MyTableModel(TemplateFrame lab7) {
         this.lab7 = lab7;
+        mainFrame = null;
+    }
+    public MyTableModel(MainFrame mainFrame) {
+        lab7 = null;
+        this.mainFrame = mainFrame;
     }
 
     public int getColumnCount() {

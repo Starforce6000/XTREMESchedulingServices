@@ -1,87 +1,37 @@
 package app;
 
+import Requests.MakeRequest;
+import javazoom.jl.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.List;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-
-import DAO.DepartmentDAO;
-import DAO.EmployeeDAO;
-import DAO.RequestDAO;
-import Models.Department;
-import Models.Employee;
-import Requests.MakeRequest;
-import Requests.ManageRequests;
-import Requests.Request;
-import javazoom.jl.player.Player;
-
-
-public class TemplateFrame extends JFrame {
-    // Gets all Employee data
-    EmployeeDAO employeeDAO = new EmployeeDAO();
-    ArrayList<Employee> employees = new ArrayList<>();
-    DepartmentDAO departmentDAO;
-    ArrayList<Department> departments;
-
-    RequestDAO requestDAO;// = new RequestDAO(employees);
-    ArrayList<Request> requests;// = requestDAO.loadRequestsFromFile(new File("requests.csv"));
-
-    String[] adList = {"tcerny@example.com", "ghamerly@example.com", "cfry@example.com", "dbooth@example.com"};
-    String jav;
-    ArrayList<String> adminList = new ArrayList<>(List.of(adList));
+public class InitFrame {
+    JFrame frame;
+    JTable theTable;
+    SpringLayout layout;
+    Boolean logged, admin;
     JButton left = new JButton("<");
     JButton right = new JButton(">");
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
-
-    MyTableModel model = new MyTableModel(this);
-    JTable theTable = new JTable(model);
-
-    JFrame frame = new JFrame("XTREME Schedule.Schedule Processing");
-    Boolean logged = true, admin = false;
-    SpringLayout layout = new SpringLayout();
-
-    public TemplateFrame() throws IOException {
-        employees.addAll(employeeDAO.loadEmployeesFromFile(new File("employee.csv")));
-        departmentDAO = new DepartmentDAO(employees);
-        requestDAO = new RequestDAO(employees);
-
-        departments = new ArrayList<>();
-        departments.addAll(departmentDAO.loadDepartmentFromFile(new File("department.csv")));
-
-        requests = new ArrayList<>();
-        requests.addAll(requestDAO.loadRequestsFromFile(new File("requests.csv")));
-
-        for(Department d : departments) {
-            System.out.println(d.getName() + ": ");
-            for(Employee e : d.getEmployees()) {
-                e.printData();
-            }
-        }
-
-        for(Request r : requests) {
-            System.out.println(r.printRequest());
-        }
-
-        System.out.println("number of employees: " + employees.size());
-        /*for(Employee e : employees){
-            System.out.println(e.getDepartment().getName());
-        }*/
+    public InitFrame(JFrame frame,
+                     JTable theTable,
+                     SpringLayout layout,
+                     Boolean logged,
+                     Boolean admin){
+        this.frame = frame;
+        this.theTable = theTable;
+        this.layout = layout;
+        this.logged = logged;
+        this.admin = admin;
     }
-
-    void run(){
-        week.setEditable(false);
-        login();
-    }
-
     void initFrame(){
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,13 +41,16 @@ public class TemplateFrame extends JFrame {
 
 
         // Set the Main Menu
-        if(logged) { frame.setJMenuBar(initHead()); userBar(); initCalendar(); }
+        if(logged) {
+            frame.setJMenuBar(initHead());
+            userBar();
+            initCalendar();
+        }
         else{
             frame.setVisible(false);
             goodbye();
         }
     }
-
     JMenuBar initHead(){
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
@@ -121,7 +74,6 @@ public class TemplateFrame extends JFrame {
                 confirm.setSize(600,100);
                 JButton yes = new JButton("Yes");
                 JButton no = new JButton("No");
-
                 confirm.add(no);
                 confirm.add(yes);
 
@@ -225,8 +177,7 @@ public class TemplateFrame extends JFrame {
         request.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ManageRequests manage = new ManageRequests(requests);
-                manage.init(requests);
+                // NEED TO ADD
             }
         });
 
@@ -249,8 +200,91 @@ public class TemplateFrame extends JFrame {
 
         return menuBar;
     }
+    void userBar(){
+        // CHANGE TO REFLECT REAL USERS
+        String[] list = {"Models.Employee","Suzzie", "Mike", "John", "Rebecca"};
+        String[] def = {"Models.Employee"};
+        String[] newList = {"Models.Employee","Cerny", "Fry", "Booth", "Donahoo"};
+        String[] departments = {"Models.Department", "Cashiers", "Back-of-House", "Dream Killers"};
+        JComboBox<String> userList = new JComboBox<>(def);
+        JComboBox<String> depList = new JComboBox<>(departments);
+        JButton conf = new JButton("Find Models.Employee");
+        conf.setSize(30,40);
+        depList.setSize(50, 40);
+        userList.setSize(50,40);
 
+        conf.setVisible(true);
+        conf.setEnabled(false);
+        depList.setVisible(true);
+        layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
+        layout.putConstraint(SpringLayout.EAST, depList, -5, SpringLayout.WEST, userList);
+        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depList);
 
+        userList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(userList.getSelectedItem().toString().equals("Models.Employee")){
+                    conf.setEnabled(false);
+                }
+                else {
+                    conf.setEnabled(true);
+                }
+                // NEED TO FIX
+            }
+        });
+
+        depList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // NEED TO FIX
+                switch(depList.getSelectedItem().toString()){
+                    case "Dream Killers":
+                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>(newList);
+                        userList.setModel(temp);
+                        break;
+                    case "Models.Department":
+                        ComboBoxModel<String> tmp = new DefaultComboBoxModel<>(def);
+                        userList.setModel(tmp);
+                        conf.setEnabled(false);
+                        break;
+                    default:
+                        ComboBoxModel<String> temp1 = new DefaultComboBoxModel<>(list);
+                        userList.setModel(temp1);
+                }
+            }
+        });
+
+        conf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // NEED TO ADD FUNCTION
+            }
+        });
+
+        frame.add(userList);
+        frame.add(depList);
+        frame.add(conf);
+    }
+    void goodbye(){
+        JFrame goodbye = new JFrame();
+        JLabel bye = new JLabel("Thank you for using XTREME Scheduling Services.");
+
+        goodbye.add(bye);
+        goodbye.setVisible(true);
+        goodbye.setSize(450,300);
+        new Thread(){
+            @Override
+            public void run() {
+                try(InputStream in = TemplateFrame.class.getResourceAsStream("/ByeByey.mp3")){
+                    new Player(in).play();
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+            }
+        }.start();
+        goodbye.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+    }
     void initCalendar(){
         theTable.setSize(500,100);
         theTable.setVisible(true);
@@ -345,169 +379,6 @@ public class TemplateFrame extends JFrame {
                 week.setText(newLine);
             }
         });
-
-    }
-
-
-    void login(){
-        JFrame loginForm = new JFrame("XTREME Scheduling Services Login");
-        loginForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        loginForm.setVisible(true);
-        loginForm.setLayout(new GridLayout(3,3));
-
-        JLabel userL = new JLabel("Username: ");
-        JLabel passL = new JLabel("Password: ");
-
-        JTextField user = new JTextField("");
-        JPasswordField pass = new JPasswordField("");
-        JButton canButton = new JButton("Cancel");
-        JButton logButton = new JButton("Login");
-
-        loginForm.add(userL);
-        loginForm.add(user);
-
-        loginForm.add(passL);
-        loginForm.add(pass);
-
-        loginForm.add(canButton);
-        loginForm.add(logButton);
-
-        canButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                logged = false;
-                loginForm.setVisible(false);
-            }
-        });
-
-        logButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                /*
-                Add info to check login information
-                 */
-                logged = false;
-                for(Employee employee:employees){
-                    if(employee.getEmail().equals(user.getText())){
-                        if(employee.getPassword().equals(pass.getText())){
-                            logged = true;
-                        }
-                    }
-                }
-                if(adminList.contains(user.getText())){
-                    admin = true;
-                }
-                loginForm.setVisible(false);
-                new Thread(){
-                    @Override
-                    public void run() {
-                        try(InputStream in = TemplateFrame.class.getResourceAsStream("/Explosion.mp3")){
-                            new Player(in).play();
-                        }catch (Exception e){
-                            System.out.println(e);
-                        }
-                    }
-                }.start();
-                initFrame();
-            }
-        });
-
-        loginForm.setSize(300,300);
-        loginForm.setAlwaysOnTop(true);
-
-    }
-
-    void userBar(){
-        // CHANGE TO REFLECT REAL USERS
-        String[] list = {"Models.Employee","Suzzie", "Mike", "John", "Rebecca"};
-        String[] def = {"Models.Employee"};
-        String[] newList = {"Models.Employee","Cerny", "Fry", "Booth", "Donahoo"};
-        String[] departments = {"Models.Department", "Cashiers", "Back-of-House", "Dream Killers"};
-        JComboBox<String> userList = new JComboBox<>(def);
-        JComboBox<String> depList = new JComboBox<>(departments);
-        JButton conf = new JButton("Find Models.Employee");
-        conf.setSize(30,40);
-        depList.setSize(50, 40);
-        userList.setSize(50,40);
-
-        conf.setVisible(true);
-        conf.setEnabled(false);
-        depList.setVisible(true);
-        layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
-        layout.putConstraint(SpringLayout.EAST, depList, -5, SpringLayout.WEST, userList);
-        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depList);
-
-        userList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(userList.getSelectedItem().toString().equals("Models.Employee")){
-                    conf.setEnabled(false);
-                }
-                else {
-                    conf.setEnabled(true);
-                }
-                // NEED TO FIX
-            }
-        });
-
-        depList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                // NEED TO FIX
-                switch(depList.getSelectedItem().toString()){
-                    case "Dream Killers":
-                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>(newList);
-                        userList.setModel(temp);
-                        break;
-                    case "Models.Department":
-                        ComboBoxModel<String> tmp = new DefaultComboBoxModel<>(def);
-                        userList.setModel(tmp);
-                        conf.setEnabled(false);
-                        break;
-                    default:
-                        ComboBoxModel<String> temp1 = new DefaultComboBoxModel<>(list);
-                        userList.setModel(temp1);
-                }
-            }
-        });
-
-        conf.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // NEED TO ADD FUNCTION
-            }
-        });
-
-        frame.add(userList);
-        frame.add(depList);
-        frame.add(conf);
-    }
-
-    void goodbye(){
-        JFrame goodbye = new JFrame();
-        JLabel bye = new JLabel("Thank you for using XTREME Scheduling Services.");
-
-        goodbye.add(bye);
-        goodbye.setVisible(true);
-        goodbye.setSize(450,300);
-        new Thread(){
-            @Override
-            public void run() {
-                try(InputStream in = TemplateFrame.class.getResourceAsStream("/ByeByey.mp3")){
-                    new Player(in).play();
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-            }
-        }.start();
-        goodbye.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
-    }
-
-
-    public static void main(String[] args) throws IOException {
-        TemplateFrame tmp = new TemplateFrame();
-        tmp.run();
-
+        week.setEditable(false);
     }
 }
