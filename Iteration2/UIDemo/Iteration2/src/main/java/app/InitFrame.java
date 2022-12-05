@@ -102,6 +102,7 @@ public class InitFrame extends JFrame{
                 JFrame scheduleActiveFrame = new JFrame("Set active schedule for departments");
                 scheduleActiveFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 scheduleActiveFrame.setLayout(new FlowLayout());
+                JButton activate = new JButton("Set Selected as Active");
                 ArrayList<String> deptList = new ArrayList<>();
                 for(Department d : departments) {
                     deptList.add(d.getName());
@@ -116,9 +117,32 @@ public class InitFrame extends JFrame{
 
                 scheduleActiveFrame.add(departmentBox);
                 scheduleActiveFrame.add(scheduleBox);
+                scheduleActiveFrame.add(activate);
 
                 scheduleActiveFrame.setSize(500,100);
                 scheduleActiveFrame.setVisible(true);
+
+                activate.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String deptName = departmentBox.getSelectedItem().toString();
+                        String scheduleName = scheduleBox.getSelectedItem().toString();
+
+                        Department target = null;
+                        for(Department d : departments) {
+                            if(d.getName().equals(deptName)) {
+                                target = d;
+                            }
+                        }
+                        for(Schedule s : target.getSchedules()) {
+                            if(s.getName().equals(scheduleName)) {
+                                s.activate();
+                            } else {
+                                s.deactivate();
+                            }
+                        }
+                    }
+                });
 
                 departmentBox.addActionListener(new ActionListener() {
                     @Override

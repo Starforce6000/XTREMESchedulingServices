@@ -39,8 +39,12 @@ public class Schedule {
         this.name = name;
     }
 
-    public void changeActivity() {
-        active = !active;
+    public void activate() {
+        active = true;
+    }
+
+    public void deactivate() {
+        active = false;
     }
 
     public boolean getActive() {
