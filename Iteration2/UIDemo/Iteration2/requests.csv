@@ -1,4 +1,3 @@
-employee id,status,request type,day,shift,reason,id
 1,PENDING,RESCHEDULE,MONDAY,Night,dentist appointment @ 9:30,1
 2,PENDING,OVERTIME,WEDNESDAY,Swing,previous event canceled new free time,2
 3,DENIED,SWAP,TUESDAY,Day,just felt like it,3
