@@ -67,7 +67,7 @@ public class EmployeeDAO {
     public void saveEmployeesToFile(ArrayList<Employee> employees) throws IOException {
         BufferedWriter writer = null;
         try{
-            writer = new BufferedWriter(new FileWriter(new File("employee.csv")));
+            writer = new BufferedWriter(new FileWriter(new File("outemp.csv")));
             if(employees.size() == 0){
                 return;
             }

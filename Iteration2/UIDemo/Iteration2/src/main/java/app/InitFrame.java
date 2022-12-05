@@ -143,7 +143,7 @@ public class InitFrame extends JFrame{
                         throw new RuntimeException(ex);
                     }
                     try {
-                        requestDAO.saveRequestsToFile(new File("requests.csv"), requests);
+                        requestDAO.saveRequestsToFile(new File("outreq.csv"), requests);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -198,15 +198,30 @@ public class InitFrame extends JFrame{
     }
     void userBar(){
         // CHANGE TO REFLECT REAL USERS
-        String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
+        //String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
         String[] def = {"Employee"};
         String[] newList = {"Employee","Cerny", "Fry", "Booth", "Donahoo"};
-        JComboBox<String> userList = new JComboBox<>(def);
+        //JComboBox<String> userList = new JComboBox<>(def);
         ArrayList<String> deptNames = new ArrayList<>();
         for(Department d : departments) {
             deptNames.add(d.getName());
         }
         depCB = new JComboBox<>(deptNames.toArray(new String[0]));
+
+        ArrayList<String> emps = new ArrayList<>();
+        String temp = (String) depCB.getSelectedItem();
+        Department dep = new Department();
+        for(Department d : departments) {
+            if(d.getName().equalsIgnoreCase(temp)) {
+                dep = d;
+            }
+        }
+        for(Employee e : dep.getEmployees()) {
+            emps.add(e.getName());
+        }
+        JComboBox<String> userList = new JComboBox<>();
+        userList.setModel(new DefaultComboBoxModel<String>(emps.toArray(new String[0])));
+
         JButton conf = new JButton("Find Employee");
         conf.setSize(30,40);
         depCB.setSize(50, 40);
@@ -237,9 +252,11 @@ public class InitFrame extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 // NEED TO FIX
+                /*
                 switch(depCB.getSelectedItem().toString()){
+
                     case "Dream Killers":
-                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>(newList);
+                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>();
                         userList.setModel(temp);
                         break;
                     case "Models.Department":
@@ -248,9 +265,13 @@ public class InitFrame extends JFrame{
                         conf.setEnabled(false);
                         break;
                     default:
-                        ComboBoxModel<String> temp1 = new DefaultComboBoxModel<>(list);
+                        ComboBoxModel<String> temp1 = new DefaultComboBoxModel<>();
+                        //temp1.setModel(new DefaultComboBoxModel<String>(emps.toArray(new String[0])));
                         userList.setModel(temp1);
                 }
+                 */
+                ComboBoxModel<String> temp1 = new DefaultComboBoxModel<>();
+                userList.setModel(temp1);
             }
         });
 

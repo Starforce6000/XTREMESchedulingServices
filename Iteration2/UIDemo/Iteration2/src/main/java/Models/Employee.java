@@ -1,5 +1,6 @@
 package Models;
 
+import Enums.Day;
 import app.Availability;
 
 import java.util.LinkedList;
@@ -75,7 +76,10 @@ public class Employee {
 
     public String printData() {
         String temp = id + "," + name + "," + email + ",";
-        temp+= "," + availability.getShift().shift + "," + availability.getDays().toString();
+        temp+= availability.getShift().shift + ",";// + availability.getDays().toString();
+        for(Day d : availability.getDays()) {
+            temp += d.toString() + " ";
+        }
         if(isManager) {
             temp += "Y,";
         } else {
