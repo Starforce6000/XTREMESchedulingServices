@@ -80,6 +80,7 @@ public class Employee {
         for(Day d : availability.getDays()) {
             temp += d.toString() + " ";
         }
+        temp+= ",";
         if(isManager) {
             temp += "Y,";
         } else {

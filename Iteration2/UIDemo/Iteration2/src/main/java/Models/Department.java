@@ -46,9 +46,9 @@ public class Department {
 
     public String printData(){
         String temp = "";
-        temp += getId() + "," + getManagerId() + ",";
+        temp += getId() + "," + getManagerId();
         for(Employee e: getEmployees()){
-            temp += e.getId() + "," + e.name;
+            temp += "," + e.getId() + "," + e.name;
         }
         return temp;
     }
