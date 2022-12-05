@@ -44,8 +44,8 @@ public class LoginFrame {
         userL = new JLabel("Username: ");
         passL = new JLabel("Password: ");
 
-        user = new JTextField("");
-        pass = new JPasswordField("");
+        user = new JTextField("tcerny@example.com");
+        pass = new JPasswordField("1234");
         canButton = new JButton("Cancel");
         logButton = new JButton("Login");
 
@@ -98,6 +98,7 @@ public class LoginFrame {
                 }.start();
                 if(logged){
                     loginForm.setVisible(false);
+                    initFrame.admin = admin;
                     initFrame.initFrame();
                 }
             }
