@@ -329,6 +329,8 @@ public class InitFrame extends JFrame{
 
                 ComboBoxModel<String> temp = new DefaultComboBoxModel<>(strings);
                 userList.setModel(temp);
+
+                updateScheduleTable();
             }
         });
 
@@ -479,25 +481,39 @@ public class InitFrame extends JFrame{
         if(targetEmployee != null) {
             ArrayList<String> dayShift = new ArrayList<>();
             Schedule activeSchedule = targetDepartment.getActiveSchedule();
-            EmployeeSchedule targetSchedule = activeSchedule.getSchedule(targetEmployee);
-            if(targetSchedule != null) {
-                Shift employeeShift = targetSchedule.getShift();
-                List<Day> scheduleDays = targetSchedule.getDays();
-                ArrayList<Day> allDays = new ArrayList<>();
-                Collections.addAll(allDays, Day.values());
-                allDays.remove(Day.SELECT);
-                int counter = 1;
-                for (Day day : allDays) {
-                    dayShift.add("");
-                }
-                for (Day day : allDays) {
-                    if (scheduleDays.contains(day)) {
-                        dayShift.set(counter, employeeShift.toString());
+            ArrayList<Day> allDays = new ArrayList<>();
+            Collections.addAll(allDays, Day.values());
+            allDays.remove(Day.SELECT);
+            int counter = 1;
+            for (Day day : allDays) {
+                dayShift.add("");
+            }
+            if(activeSchedule != null) {
+                EmployeeSchedule targetSchedule = activeSchedule.getSchedule(targetEmployee);
+                if (targetSchedule != null) {
+                    Shift employeeShift = targetSchedule.getShift();
+                    List<Day> scheduleDays = targetSchedule.getDays();
+                    for (Day day : allDays) {
+                        if (scheduleDays.contains(day)) {
+                            dayShift.set(counter, employeeShift.toString());
+                        }
+                        counter += 1;
+                        counter = counter % 7;
                     }
-                    counter += 1;
-                    counter = counter % 7;
-                }
 
+                    counter = 0;
+                    for (String str : dayShift) {
+                        tableModel.setValueAt(str, 0, counter);
+                        counter++;
+                    }
+                } else {
+                    counter = 0;
+                    for (String str : dayShift) {
+                        tableModel.setValueAt(str, 0, counter);
+                        counter++;
+                    }
+                }
+            } else {
                 counter = 0;
                 for (String str : dayShift) {
                     tableModel.setValueAt(str, 0, counter);
