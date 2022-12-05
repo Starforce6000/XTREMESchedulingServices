@@ -1,6 +1,7 @@
 package Models;
 
-import Models.Employee;
+import Models.*;
+import Schedule.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Department {
 
     String name;
     List<Employee> employeeList = new LinkedList<Employee>();
+    List<Schedule> scheduleList = new LinkedList<>();
 
     public int getId() {
         return id;
@@ -51,5 +53,9 @@ public class Department {
             temp += e.getId() + "," + e.name;
         }
         return temp;
+    }
+
+    public void addSchedule(Schedule s) {
+        scheduleList.add(s);
     }
 }
