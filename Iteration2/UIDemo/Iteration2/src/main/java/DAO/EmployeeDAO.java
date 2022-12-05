@@ -63,6 +63,21 @@ public class EmployeeDAO {
         }
         return employeeList;
     }
+    public void saveEmployeesToFile(ArrayList<Employee> employees){
+        BufferedWriter writer = null;
+        try{
+            writer = new BufferedWriter(new FileWriter(new File("employee.csv")));
+            if(employees.size() == 0){
+                return;
+            }
+            for(Employee employee : employees){
+                writer.write(employee.printData());
+            }
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 //    public static void main(String[] args) throws IOException {
 //        System.out.println("Hello World");
