@@ -1,5 +1,8 @@
 package app;
 
+import DAO.DepartmentDAO;
+import DAO.EmployeeDAO;
+import DAO.RequestDAO;
 import Models.Department;
 import Models.Employee;
 import Requests.MakeRequest;
@@ -11,6 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.text.ParseException;
@@ -124,7 +129,16 @@ public class InitFrame extends JFrame{
                         "Confirm Save",
                         JOptionPane.OK_CANCEL_OPTION);
                 if(action == JOptionPane.OK_OPTION){
-                    System.exit(0);
+                    EmployeeDAO employeeDAO = new EmployeeDAO();
+                    DepartmentDAO departmentDAO = new DepartmentDAO(employees);
+                    RequestDAO requestDAO = new RequestDAO(employees);
+                    employeeDAO.saveEmployeesToFile(employees);
+                    departmentDAO.saveDepartmentToFile(departments);
+                    try {
+                        requestDAO.saveRequestsToFile(new File("requests.csv"), requests);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
 
             }
