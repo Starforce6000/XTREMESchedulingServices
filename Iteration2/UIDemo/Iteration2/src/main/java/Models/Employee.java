@@ -72,13 +72,16 @@ public class Employee {
         isManager = manager;
     }
 
-    public void printData() {
+
+    public String printData() {
         String temp = id + "," + name + "," + email + ",";
+        temp+= "," + availability.getShift().shift + "," + availability.getDays().toString();
         if(isManager) {
-            temp += "Y";
+            temp += "Y,";
         } else {
-            temp += "N";
+            temp += "N,";
         }
-        System.out.println(temp);
+        temp+=password;
+        return temp;
     }
 }

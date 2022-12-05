@@ -22,8 +22,8 @@ public class MainFrame extends JFrame {
     DepartmentDAO departmentDAO;
     ArrayList<Department> departments;
 
-    RequestDAO requestDAO = new RequestDAO(employees);
-    ArrayList<Request> requests = requestDAO.loadRequestsFromFile(new File("requests.csv"));
+    RequestDAO requestDAO;// = new RequestDAO(employees);
+    ArrayList<Request> requests;// = requestDAO.loadRequestsFromFile(new File("requests.csv"));
 
     String[] adList = {"tcerny@example.com", "ghamerly@example.com", "cfry@example.com", "dbooth@example.com"};
     ArrayList<String> adminList = new ArrayList<>(List.of(adList));
@@ -43,6 +43,7 @@ public class MainFrame extends JFrame {
         departments = new ArrayList<>();
         departments.addAll(departmentDAO.loadDepartmentFromFile(new File("department.csv")));
 
+        requests = new ArrayList<>();
         requests.addAll(requestDAO.loadRequestsFromFile(new File("requests.csv")));
     }
 

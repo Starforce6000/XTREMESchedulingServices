@@ -32,6 +32,7 @@ public class InitFrame {
     ArrayList<Request> requests;
     ArrayList<Department> departments;
     ArrayList<Employee> employees;
+
     public InitFrame(JFrame frame,
                      JTable theTable,
                      SpringLayout layout,
@@ -48,6 +49,7 @@ public class InitFrame {
         this.requests = requests;
         this.departments = departments;
         this.employees = employees;
+        this.requests.addAll(requests);
     }
     void initFrame(){
         frame.setVisible(true);
