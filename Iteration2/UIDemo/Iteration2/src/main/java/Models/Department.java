@@ -44,13 +44,12 @@ public class Department {
         this.employeeList.addAll(employeeList);
     }
 
-    public void printData(){
-        System.out.println(getId());
-        System.out.println(getName());
-        System.out.println(getManagerId());
+    public String printData(){
+        String temp = "";
+        temp += getId() + "," + getName() + "," + getManagerId() + ",";
         for(Employee e: getEmployees()){
-            System.out.println(e.id);
-            System.out.println(e.name);
+            temp += e.getId() + "," + e.name;
         }
+        return temp;
     }
 }
