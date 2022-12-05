@@ -3,6 +3,7 @@ package app;
 import DAO.DepartmentDAO;
 import DAO.EmployeeDAO;
 import DAO.RequestDAO;
+import Enums.*;
 import Models.Department;
 import Models.Employee;
 import Requests.MakeRequest;
@@ -12,17 +13,18 @@ import javazoom.jl.player.Player;
 import Schedule.*;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
+import java.util.List;
 
 public class InitFrame extends JFrame{
     JFrame frame;
@@ -35,6 +37,7 @@ public class InitFrame extends JFrame{
     JComboBox<String> depCB;
     JComboBox<String> userList;
     JButton conf = new JButton("Find Employee");
+    MyTableModel tableModel;
 
     ArrayList<Request> requests;
     ArrayList<Department> departments;
@@ -47,7 +50,8 @@ public class InitFrame extends JFrame{
                      Boolean admin,
                      ArrayList<Request> requests,
                      ArrayList<Department> departments,
-                     ArrayList<Employee> employees){
+                     ArrayList<Employee> employees,
+                     MyTableModel tableModel){
         this.frame = frame;
         this.theTable = theTable;
         this.layout = layout;
@@ -56,6 +60,7 @@ public class InitFrame extends JFrame{
         this.requests = requests;
         this.departments = departments;
         this.employees = employees;
+        this.tableModel = tableModel;
     }
     void initFrame(){
         frame.setVisible(true);
@@ -338,7 +343,7 @@ public class InitFrame extends JFrame{
         conf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // NEED TO ADD FUNCTION
+                updateScheduleTable();
             }
         });
 
@@ -480,16 +485,30 @@ public class InitFrame extends JFrame{
         }
 
         if(targetEmployee != null) {
-            System.out.println("Got here");
-            for(int i = 0; i < theTable.getColumnCount(); i++) {
-                for(int j = 0; j < theTable.getRowCount(); j++) {
-                    theTable.getModel().setValueAt("Day",j,i);
-                    System.out.println("Set value at " + j + "," + i + " to Day");
+            ArrayList<String> dayShift = new ArrayList<>();
+            Schedule activeSchedule = targetDepartment.getActiveSchedule();
+            EmployeeSchedule targetSchedule = activeSchedule.getSchedule(targetEmployee);
+            Shift employeeShift = targetSchedule.getShift();
+            List<Day> scheduleDays = targetSchedule.getDays();
+            ArrayList<Day> allDays = new ArrayList<>();
+            Collections.addAll(allDays, Day.values());
+            allDays.remove(Day.SELECT);
+            int counter = 1;
+            for(Day day : allDays) {
+                dayShift.add("");
+            }
+            for(Day day : allDays) {
+                if(scheduleDays.contains(day)) {
+                    dayShift.set(counter, employeeShift.toString());
                 }
+                counter += 1;
+                counter = counter % 7;
             }
 
-            for (int i = 0; i < theTable.getColumnCount(); i++) {
-                theTable.getColumnModel().getColumn(i).setCellRenderer(new StatusColumnCellRenderer());
+            counter = 0;
+            for(String str : dayShift) {
+                tableModel.setValueAt(str, 0, counter);
+                counter++;
             }
         }
     }

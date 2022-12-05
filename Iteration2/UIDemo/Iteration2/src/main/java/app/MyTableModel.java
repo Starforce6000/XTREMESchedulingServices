@@ -66,17 +66,9 @@ class MyTableModel extends AbstractTableModel {
         data[row][1] = line[1];
         data[row][2] = line[2];
         data[row][3] = line[3];
-        switch (line[0]){
-            case "Pig":
-                data[row][4] = line[4];
-                break;
-            case "Dog":
-                data[row][5] = line[4];
-                break;
-            case "Cat":
-                data[row][6] = line[4];
-                break;
-        }
+        data[row][4] = line[4];
+        data[row][5] = line[5];
+        data[row][6] = line[6];
     }
 
     /*
@@ -127,7 +119,6 @@ class MyTableModel extends AbstractTableModel {
 
  */
     }
-
 
     private void printDebugData() {
         int numRows = getRowCount();
