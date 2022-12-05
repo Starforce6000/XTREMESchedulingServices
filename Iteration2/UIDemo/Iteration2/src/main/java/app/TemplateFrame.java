@@ -234,7 +234,14 @@ public class TemplateFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MakeRequest makeRequest = new MakeRequest();
-                makeRequest.initRequest();
+                /*
+                try {
+                    makeRequest.initRequest(employees);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+                 */
             }
         });
 

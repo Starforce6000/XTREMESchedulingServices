@@ -20,6 +20,7 @@ public class Request {
         type = RequestType.SELECT;
         reason = "";
         day.setDay(Day.SELECT);
+        emp = new Employee();
     }
 
     public void approve() {

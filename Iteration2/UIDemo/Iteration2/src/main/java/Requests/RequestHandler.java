@@ -3,6 +3,8 @@ package Requests;
 import Enums.Day;
 import Enums.RequestType;
 import Enums.Shift;
+import Models.Employee;
+
 public class RequestHandler {
     Request request;
 
@@ -25,4 +27,8 @@ public class RequestHandler {
     public void setReason(String reason) {
         request.setReason(reason);
     }
+
+    public void setEmployee(Employee employee) { request.setEmp(employee);}
+
+    public Employee getEmployee() { return request.getEmp();}
 }
