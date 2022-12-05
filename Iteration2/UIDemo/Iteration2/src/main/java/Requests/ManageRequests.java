@@ -88,7 +88,7 @@ public class ManageRequests extends JPanel {
                         //TODO: make the change reflected in the database
                         for(Request r : requests) {
                             if(r.getId() == (Integer)model.getValueAt(modelRow, 6)) {
-                                r.setStatus(RequestStatus.DENIED);
+                                r.deny();
                             }
                         }
                         manageWindow.setVisible(false);
@@ -104,7 +104,7 @@ public class ManageRequests extends JPanel {
                         //TODO: make the change reflected in the database
                         for(Request r : requests) {
                             if(r.getId() == (Integer)model.getValueAt(modelRow, 6)) {
-                                r.setStatus(RequestStatus.APPROVED);
+                                r.approve();
                             }
                         }
                         manageWindow.setVisible(false);
