@@ -6,15 +6,17 @@ class MyTableModel extends AbstractTableModel {
     private final TemplateFrame lab7;
     private final MainFrame mainFrame;
 
-    private String[] columnNames = {"Sunday",
+    private String[] columnNames = {"Shift Name","Shift Time","Sunday",
             "Monday",
             "Tuesday",
             "Wednesday",
             "Thursday",
             "Friday",
             "Saturday"};
-    private String[] nul = {" ", " ", " ", " ", " ", " ", " "};
-    private String[][] data = {nul,nul,nul};
+    private String[] nul = {"Day","(8:00am - 5:00pm)"," ", " ", " ", " ", " ", " ", " "};
+    private String[] nul2 = {"Swing","(4:00pm - 12:00am)"," ", " ", " ", " ", " ", " ", " "};
+    private String[] nul3 = {"Night","(11:00pm - 9:00am)"," ", " ", " ", " ", " ", " ", " "};
+    private String[][] data = {nul,nul2,nul3};
 
     public MyTableModel(TemplateFrame lab7) {
         this.lab7 = lab7;
