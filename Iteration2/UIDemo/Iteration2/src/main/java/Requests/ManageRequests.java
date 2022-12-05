@@ -168,7 +168,7 @@ public class ManageRequests extends JPanel {
         for(Request r : requests) {
             ((DefaultTableModel)table.getModel()).addRow(new Object[]
                     {r.getStatus().toString(), r.getEmp().getName(),
-                            r.getType().toString(), r.getDay().toString(),
+                            r.getType().toString(), r.getDay().getDay().toString(),
                             r.getDay().getShift().toString(), r.getReason(),
                             r.getId(), "View"});
         }
