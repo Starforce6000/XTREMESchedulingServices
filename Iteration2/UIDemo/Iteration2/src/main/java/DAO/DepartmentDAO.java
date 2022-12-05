@@ -4,10 +4,7 @@ import Models.Department;
 import Models.Employee;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,13 +46,20 @@ public class DepartmentDAO {
         }
         return departments;
     }
+    public void saveDepartmentToFile(ArrayList<Department> departments){
+        BufferedWriter writer = null;
+        try{
+            writer = new BufferedWriter(new FileWriter(new File("department.csv")));
+            if(departments.size() == 0){
+                return;
+            }
+            for(Department department : departments){
+                writer.write(department.printData());
+            }
 
-//    public static void main(String[] args) throws IOException {
-//        System.out.println("Hello World");
-//        DepartmentDAO dao = new DepartmentDAO();
-//        ArrayList<Department> temp = dao.loadDepartmentFromFile(new File("department.csv"));
-//        for(Department t : temp){
-//            t.printData();
-//        }
-//    }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
