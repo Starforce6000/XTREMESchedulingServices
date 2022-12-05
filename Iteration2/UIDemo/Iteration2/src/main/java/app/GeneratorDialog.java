@@ -48,11 +48,47 @@ public class GeneratorDialog {
                 String shiftsSplit[] = shiftF.getText().replace(" ", "").split(",");
 
                 for(String string: daysSplit) {
-                    
+                    if(string.equalsIgnoreCase("M")) {
+                        if(!days.contains(Day.MONDAY)) {
+                            days.add(Day.MONDAY);
+                        }
+                    } else if(string.equalsIgnoreCase("T")) {
+                        if(!days.contains(Day.THURSDAY)) {
+                            days.add(Day.TUESDAY);
+                        }
+                    } else if(string.equalsIgnoreCase("W")) {
+                        if(!days.contains(Day.WEDNESDAY)) {
+                            days.add(Day.WEDNESDAY);
+                        }
+                    } else if(string.equalsIgnoreCase("TR")) {
+                        if(!days.contains(Day.THURSDAY)) {
+                            days.add(Day.THURSDAY);
+                        }
+                    } else if(string.equalsIgnoreCase("F")) {
+                        if(!days.contains(Day.FRIDAY)) {
+                            days.add(Day.FRIDAY);
+                        }
+                    }
                 }
-                for(String string: daysSplit) {
+                for(String string: shiftsSplit) {
+                    if (string.equalsIgnoreCase("night")){
+                        if(!shifts.contains(Shift.Night)) {
+                            shifts.add(Shift.Night);
+                        }
+                    } else if (string.equalsIgnoreCase("swing")) {
+                        if(!shifts.contains(Shift.Swing)) {
+                            shifts.add(Shift.Swing);
+                        }
+                    } else if(string.equalsIgnoreCase("day")) {
+                        if(!shifts.contains(Shift.Day)) {
+                            shifts.add(Shift.Day);
+                        }
+                    }
+                }
 
-                }
+                
+
+                frame.dispose();
             }
         });
         cancel.addActionListener(new ActionListener() {
