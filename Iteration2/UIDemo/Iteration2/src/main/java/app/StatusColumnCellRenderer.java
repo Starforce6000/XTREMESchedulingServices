@@ -15,11 +15,11 @@ class StatusColumnCellRenderer extends DefaultTableCellRenderer {
 
         //Get the status for the current row.
         if (value.equals("Day")) {
-            l.setBackground(new Color(61,133,198));
-            l.setForeground(new Color(61, 133, 198));
+            l.setBackground(new Color(74, 192, 224));
+            l.setForeground(new Color(74, 192, 224));
         } else if(value.equals("Swing")){
-            l.setBackground(new Color(11, 83, 148));
-            l.setForeground(new Color(11, 83, 148));
+            l.setBackground(new Color(245, 163, 56));
+            l.setForeground(new Color(245, 163, 56));
         }else if(value.equals("Night")){
             l.setBackground(new Color(7, 55, 99));
             l.setForeground(new Color(7, 55, 99));

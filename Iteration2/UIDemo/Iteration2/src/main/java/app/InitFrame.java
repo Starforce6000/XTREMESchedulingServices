@@ -3,6 +3,7 @@ package app;
 import DAO.DepartmentDAO;
 import DAO.EmployeeDAO;
 import DAO.RequestDAO;
+import Enums.*;
 import Models.Department;
 import Models.Employee;
 import Requests.MakeRequest;
@@ -12,17 +13,18 @@ import javazoom.jl.player.Player;
 import Schedule.*;
 
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
+import java.util.List;
 
 public class InitFrame extends JFrame{
     JFrame frame;
@@ -33,7 +35,9 @@ public class InitFrame extends JFrame{
     JButton right = new JButton(">");
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
     JComboBox<String> depCB;
-    JButton conf = new JButton("Find Employee");
+    JComboBox<String> userList;
+    //JButton conf = new JButton("Find Employee");
+    MyTableModel tableModel;
 
     ArrayList<Request> requests;
     ArrayList<Department> departments;
@@ -46,7 +50,8 @@ public class InitFrame extends JFrame{
                      Boolean admin,
                      ArrayList<Request> requests,
                      ArrayList<Department> departments,
-                     ArrayList<Employee> employees){
+                     ArrayList<Employee> employees,
+                     MyTableModel tableModel){
         this.frame = frame;
         this.theTable = theTable;
         this.layout = layout;
@@ -55,6 +60,7 @@ public class InitFrame extends JFrame{
         this.requests = requests;
         this.departments = departments;
         this.employees = employees;
+        this.tableModel = tableModel;
     }
     void initFrame(){
         frame.setVisible(true);
@@ -92,7 +98,7 @@ public class InitFrame extends JFrame{
             request.setEnabled(false);
             saveAll.setEnabled(false);
             addSchedule.setEnabled(false);
-            conf.setEnabled(false);
+            //conf.setEnabled(false);
             makeActive.setEnabled(false);
         }
 
@@ -136,11 +142,11 @@ public class InitFrame extends JFrame{
                         }
                         for(Schedule s : target.getSchedules()) {
                             if(s.getName().equals(scheduleName)) {
-                                s.activate();
-                            } else {
-                                s.deactivate();
+                                target.setActiveSchedule(s);
                             }
                         }
+
+                        updateScheduleTable();
                     }
                 });
 
@@ -279,35 +285,27 @@ public class InitFrame extends JFrame{
         for(Employee e : departments.get(0).getEmployees()) {
             initEmployees.add(e.getName());
         }
-        JComboBox<String> userList = new JComboBox<>(initEmployees.toArray(new String[0]));
+        userList = new JComboBox<>(initEmployees.toArray(new String[0]));
         ArrayList<String> deptNames = new ArrayList<>();
         for(Department d : departments) {
             deptNames.add(d.getName());
         }
         depCB = new JComboBox<>(deptNames.toArray(new String[0]));
-        conf.setSize(30,40);
+        //conf.setSize(30,40);
         depCB.setSize(50, 40);
         userList.setSize(50,40);
 
-        conf.setVisible(true);
-        conf.setEnabled(false);
+        //conf.setVisible(true);
+        //conf.setEnabled(false);
         depCB.setVisible(true);
         layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
         layout.putConstraint(SpringLayout.EAST, depCB, -5, SpringLayout.WEST, userList);
-        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
+        //layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
 
         userList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(userList.getSelectedItem().toString().equals("Employee")){
-                    conf.setEnabled(false);
-                }
-                else {
-                    if(admin) {
-                        conf.setEnabled(true);
-                    }
-                }
-                // NEED TO FIX
+                updateScheduleTable();
             }
         });
 
@@ -331,19 +329,21 @@ public class InitFrame extends JFrame{
 
                 ComboBoxModel<String> temp = new DefaultComboBoxModel<>(strings);
                 userList.setModel(temp);
+
+                updateScheduleTable();
             }
         });
 
-        conf.addActionListener(new ActionListener() {
+        /*conf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // NEED TO ADD FUNCTION
+                updateScheduleTable();
             }
-        });
+        });*/
 
         frame.add(userList);
         frame.add(depCB);
-        frame.add(conf);
+        //frame.add(conf);
     }
     void goodbye(){
         JFrame goodbye = new JFrame();
@@ -459,5 +459,67 @@ public class InitFrame extends JFrame{
             }
         });
         week.setEditable(false);
+    }
+
+    void updateScheduleTable() {
+        String activeDept = depCB.getSelectedItem().toString();
+        String activeEmployee = userList.getSelectedItem().toString();
+
+        Department targetDepartment = null;
+        Employee targetEmployee = null;
+        for(Department d : departments) {
+            if(d.getName().equals(activeDept)) {
+                targetDepartment = d;
+            }
+        }
+        for(Employee e : targetDepartment.getEmployees()) {
+            if(e.getName().equals(activeEmployee)) {
+                targetEmployee = e;
+            }
+        }
+
+        if(targetEmployee != null) {
+            ArrayList<String> dayShift = new ArrayList<>();
+            Schedule activeSchedule = targetDepartment.getActiveSchedule();
+            ArrayList<Day> allDays = new ArrayList<>();
+            Collections.addAll(allDays, Day.values());
+            allDays.remove(Day.SELECT);
+            int counter = 1;
+            for (Day day : allDays) {
+                dayShift.add("");
+            }
+            if(activeSchedule != null) {
+                EmployeeSchedule targetSchedule = activeSchedule.getSchedule(targetEmployee);
+                if (targetSchedule != null) {
+                    Shift employeeShift = targetSchedule.getShift();
+                    List<Day> scheduleDays = targetSchedule.getDays();
+                    for (Day day : allDays) {
+                        if (scheduleDays.contains(day)) {
+                            dayShift.set(counter, employeeShift.toString());
+                        }
+                        counter += 1;
+                        counter = counter % 7;
+                    }
+
+                    counter = 0;
+                    for (String str : dayShift) {
+                        tableModel.setValueAt(str, 0, counter);
+                        counter++;
+                    }
+                } else {
+                    counter = 0;
+                    for (String str : dayShift) {
+                        tableModel.setValueAt(str, 0, counter);
+                        counter++;
+                    }
+                }
+            } else {
+                counter = 0;
+                for (String str : dayShift) {
+                    tableModel.setValueAt(str, 0, counter);
+                    counter++;
+                }
+            }
+        }
     }
 }

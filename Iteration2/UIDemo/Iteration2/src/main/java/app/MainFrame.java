@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
     }
 
     void run(){
-        InitFrame initFrame = new InitFrame(frame, theTable, layout, logged, admin, requests, departments, employees);
+        InitFrame initFrame = new InitFrame(frame, theTable, layout, logged, admin, requests, departments, employees, model);
         LoginFrame loginFrame = new LoginFrame(logged, admin, employees, adminList, initFrame);
         loginFrame.login();
     }

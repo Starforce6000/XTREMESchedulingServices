@@ -13,6 +13,7 @@ public class Department {
     String name;
     List<Employee> employeeList = new LinkedList<Employee>();
     List<Schedule> scheduleList = new LinkedList<>();
+    Schedule activeSchedule = null;
 
     public int getId() {
         return id;
@@ -68,5 +69,13 @@ public class Department {
 
     public List<Schedule> getSchedules() {
         return scheduleList;
+    }
+
+    public void setActiveSchedule(Schedule activeSchedule) {
+        this.activeSchedule = activeSchedule;
+    }
+
+    public Schedule getActiveSchedule() {
+        return activeSchedule;
     }
 }

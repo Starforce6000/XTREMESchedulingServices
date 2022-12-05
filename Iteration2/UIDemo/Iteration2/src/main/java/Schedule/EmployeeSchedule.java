@@ -44,4 +44,12 @@ public class EmployeeSchedule {
         }
         System.out.println("\n" + shift);
     }
+
+    public List<Day> getDays() {
+        return workdays;
+    }
+
+    public Shift getShift() {
+        return shift;
+    }
 }
