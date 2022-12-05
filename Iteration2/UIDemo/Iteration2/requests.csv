@@ -1,6 +1,6 @@
-employee id,status,request type,day,shift,reason
-1,PENDING,RESCHEDULE,MONDAY,Night,dentist appointment @ 9:30
-2,PENDING,OVERTIME,WEDNESDAY,Swing,previous event canceled, free time
-3,DENIED,SWAP,TUESDAY,Day,just felt like it
-4,APPROVED,PTO,SATURDAY,Night,pick up kids from school
-5,APPROVED,RESCHEDULE,FRIDAY,Swing,open whenever
+employee id,status,request type,day,shift,reason,id
+1,PENDING,RESCHEDULE,MONDAY,Night,dentist appointment @ 9:30,1
+2,PENDING,OVERTIME,WEDNESDAY,Swing,previous event canceled new free time,2
+3,DENIED,SWAP,TUESDAY,Day,just felt like it,3
+4,APPROVED,PTO,SATURDAY,Night,pick up kids from school,4
+5,APPROVED,RESCHEDULE,FRIDAY,Swing,open whenever,5

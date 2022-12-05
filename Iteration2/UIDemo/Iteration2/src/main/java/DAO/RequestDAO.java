@@ -48,6 +48,7 @@ public class RequestDAO {
                 reqD.setShift(Shift.valueOf(data[4]));
                 r.setDay(reqD);
                 r.setReason(data[5]);
+                r.setId(Integer.parseInt(data[6]));
 
                 requestList.add(r);
             }
