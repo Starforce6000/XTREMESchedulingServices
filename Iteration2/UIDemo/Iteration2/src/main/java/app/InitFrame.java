@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Vector;
 
 public class InitFrame extends JFrame{
     JFrame frame;
@@ -198,9 +199,7 @@ public class InitFrame extends JFrame{
     }
     void userBar(){
         // CHANGE TO REFLECT REAL USERS
-        String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
-        String[] def = {"Employee"};
-        String[] newList = {"Employee","Cerny", "Fry", "Booth", "Donahoo"};
+        String[] def = {"Tomas Cerny", "John Rambo", "Chuck Norris", "Bruce Willis","Bruce Lee","Jackie Chan"};
         JComboBox<String> userList = new JComboBox<>(def);
         ArrayList<String> deptNames = new ArrayList<>();
         for(Department d : departments) {
@@ -235,22 +234,23 @@ public class InitFrame extends JFrame{
         depCB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                // NEED TO FIX
-                switch(depCB.getSelectedItem().toString()){
-                    case "Dream Killers":
-                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>(newList);
-                        userList.setModel(temp);
+                String str = (String) depCB.getSelectedItem();
+                Department department = new Department();
+                for(Department d: departments){
+                    if(d.getName().equalsIgnoreCase(str)){
+                        department = d;
                         break;
-                    case "Models.Department":
-                        ComboBoxModel<String> tmp = new DefaultComboBoxModel<>(def);
-                        userList.setModel(tmp);
-                        conf.setEnabled(false);
-                        break;
-                    default:
-                        ComboBoxModel<String> temp1 = new DefaultComboBoxModel<>(list);
-                        userList.setModel(temp1);
+                    }
                 }
+                String[] strings = new String[department.getEmployees().size()];
+                int count = 0;
+                for(Employee employee:department.getEmployees()){
+                    strings[count] = employee.getName();
+                    count++;
+                }
+
+                ComboBoxModel<String> temp = new DefaultComboBoxModel<>(strings);
+                userList.setModel(temp);
             }
         });
 
