@@ -1,6 +1,8 @@
 package app;
 
 import Models.*;
+
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.swing.*;
 import java.awt.*;
 import Enums.*;
@@ -42,13 +44,21 @@ public class GeneratorDialog {
                     perShift = 0;
                 }
 
-                String daysSplit[] = daysF.getText().split(",");
+                String daysSplit[] = daysF.getText().replace(" ", "").split(",");
+                String shiftsSplit[] = shiftF.getText().replace(" ", "").split(",");
+
+                for(String string: daysSplit) {
+                    
+                }
+                for(String string: daysSplit) {
+
+                }
             }
         });
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                frame.dispose();
             }
         });
 
