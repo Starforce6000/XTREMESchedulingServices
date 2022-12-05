@@ -6,6 +6,9 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.swing.*;
 import java.awt.*;
 import Enums.*;
+import Schedule.*;
+import Schedule.Schedule;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -13,12 +16,16 @@ import java.util.ArrayList;
 
 public class GeneratorDialog {
     JFrame frame;
+    Schedule newSchedule;
 
     public GeneratorDialog(Department d) {
         frame = new JFrame(d.getName() + ": Generate New Schedule");
-
-        frame.setLayout(new GridLayout(4,2));
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridLayout(4,2));
+        JTextField scheduleName = new JTextField("Unnamed Schedule");
 
         JLabel perShiftL = new JLabel("Employees/shift");
         perShiftL.setPreferredSize(new Dimension(200,50));
@@ -36,6 +43,7 @@ public class GeneratorDialog {
                 int perShift = 0;
                 List<Day> days = new ArrayList<>();
                 List<Shift> shifts = new ArrayList<>();
+                List<Employee> ignored = new ArrayList<>();
 
                 try {
                     perShift = Integer.parseInt(perShiftF.getText());
@@ -86,7 +94,13 @@ public class GeneratorDialog {
                     }
                 }
 
-                
+                if(scheduleName.getText().equals("")) {
+                    scheduleName.setText("Unnamed Schedule");
+                }
+
+                ScheduleGenerator generator = new ScheduleGenerator();
+                newSchedule = generator.generateSchedule(scheduleName.getText(), d, perShift, days, shifts, ignored);
+                d.addSchedule(newSchedule);
 
                 frame.dispose();
             }
@@ -98,14 +112,17 @@ public class GeneratorDialog {
             }
         });
 
-        frame.add(perShiftL);
-        frame.add(perShiftF);
-        frame.add(daysL);
-        frame.add(daysF);
-        frame.add(shiftL);
-        frame.add(shiftF);
-        frame.add(create);
-        frame.add(cancel);
+        inputPanel.add(perShiftL);
+        inputPanel.add(perShiftF);
+        inputPanel.add(daysL);
+        inputPanel.add(daysF);
+        inputPanel.add(shiftL);
+        inputPanel.add(shiftF);
+        inputPanel.add(create);
+        inputPanel.add(cancel);
+
+        frame.add(scheduleName,BorderLayout.NORTH);
+        frame.add(inputPanel,BorderLayout.SOUTH);
 
         frame.pack();
         frame.setVisible(true);
