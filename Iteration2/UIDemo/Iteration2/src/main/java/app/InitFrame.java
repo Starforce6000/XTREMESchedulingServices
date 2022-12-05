@@ -78,7 +78,7 @@ public class InitFrame extends JFrame{
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         JMenuItem logout = new JMenuItem("Logout");
-        JMenuItem print = new JMenuItem("Print");
+        //JMenuItem print = new JMenuItem("Print");
         JButton addSchedule = new JButton("Add Schedule");
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
@@ -132,10 +132,18 @@ public class InitFrame extends JFrame{
                     EmployeeDAO employeeDAO = new EmployeeDAO();
                     DepartmentDAO departmentDAO = new DepartmentDAO(employees);
                     RequestDAO requestDAO = new RequestDAO(employees);
-                    employeeDAO.saveEmployeesToFile(employees);
-                    departmentDAO.saveDepartmentToFile(departments);
                     try {
-                        requestDAO.saveRequestsToFile(new File("requests.csv"), requests);
+                        employeeDAO.saveEmployeesToFile(employees);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    try {
+                        departmentDAO.saveDepartmentToFile(departments);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    try {
+                        requestDAO.saveRequestsToFile(new File("outreq.csv"), requests);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -176,7 +184,7 @@ public class InitFrame extends JFrame{
         });
 
 
-        menu.add(print);
+        //menu.add(print);
         menu.add(logout);
         menu.addSeparator();
         menu.add(saveAll);

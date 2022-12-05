@@ -44,22 +44,25 @@ public class DepartmentDAO {
         }catch (Exception e){
             throw e;
         }
+        reader.close();
         return departments;
     }
-    public void saveDepartmentToFile(ArrayList<Department> departments){
+    public void saveDepartmentToFile(ArrayList<Department> departments) throws IOException {
         BufferedWriter writer = null;
         try{
-            writer = new BufferedWriter(new FileWriter(new File("department.csv")));
+            writer = new BufferedWriter(new FileWriter(new File("outdept.csv")));
             if(departments.size() == 0){
                 return;
             }
             for(Department department : departments){
                 writer.write(department.printData());
+                writer.write("\n");
             }
 
         }catch (IOException e) {
             e.printStackTrace();
         }
+        writer.close();
     }
 
 }
