@@ -63,7 +63,7 @@ public class InitFrame {
         JMenu menu = new JMenu("Menu");
         JMenuItem logout = new JMenuItem("Logout");
         JMenuItem print = new JMenuItem("Print");
-        JButton addSchedule = new JButton("Add Schedule.Schedule");
+        JButton addSchedule = new JButton("Add Schedule");
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
 
@@ -107,77 +107,65 @@ public class InitFrame {
         addSchedule.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame addSched = new JFrame("Adding Schedule.Schedule");
-                addSched.setLayout(new GridLayout(10,2));
-                addSched.setSize(500,450);
-                JLabel l1 = new JLabel("User");
-                JLabel l2 = new JLabel("ID");
-                JLabel l3 = new JLabel("Sunday");
-                JLabel l4 = new JLabel("Monday");
-                JLabel l5 = new JLabel("Tuesday");
-                JLabel l6 = new JLabel("Wednesday");
-                JLabel l7 = new JLabel("Thursday");
-                JLabel l8 = new JLabel("Friday");
-                JLabel l9 = new JLabel("Saturday");
+//                JFrame addSched = new JFrame("Generate Schedule");
+//                addSched.setLayout(new GridLayout(10,2));
+//                addSched.setSize(500,450);
+//                JLabel l1 = new JLabel("User");
+//                JLabel l2 = new JLabel("ID");
+//                JLabel l3 = new JLabel("Sunday");
+//                JLabel l4 = new JLabel("Monday");
+//                JLabel l5 = new JLabel("Tuesday");
+//                JLabel l6 = new JLabel("Wednesday");
+//                JLabel l7 = new JLabel("Thursday");
+//                JLabel l8 = new JLabel("Friday");
+//                JLabel l9 = new JLabel("Saturday");
+//                JTextField f1 = new JTextField();
+//                JTextField f2 = new JTextField();
+//                JTextField f3 = new JTextField();
+//                JTextField f4 = new JTextField();
+//                JTextField f5 = new JTextField();
+//                JTextField f6 = new JTextField();
+//                JTextField f7 = new JTextField();
+//                JTextField f8 = new JTextField();
+//                JTextField f9 = new JTextField();
+//                addSched.add(l1);
+//                addSched.add(f1);
+//                addSched.add(l2);
+//                addSched.add(f2);
+//                addSched.add(l3);
+//                addSched.add(f3);
+//                addSched.add(l4);
+//                addSched.add(f4);
+//                addSched.add(l5);
+//                addSched.add(f5);
+//                addSched.add(l6);
+//                addSched.add(f6);
+//                addSched.add(l7);
+//                addSched.add(f7);
+//                addSched.add(l8);
+//                addSched.add(f8);
+//                addSched.add(l9);
+//                addSched.add(f9);
+//                addSched.setVisible(true);
+//                JButton canc = new JButton("Cancel");
+//                JButton conf = new JButton("Confirm");
 
-                JTextField f1 = new JTextField();
-                JTextField f2 = new JTextField();
-                JTextField f3 = new JTextField();
-                JTextField f4 = new JTextField();
-                JTextField f5 = new JTextField();
-                JTextField f6 = new JTextField();
-                JTextField f7 = new JTextField();
-                JTextField f8 = new JTextField();
-                JTextField f9 = new JTextField();
-
-                addSched.add(l1);
-                addSched.add(f1);
-
-                addSched.add(l2);
-                addSched.add(f2);
-
-                addSched.add(l3);
-                addSched.add(f3);
-
-                addSched.add(l4);
-                addSched.add(f4);
-
-                addSched.add(l5);
-                addSched.add(f5);
-
-                addSched.add(l6);
-                addSched.add(f6);
-
-                addSched.add(l7);
-                addSched.add(f7);
-
-                addSched.add(l8);
-                addSched.add(f8);
-
-                addSched.add(l9);
-                addSched.add(f9);
-
-                addSched.setVisible(true);
-
-                JButton canc = new JButton("Cancel");
-                JButton conf = new JButton("Confirm");
-
-                canc.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        addSched.setVisible(false);
-                    }
-                });
-
-                conf.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        addSched.setVisible(false);
-                    }
-                });
-
-                addSched.add(canc);
-                addSched.add(conf);
+//                canc.addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        addSched.setVisible(false);
+//                    }
+//                });
+//
+//                conf.addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        addSched.setVisible(false);
+//                    }
+//                });
+//
+//                addSched.add(canc);
+//                addSched.add(conf);
             }
         });
 
@@ -210,13 +198,13 @@ public class InitFrame {
     }
     void userBar(){
         // CHANGE TO REFLECT REAL USERS
-        String[] list = {"Models.Employee","Suzzie", "Mike", "John", "Rebecca"};
-        String[] def = {"Models.Employee"};
-        String[] newList = {"Models.Employee","Cerny", "Fry", "Booth", "Donahoo"};
-        String[] departments = {"Models.Department", "Cashiers", "Back-of-House", "Dream Killers"};
+        String[] list = {"Employee","Suzzie", "Mike", "John", "Rebecca"};
+        String[] def = {"Employee"};
+        String[] newList = {"Employee","Cerny", "Fry", "Booth", "Donahoo"};
+        String[] departments = {"Department", "Cashiers", "Back-of-House", "Dream Killers"};
         JComboBox<String> userList = new JComboBox<>(def);
         JComboBox<String> depList = new JComboBox<>(departments);
-        JButton conf = new JButton("Find Models.Employee");
+        JButton conf = new JButton("Find Employee");
         conf.setSize(30,40);
         depList.setSize(50, 40);
         userList.setSize(50,40);
