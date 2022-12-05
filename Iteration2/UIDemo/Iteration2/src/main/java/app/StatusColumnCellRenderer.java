@@ -12,17 +12,21 @@ class StatusColumnCellRenderer extends DefaultTableCellRenderer {
 
         //Cells are by default rendered as a JLabel.
         JLabel l = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, col);
+        Color text = new Color(0,0,0);
+        Color day = new Color(10,220,220);
+        Color swing = new Color(100,100,150);
+        Color night = new Color(200,50,120);
 
         //Get the status for the current row.
         if (value.equals("Day")) {
-            l.setBackground(new Color(74, 192, 224));
-            l.setForeground(new Color(74, 192, 224));
+            l.setBackground(day);
+            l.setForeground(text);
         } else if(value.equals("Swing")){
-            l.setBackground(new Color(245, 163, 56));
-            l.setForeground(new Color(245, 163, 56));
+            l.setBackground(swing);
+            l.setForeground(text);
         }else if(value.equals("Night")){
-            l.setBackground(new Color(7, 55, 99));
-            l.setForeground(new Color(7, 55, 99));
+            l.setBackground(night);
+            l.setForeground(text);
         }else{
             l.setBackground(Color.LIGHT_GRAY);
         }
