@@ -31,15 +31,6 @@ public class RequestDAO {
             while((line = reader.readLine()) != null) {
                 Request r = new Request();
                 String[] data = line.split(",");
-/*
-                int userID = Integer.parseInt(data[0]);
-                for(Employee e : employees) {
-                    if(e.getId() == userID) {
-                        r.setEmp(e);
-                    }
-                }
-
- */
                 r.getEmp().setName(data[0]);
                 r.setStatus(RequestStatus.valueOf(data[1]));
                 r.setType(RequestType.valueOf(data[2]));
