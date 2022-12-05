@@ -488,27 +488,29 @@ public class InitFrame extends JFrame{
             ArrayList<String> dayShift = new ArrayList<>();
             Schedule activeSchedule = targetDepartment.getActiveSchedule();
             EmployeeSchedule targetSchedule = activeSchedule.getSchedule(targetEmployee);
-            Shift employeeShift = targetSchedule.getShift();
-            List<Day> scheduleDays = targetSchedule.getDays();
-            ArrayList<Day> allDays = new ArrayList<>();
-            Collections.addAll(allDays, Day.values());
-            allDays.remove(Day.SELECT);
-            int counter = 1;
-            for(Day day : allDays) {
-                dayShift.add("");
-            }
-            for(Day day : allDays) {
-                if(scheduleDays.contains(day)) {
-                    dayShift.set(counter, employeeShift.toString());
+            if(targetSchedule != null) {
+                Shift employeeShift = targetSchedule.getShift();
+                List<Day> scheduleDays = targetSchedule.getDays();
+                ArrayList<Day> allDays = new ArrayList<>();
+                Collections.addAll(allDays, Day.values());
+                allDays.remove(Day.SELECT);
+                int counter = 1;
+                for (Day day : allDays) {
+                    dayShift.add("");
                 }
-                counter += 1;
-                counter = counter % 7;
-            }
+                for (Day day : allDays) {
+                    if (scheduleDays.contains(day)) {
+                        dayShift.set(counter, employeeShift.toString());
+                    }
+                    counter += 1;
+                    counter = counter % 7;
+                }
 
-            counter = 0;
-            for(String str : dayShift) {
-                tableModel.setValueAt(str, 0, counter);
-                counter++;
+                counter = 0;
+                for (String str : dayShift) {
+                    tableModel.setValueAt(str, 0, counter);
+                    counter++;
+                }
             }
         }
     }
