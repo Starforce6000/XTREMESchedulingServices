@@ -23,6 +23,7 @@ public class LoginFrame {
     JPasswordField pass;
     JButton canButton;
     JButton logButton;
+    Employee loggedUser;
     public LoginFrame(Boolean logged, Boolean admin,
                       ArrayList<Employee> employees,
                       ArrayList<String> adminList,
@@ -78,6 +79,7 @@ public class LoginFrame {
                     if(employee.getEmail().equals(user.getText())){
                         if(employee.getPassword().equals(pass.getText())){
                             logged = true;
+                            loggedUser = employee;
                         }
                     }
                 }

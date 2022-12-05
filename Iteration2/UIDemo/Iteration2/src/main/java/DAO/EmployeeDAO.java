@@ -61,9 +61,10 @@ public class EmployeeDAO {
             }catch (Exception e){
             throw e;
         }
+        reader.close();
         return employeeList;
     }
-    public void saveEmployeesToFile(ArrayList<Employee> employees){
+    public void saveEmployeesToFile(ArrayList<Employee> employees) throws IOException {
         BufferedWriter writer = null;
         try{
             writer = new BufferedWriter(new FileWriter(new File("employee.csv")));
@@ -72,11 +73,14 @@ public class EmployeeDAO {
             }
             for(Employee employee : employees){
                 writer.write(employee.printData());
+                writer.write("\n");
             }
+
 
         }catch (IOException e) {
             e.printStackTrace();
         }
+        writer.close();
     }
 
 //    public static void main(String[] args) throws IOException {
