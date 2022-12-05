@@ -79,8 +79,9 @@ public class Employee {
         //temp += availability.getShift().shift + ",";// + availability.getDays().toString();
         temp += availability.getShift().shift + ",";
         for(Day d : availability.getDays()) {
-            temp += d.toString() + " ";
+            temp += d.day + " ";
         }
+        temp = temp.substring(0, temp.length() - 1);
         temp+= ",";
         if(isManager) {
             temp += "Y,";

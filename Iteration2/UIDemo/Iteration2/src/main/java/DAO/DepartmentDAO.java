@@ -54,6 +54,7 @@ public class DepartmentDAO {
             if(departments.size() == 0){
                 return;
             }
+            writer.write("department_id, name, manger_id, employee_ids\n");
             for(Department department : departments){
                 writer.write(department.printData());
                 writer.write("\n");

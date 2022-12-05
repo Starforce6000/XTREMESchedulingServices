@@ -48,10 +48,16 @@ public class Department {
 
     public String printData(){
         String temp = "";
-        //temp += id + "," + name + "," + getManagerId();
+        //temp += id + "," + name + "," + managerId + ",";
         temp += id + "," + name + "," + managerId + ",";
+        int size = getEmployees().size();
+        int count = 1;
         for(Employee e: getEmployees()){
-            temp += e.getId() + " ";
+            temp += e.getId();
+            if(count < size) {
+                temp += " ";
+            }
+            count++;
         }
         return temp;
     }

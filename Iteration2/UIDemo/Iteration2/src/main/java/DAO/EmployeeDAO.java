@@ -71,6 +71,7 @@ public class EmployeeDAO {
             if(employees.size() == 0){
                 return;
             }
+            writer.write("id,username,email,shift type,Working Day,Manager,Password\n");
             for(Employee employee : employees){
                 writer.write(employee.printData());
                 writer.write("\n");
