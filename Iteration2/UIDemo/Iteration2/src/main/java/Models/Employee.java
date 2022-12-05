@@ -75,7 +75,7 @@ public class Employee {
 
     public String printData() {
         String temp = id + "," + name + "," + email + ",";
-        temp+= "," + availability.getShift().shift + "," + availability.getDays().toString();
+        temp+= availability.getShift().shift + "," + availability.getDays().toString();
         if(isManager) {
             temp += "Y,";
         } else {
