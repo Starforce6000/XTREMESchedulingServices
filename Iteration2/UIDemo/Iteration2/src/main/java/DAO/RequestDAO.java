@@ -31,13 +31,7 @@ public class RequestDAO {
             while((line = reader.readLine()) != null) {
                 Request r = new Request();
                 String[] data = line.split(",");
-
-                int userID = Integer.parseInt(data[0]);
-                for(Employee e : employees) {
-                    if(e.getId() == userID) {
-                        r.setEmp(e);
-                    }
-                }
+                r.getEmp().setName(data[0]);
                 r.setStatus(RequestStatus.valueOf(data[1]));
                 r.setType(RequestType.valueOf(data[2]));
                 RequestDay reqD = new RequestDay();
@@ -61,7 +55,7 @@ public class RequestDAO {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(file));
-            writer.write("id,status,type,day,shift,reason,request,id\n");
+            writer.write("id,status,type,day,shift,reason,request,request id\n");
             for(Request r : reqs) {
                 writer.write(r.printRequest());
                 writer.write('\n');

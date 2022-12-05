@@ -36,7 +36,7 @@ public class InitFrame extends JFrame{
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
     JComboBox<String> depCB;
     JComboBox<String> userList;
-    //JButton conf = new JButton("Find Employee");
+    JButton conf = new JButton("Department Schedule Report");
     MyTableModel tableModel;
 
     ArrayList<Request> requests;
@@ -72,11 +72,11 @@ public class InitFrame extends JFrame{
         frame.setSize(800,400);
         frame.setLayout(layout);
         theTable.setRowHeight(50);
+        theTable.getColumnModel().getColumn(0).setPreferredWidth(60);
         theTable.getColumnModel().getColumn(1).setPreferredWidth(120);
         for (int i = 2; i < theTable.getColumnCount(); i++) {
             theTable.getColumnModel().getColumn(i).setCellRenderer(new StatusColumnCellRenderer());
         }
-
 
         // Set the Main Menu
         if(logged) {
@@ -308,16 +308,15 @@ public class InitFrame extends JFrame{
             deptNames.add(d.getName());
         }
         depCB = new JComboBox<>(deptNames.toArray(new String[0]));
-        //conf.setSize(30,40);
+        conf.setSize(30,40);
         depCB.setSize(50, 40);
         userList.setSize(50,40);
 
-        //conf.setVisible(true);
-        //conf.setEnabled(false);
+        conf.setVisible(true);
         depCB.setVisible(true);
         layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
         layout.putConstraint(SpringLayout.EAST, depCB, -5, SpringLayout.WEST, userList);
-        //layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
+        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
 
         userList.addActionListener(new ActionListener() {
             @Override
@@ -351,16 +350,88 @@ public class InitFrame extends JFrame{
             }
         });
 
-        /*conf.addActionListener(new ActionListener() {
+        conf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateScheduleTable();
+                String deptName = depCB.getSelectedItem().toString();
+                Department targetDepartment = null;
+                for(Department d : departments) {
+                    if(d.getName().equals(deptName)) {
+                        targetDepartment = d;
+                    }
+                }
+                JFrame dayListFrame = new JFrame("Department Schedule Report: " + targetDepartment.getName());
+                dayListFrame.setSize(850,100);
+                dayListFrame.setLayout(new FlowLayout());
+
+                JLabel sel = new JLabel("Select day:");
+                JButton sun = new JButton("Sunday");
+                JButton mon = new JButton("Monday");
+                JButton tue = new JButton("Tuesday");
+                JButton wed = new JButton("Wednesday");
+                JButton thu = new JButton("Thursday");
+                JButton fri = new JButton("Friday");
+                JButton sat = new JButton("Saturday");
+
+                sun.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.SUNDAY);
+                    }
+                });
+                mon.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.MONDAY);
+                    }
+                });
+                tue.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.TUESDAY);
+                    }
+                });
+                wed.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.WEDNESDAY);
+                    }
+                });
+                thu.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.THURSDAY);
+                    }
+                });
+                fri.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.FRIDAY);
+                    }
+                });
+                sat.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.SATURDAY);
+                    }
+                });
+
+                dayListFrame.add(sel);
+                dayListFrame.add(sun);
+                dayListFrame.add(mon);
+                dayListFrame.add(tue);
+                dayListFrame.add(wed);
+                dayListFrame.add(thu);
+                dayListFrame.add(fri);
+                dayListFrame.add(sat);
+
+                dayListFrame.setVisible(true);
             }
-        });*/
+        });
 
         frame.add(userList);
         frame.add(depCB);
-        //frame.add(conf);
+        frame.add(conf);
     }
     void goodbye(){
         JFrame goodbye = new JFrame();
@@ -478,6 +549,31 @@ public class InitFrame extends JFrame{
         week.setEditable(false);
     }
 
+    void displayDay(Day toDisplay) {
+        Department target = null;
+        for(Department d : departments) {
+            if(d.getName().equals(depCB.getSelectedItem().toString())) {
+                target = d;
+            }
+        }
+        Schedule activeSchedule = target.getActiveSchedule();
+        ArrayList<String> shiftD = new ArrayList<>();
+        ArrayList<String> shiftS = new ArrayList<>();
+        ArrayList<String> shiftN = new ArrayList<>();
+        for(EmployeeSchedule es : activeSchedule.getFullSchedule()) {
+            if(es.getDays().contains(toDisplay)) {
+                String esShift = es.getShift().toString();
+                if(esShift.equals("Day")) {
+                    shiftD.add(es.getEmployee().getName());
+                } else if(esShift.equals("Swing")) {
+                    shiftS.add(es.getEmployee().getName());
+                } else {
+                    shiftN.add(es.getEmployee().getName());
+                }
+            }
+        }
+    }
+
     void updateScheduleTable() {
         String activeDept = depCB.getSelectedItem().toString();
         String activeEmployee = userList.getSelectedItem().toString();
@@ -518,20 +614,29 @@ public class InitFrame extends JFrame{
                         counter = counter % 7;
                     }
 
-                    counter = 0;
+                    counter = 2;
                     for (String str : dayShift) {
-                        tableModel.setValueAt(str, 0, counter);
+                        tableModel.setValueAt(" ", 0, counter);
+                        tableModel.setValueAt(" ", 1, counter);
+                        tableModel.setValueAt(" ", 2, counter);
+                        if(str == "Swing") {
+                            tableModel.setValueAt(str, 1, counter);
+                        } else if(str.equals("Night")) {
+                            tableModel.setValueAt(str, 2, counter);
+                        } else {
+                            tableModel.setValueAt(str, 0, counter);
+                        }
                         counter++;
                     }
                 } else {
-                    counter = 0;
+                    counter = 2;
                     for (String str : dayShift) {
                         tableModel.setValueAt(str, 0, counter);
                         counter++;
                     }
                 }
             } else {
-                counter = 0;
+                counter = 2;
                 for (String str : dayShift) {
                     tableModel.setValueAt(str, 0, counter);
                     counter++;

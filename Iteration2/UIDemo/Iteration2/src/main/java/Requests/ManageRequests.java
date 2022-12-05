@@ -134,7 +134,7 @@ public class ManageRequests extends JPanel {
         //this.requests.addAll(reqs);
         dao = new RequestDAO(employees);
         try {
-            requests = dao.loadRequestsFromFile(new File("requests.csv"));
+            requests = (dao.loadRequestsFromFile(new File("requests.csv")));
         }catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -146,10 +146,14 @@ public class ManageRequests extends JPanel {
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         employees.addAll(emps);
+        for(Employee e : employees) {
+            System.out.println(e.getName());
+        }
 
-        ManageRequests newContentPane = new ManageRequests();
-        newContentPane.setOpaque(true);
-        frame.setContentPane(newContentPane);
+        //ManageRequests newContentPane = new ManageRequests();
+        //newContentPane.setOpaque(true);
+        this.setOpaque(true);
+        frame.setContentPane(this);
         JButton done = new JButton("Finished");
         done.addActionListener(new ActionListener() {
             @Override
@@ -166,6 +170,7 @@ public class ManageRequests extends JPanel {
 
     public void fillTable() {
         for(Request r : requests) {
+            //System.out.println(r.getEmp().getName());
             ((DefaultTableModel)table.getModel()).addRow(new Object[]
                     {r.getStatus().toString(), r.getEmp().getName(),
                             r.getType().toString(), r.getDay().getDay().toString(),
