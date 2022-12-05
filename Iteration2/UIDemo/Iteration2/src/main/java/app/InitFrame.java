@@ -123,10 +123,15 @@ public class InitFrame extends JFrame{
                 departmentBox.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        for(Object o : scheduleList) {
-                            scheduleList.remove(o);
+                        scheduleList.removeAll(scheduleList);
+                        String deptName = departmentBox.getSelectedItem().toString();
+                        Department target = null;
+                        for(Department d : departments) {
+                            if(d.getName().equals(deptName)) {
+                                target = d;
+                            }
                         }
-                        for(Schedule s : departments.get(0).getSchedules()) {
+                        for(Schedule s : target.getSchedules()) {
                             scheduleList.add(s.getName());
                         }
 
