@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
 public class RequestTest {
+    /*
     Request request;
     RequestDay rd;
     Employee emp;
@@ -69,4 +70,6 @@ public class RequestTest {
 
     //TODO: COMMIT TESTS!
 
+
+     */
 }
