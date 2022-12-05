@@ -78,7 +78,7 @@ public class InitFrame extends JFrame{
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         JMenuItem logout = new JMenuItem("Logout");
-        JMenuItem print = new JMenuItem("Print");
+        //JMenuItem print = new JMenuItem("Print");
         JButton addSchedule = new JButton("Add Schedule");
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
@@ -184,7 +184,7 @@ public class InitFrame extends JFrame{
         });
 
 
-        menu.add(print);
+        //menu.add(print);
         menu.add(logout);
         menu.addSeparator();
         menu.add(saveAll);
