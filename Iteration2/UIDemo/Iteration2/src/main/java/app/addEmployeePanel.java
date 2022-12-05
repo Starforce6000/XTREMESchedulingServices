@@ -31,6 +31,12 @@ public class addEmployeePanel extends JPanel {
         name_field= new JTextField(10);
         email_field= new JTextField(10);
         password_field= new JTextField(10);
+        DefaultComboBoxModel<Object> depModel = new DefaultComboBoxModel<>();
+        for(String name:departments){
+            depModel.addElement(name);
+        }
+        department_box.setModel(depModel);
+
 
     }
 
