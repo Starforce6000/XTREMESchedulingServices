@@ -132,10 +132,18 @@ public class InitFrame extends JFrame{
                     EmployeeDAO employeeDAO = new EmployeeDAO();
                     DepartmentDAO departmentDAO = new DepartmentDAO(employees);
                     RequestDAO requestDAO = new RequestDAO(employees);
-                    employeeDAO.saveEmployeesToFile(employees);
-                    departmentDAO.saveDepartmentToFile(departments);
                     try {
-                        requestDAO.saveRequestsToFile(new File("requests.csv"), requests);
+                        employeeDAO.saveEmployeesToFile(employees);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    try {
+                        departmentDAO.saveDepartmentToFile(departments);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    try {
+                        requestDAO.saveRequestsToFile(new File("outreq.csv"), requests);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
