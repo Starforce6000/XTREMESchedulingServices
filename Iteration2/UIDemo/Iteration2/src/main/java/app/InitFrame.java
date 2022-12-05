@@ -60,6 +60,9 @@ public class InitFrame extends JFrame{
         frame.setSize(600,600);
         frame.setLayout(layout);
         theTable.setRowHeight(400);
+        for (int i = 0; i < theTable.getColumnCount(); i++) {
+            theTable.getColumnModel().getColumn(i).setCellRenderer(new StatusColumnCellRenderer());
+        }
 
 
         // Set the Main Menu
