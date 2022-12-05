@@ -78,7 +78,7 @@ public class Request {
     public String printRequest() {
         String temp = "";
 
-        temp += emp.getId() + ",";
+        temp += emp.getName() + ",";
         temp += status.toString().toUpperCase() + ",";
         temp += type.toString() + ",";
         temp += day.getDay().toString() + ",";

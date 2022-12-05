@@ -1,7 +1,8 @@
 id,status,type,day,shift,reason,request,id
-1,PENDING,RESCHEDULE,MONDAY,Night,dentist appointment @ 9:30,1
-2,PENDING,OVERTIME,WEDNESDAY,Swing,previous event canceled new free time,2
-3,DENIED,SWAP,TUESDAY,Day,just felt like it,3
-4,APPROVED,PTO,SATURDAY,Night,pick up kids from school,4
-5,APPROVED,RESCHEDULE,FRIDAY,Swing,open whenever,5
-1,PENDING,SELECT,MONDAY,Night,family stuff,6
+Tomas Cerny,PENDING,RESCHEDULE,MONDAY,Night,dentist appointment @ 9:30,1
+John Rambo,PENDING,OVERTIME,WEDNESDAY,Swing,previous event canceled new free time,2
+Chuck Norris,DENIED,SWAP,TUESDAY,Day,just felt like it,3
+Bruce Willis,APPROVED,PTO,SATURDAY,Night,pick up kids from school,4
+Bruce Lee,APPROVED,RESCHEDULE,FRIDAY,Swing,open whenever,5
+Tomas Cerny,PENDING,SELECT,MONDAY,Night,family stuff,6
+Tomas Cerny,PENDING,SELECT,SATURDAY,Night,testing new-ish feature,7
