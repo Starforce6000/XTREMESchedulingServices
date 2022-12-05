@@ -20,23 +20,29 @@ public class ScheduleGenerator {
         schedule = new Schedule();
     }
 
-    public Schedule generateSchedule(Department d, int perShift, List<Day> days, List<Shift> shifts, List<Employee> exclude) {
+    public Schedule generateSchedule(String name, Department d, int perShift, List<Day> days, List<Shift> shifts, List<Employee> exclude) {
+        schedule.setName(name);
+
         List<Employee> employeeList = d.getEmployees();
         List<List<List<Employee>>> scheduleList = new ArrayList<List<List<Employee>>>();
 
         Map<Day, Integer> dayLocation = new HashMap<>();
         Map<Shift, Integer> shiftLocation = new HashMap<>();
+        Map<Integer, Day> dayLookup = new HashMap<>();
+        Map<Integer, Shift> shiftLookup = new HashMap<>();
 
         int dayCounter = 0;
         int shiftCounter = 0;
 
         for(Shift shift : shifts) {
             shiftLocation.put(shift, shiftCounter);
+            shiftLookup.put(shiftCounter, shift);
             shiftCounter++;
         }
 
         for(Day day : days) {
             dayLocation.put(day, dayCounter);
+            dayLookup.put(dayCounter, day);
             scheduleList.add(new ArrayList<List<Employee>>());
             dayCounter++;
             for(Shift shift : shifts) {
@@ -76,12 +82,31 @@ public class ScheduleGenerator {
 //            counterI++;
 //        }
 
+
         for(Employee e : employeeList) {
             if(working.contains(e)) {
+                int counterDay = 0;
                 System.out.println(e.getName() + " working");
 
                 EmployeeSchedule newSchedule = new EmployeeSchedule(e, schedule);
+                for(List<List<Employee>> i : scheduleList) {
+                    int counterShift = 0;
+                    for (List<Employee> j : i) {
+                        if (j.contains(e)) {
+                            newSchedule.addDay(dayLookup.get(counterDay));
+                            newSchedule.setShift(shiftLookup.get(counterShift));
+                        }
+                        counterShift++;
+                    }
+                    counterDay++;
+                }
+
+                schedule.addEmployeeSchedule(newSchedule);
             }
+        }
+
+        for(EmployeeSchedule es : schedule.getFullSchedule()) {
+            es.printData();
         }
 
         return schedule;
@@ -103,7 +128,7 @@ public class ScheduleGenerator {
         ArrayList<Shift> shifts = new ArrayList<>(Arrays.asList(Shift.values()));
         shifts.remove(0);
         List<Employee> exclude = new LinkedList<>();
-        sg.generateSchedule(departments.get(0), 1, days, shifts, exclude);
+        sg.generateSchedule("Test Schedule", departments.get(0),    1, days, shifts, exclude);
     }
 }
 
