@@ -32,6 +32,7 @@ public class InitFrame extends JFrame{
     JButton right = new JButton(">");
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
     JComboBox<String> depCB;
+    JButton conf = new JButton("Find Employee");
 
     ArrayList<Request> requests;
     ArrayList<Department> departments;
@@ -88,6 +89,8 @@ public class InitFrame extends JFrame{
         if(!admin){
             request.setEnabled(false);
             saveAll.setEnabled(false);
+            addSchedule.setEnabled(false);
+            conf.setEnabled(false);
         }
 
 
@@ -209,7 +212,6 @@ public class InitFrame extends JFrame{
             deptNames.add(d.getName());
         }
         depCB = new JComboBox<>(deptNames.toArray(new String[0]));
-        JButton conf = new JButton("Find Employee");
         conf.setSize(30,40);
         depCB.setSize(50, 40);
         userList.setSize(50,40);
@@ -228,7 +230,9 @@ public class InitFrame extends JFrame{
                     conf.setEnabled(false);
                 }
                 else {
-                    conf.setEnabled(true);
+                    if(admin) {
+                        conf.setEnabled(true);
+                    }
                 }
                 // NEED TO FIX
             }
