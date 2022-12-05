@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class InitFrame {
+public class InitFrame extends JFrame{
     JFrame frame;
     JTable theTable;
     SpringLayout layout;
@@ -66,9 +66,11 @@ public class InitFrame {
         JButton addSchedule = new JButton("Add Schedule");
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
+        JMenuItem saveAll = new JMenuItem("Save All");
 
         if(!admin){
             request.setEnabled(false);
+            saveAll.setEnabled(false);
         }
 
 
@@ -100,6 +102,20 @@ public class InitFrame {
                     }
                 });
                 confirm.setVisible(true);
+            }
+        });
+
+        saveAll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int action = JOptionPane.showConfirmDialog(InitFrame.this,
+                        "Do you really want to Save all changes?",
+                        "Confirm Save",
+                        JOptionPane.OK_CANCEL_OPTION);
+                if(action == JOptionPane.OK_OPTION){
+                    System.exit(0);
+                }
+
             }
         });
 
@@ -188,6 +204,8 @@ public class InitFrame {
 
         menu.add(print);
         menu.add(logout);
+        menu.addSeparator();
+        menu.add(saveAll);
 
         menuBar.add(menu);
         menuBar.add(addSchedule);
