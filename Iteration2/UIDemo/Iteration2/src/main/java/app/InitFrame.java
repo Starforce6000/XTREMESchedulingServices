@@ -136,9 +136,7 @@ public class InitFrame extends JFrame{
                         }
                         for(Schedule s : target.getSchedules()) {
                             if(s.getName().equals(scheduleName)) {
-                                s.activate();
-                            } else {
-                                s.deactivate();
+                                target.setActiveSchedule(s);
                             }
                         }
                     }
