@@ -6,13 +6,12 @@ import Models.*;
 import app.*;
 import org.junit.jupiter.api.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class FileOutput {
+public class fileOutput {
     EmployeeDAO dao;
     ArrayList<Employee> yaMan = new ArrayList<>();
     ArrayList<Day> days = new ArrayList<>();
