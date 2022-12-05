@@ -14,7 +14,7 @@ class MyTableModel extends AbstractTableModel {
             "Friday",
             "Saturday"};
     private String[] nul = {" ", " ", " ", " ", " ", " ", " "};
-    private String[][] data = {nul};
+    private String[][] data = {nul,nul,nul};
 
     public MyTableModel(TemplateFrame lab7) {
         this.lab7 = lab7;
