@@ -6,6 +6,9 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.swing.*;
 import java.awt.*;
 import Enums.*;
+import Schedule.*;
+import Schedule.Schedule;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -36,6 +39,7 @@ public class GeneratorDialog {
                 int perShift = 0;
                 List<Day> days = new ArrayList<>();
                 List<Shift> shifts = new ArrayList<>();
+                List<Employee> ignored = new ArrayList<>();
 
                 try {
                     perShift = Integer.parseInt(perShiftF.getText());
@@ -86,7 +90,8 @@ public class GeneratorDialog {
                     }
                 }
 
-                
+                ScheduleGenerator generator = new ScheduleGenerator();
+                generator.generateSchedule("New Schedule", d, perShift, days, shifts, ignored);
 
                 frame.dispose();
             }
