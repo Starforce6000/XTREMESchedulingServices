@@ -38,13 +38,16 @@ public class MainFrame extends JFrame {
     public MainFrame() throws IOException {
         employees.addAll(employeeDAO.loadEmployeesFromFile(new File("employee.csv")));
         departmentDAO = new DepartmentDAO(employees);
+        requestDAO = new RequestDAO(employees);
 
         departments = new ArrayList<>();
         departments.addAll(departmentDAO.loadDepartmentFromFile(new File("department.csv")));
+
+        requests.addAll(requestDAO.loadRequestsFromFile(new File("requests.csv")));
     }
 
     void run(){
-        InitFrame initFrame = new InitFrame(frame, theTable, layout, logged, admin);
+        InitFrame initFrame = new InitFrame(frame, theTable, layout, logged, admin, requests);
         LoginFrame loginFrame = new LoginFrame(logged, admin, employees, adminList, initFrame);
         loginFrame.login();
     }

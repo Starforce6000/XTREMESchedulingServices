@@ -31,15 +31,15 @@ public class ManageRequests extends JPanel {
         manage.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         String[] columNames = {"Status", "Employee", "Type", "Day",
-                                "Shift", "Reason", "Manage"};
+                                "Shift", "Reason", "ID", "Manage"};
         final Class<?>[] columnClass = new Class[] {
-                String.class, String.class, String.class,
-                String.class, String.class, String.class, JButton.class
+                String.class, String.class, String.class, String.class,
+                String.class, String.class, Integer.class, JButton.class
         };
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                if(column < 6) {return false;}
+                if(column < 7) {return false;}
                 return true;
             }
 
@@ -85,9 +85,14 @@ public class ManageRequests extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         model.setValueAt("DENIED", modelRow, 0);
+                        //TODO: make the change reflected in the database
+                        for(Request r : requests) {
+                            if(r.getId() == (Integer)model.getValueAt(modelRow, 6)) {
+                                r.setStatus(RequestStatus.DENIED);
+                            }
+                        }
                         manageWindow.setVisible(false);
                         manageWindow.dispose();
-                        //TODO: make the change reflected in the database
                     }
                 });
 
@@ -96,6 +101,12 @@ public class ManageRequests extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         model.setValueAt("APPROVED", modelRow, 0);
+                        //TODO: make the change reflected in the database
+                        for(Request r : requests) {
+                            if(r.getId() == (Integer)model.getValueAt(modelRow, 6)) {
+                                r.setStatus(RequestStatus.APPROVED);
+                            }
+                        }
                         manageWindow.setVisible(false);
                         manageWindow.dispose();
                     }
@@ -108,7 +119,7 @@ public class ManageRequests extends JPanel {
                 manageWindow.setVisible(true);
             }
         };
-        ButtonColumn viewButton = new ButtonColumn(table, view, 6);
+        ButtonColumn viewButton = new ButtonColumn(table, view, 7);
         viewButton.setMnemonic(KeyEvent.VK_D);
 
         scrollPane.add(filterHeader);
@@ -143,13 +154,8 @@ public class ManageRequests extends JPanel {
             ((DefaultTableModel)table.getModel()).addRow(new Object[]
                     {r.getStatus().toString(), r.getEmp().getName(),
                             r.getType().toString(), r.getDay().toString(),
-                            r.getStatus().toString(), r.getReason(),"View"});
+                            r.getStatus().toString(), r.getReason(),
+                            r.getId(), "View"});
         }
     }
-    /*
-    public Request findReq() {
-
-    }
-
-     */
 }

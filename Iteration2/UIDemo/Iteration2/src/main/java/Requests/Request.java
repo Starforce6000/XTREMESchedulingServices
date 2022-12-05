@@ -13,6 +13,7 @@ public class Request {
     RequestDay day = new RequestDay();
 
     Employee emp;
+    int id;
 
     public Request() {
         status = RequestStatus.PENDING;
@@ -69,6 +70,10 @@ public class Request {
 
     public Employee getEmp() { return emp; }
 
+    public void setId(int id) { this.id = id; }
+
+    public int getId() { return this.id; }
+
     public String printRequest() {
         String temp = "";
 
@@ -77,7 +82,7 @@ public class Request {
         temp += type.toString() + ",";
         temp += day.getDay().toString() + ",";
         temp += day.getShift().toString() + ",";
-        temp += reason;
+        temp += reason + "," + id;
 
         return temp;
     }

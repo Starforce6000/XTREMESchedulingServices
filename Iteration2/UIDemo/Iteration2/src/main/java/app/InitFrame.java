@@ -1,6 +1,8 @@
 package app;
 
 import Requests.MakeRequest;
+import Requests.ManageRequests;
+import Requests.Request;
 import javazoom.jl.player.Player;
 
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -21,16 +24,20 @@ public class InitFrame {
     JButton left = new JButton("<");
     JButton right = new JButton(">");
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
+
+    ArrayList<Request> requests;
     public InitFrame(JFrame frame,
                      JTable theTable,
                      SpringLayout layout,
                      Boolean logged,
-                     Boolean admin){
+                     Boolean admin,
+                     ArrayList<Request> requests){
         this.frame = frame;
         this.theTable = theTable;
         this.layout = layout;
         this.logged = logged;
         this.admin = admin;
+        this.requests = requests;
     }
     void initFrame(){
         frame.setVisible(true);
@@ -177,7 +184,8 @@ public class InitFrame {
         request.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // NEED TO ADD
+                ManageRequests manage = new ManageRequests(requests);
+                manage.init(requests);
             }
         });
 
