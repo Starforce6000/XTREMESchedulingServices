@@ -84,7 +84,7 @@ public class LoginFrame {
                 if(adminList.contains(user.getText())){
                     admin = true;
                 }
-                loginForm.setVisible(false);
+
 
                 new Thread(){
                     @Override
@@ -96,6 +96,10 @@ public class LoginFrame {
                         }
                     }
                 }.start();
+                if(logged){
+                    loginForm.setVisible(false);
+                    initFrame.initFrame();
+                }
             }
         });
 
