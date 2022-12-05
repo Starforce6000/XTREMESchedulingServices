@@ -373,6 +373,49 @@ public class InitFrame extends JFrame{
                 JButton fri = new JButton("Friday");
                 JButton sat = new JButton("Saturday");
 
+                sun.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.SUNDAY);
+                    }
+                });
+                mon.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.MONDAY);
+                    }
+                });
+                tue.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.TUESDAY);
+                    }
+                });
+                wed.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.WEDNESDAY);
+                    }
+                });
+                thu.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.THURSDAY);
+                    }
+                });
+                fri.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.FRIDAY);
+                    }
+                });
+                sat.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        displayDay(Day.SATURDAY);
+                    }
+                });
+
                 dayListFrame.add(sel);
                 dayListFrame.add(sun);
                 dayListFrame.add(mon);
@@ -504,6 +547,31 @@ public class InitFrame extends JFrame{
             }
         });
         week.setEditable(false);
+    }
+
+    void displayDay(Day toDisplay) {
+        Department target = null;
+        for(Department d : departments) {
+            if(d.getName().equals(depCB.getSelectedItem().toString())) {
+                target = d;
+            }
+        }
+        Schedule activeSchedule = target.getActiveSchedule();
+        ArrayList<String> shiftD = new ArrayList<>();
+        ArrayList<String> shiftS = new ArrayList<>();
+        ArrayList<String> shiftN = new ArrayList<>();
+        for(EmployeeSchedule es : activeSchedule.getFullSchedule()) {
+            if(es.getDays().contains(toDisplay)) {
+                String esShift = es.getShift().toString();
+                if(esShift.equals("Day")) {
+                    shiftD.add(es.getEmployee().getName());
+                } else if(esShift.equals("Swing")) {
+                    shiftS.add(es.getEmployee().getName());
+                } else {
+                    shiftN.add(es.getEmployee().getName());
+                }
+            }
+        }
     }
 
     void updateScheduleTable() {
