@@ -73,7 +73,7 @@ public class InitFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
         JMenuItem logout = new JMenuItem("Logout");
-        JMenuItem print = new JMenuItem("Print");
+        //JMenuItem print = new JMenuItem("Print");
         JButton addSchedule = new JButton("Add Schedule");
         JButton request = new JButton("Pending Requests");
         JButton makeReq = new JButton("Make Request");
@@ -146,7 +146,7 @@ public class InitFrame {
         });
 
 
-        menu.add(print);
+        //menu.add(print);
         menu.add(logout);
 
         menuBar.add(menu);
