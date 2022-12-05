@@ -36,7 +36,7 @@ public class InitFrame extends JFrame{
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
     JComboBox<String> depCB;
     JComboBox<String> userList;
-    //JButton conf = new JButton("Find Employee");
+    JButton conf = new JButton("Department Schedule Report");
     MyTableModel tableModel;
 
     ArrayList<Request> requests;
@@ -308,16 +308,15 @@ public class InitFrame extends JFrame{
             deptNames.add(d.getName());
         }
         depCB = new JComboBox<>(deptNames.toArray(new String[0]));
-        //conf.setSize(30,40);
+        conf.setSize(30,40);
         depCB.setSize(50, 40);
         userList.setSize(50,40);
 
-        //conf.setVisible(true);
-        //conf.setEnabled(false);
+        conf.setVisible(true);
         depCB.setVisible(true);
         layout.putConstraint(SpringLayout.EAST, userList, -5, SpringLayout.EAST, frame.getContentPane());
         layout.putConstraint(SpringLayout.EAST, depCB, -5, SpringLayout.WEST, userList);
-        //layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
+        layout.putConstraint(SpringLayout.EAST, conf, -10, SpringLayout.WEST, depCB);
 
         userList.addActionListener(new ActionListener() {
             @Override
@@ -351,16 +350,45 @@ public class InitFrame extends JFrame{
             }
         });
 
-        /*conf.addActionListener(new ActionListener() {
+        conf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateScheduleTable();
+                String deptName = depCB.getSelectedItem().toString();
+                Department targetDepartment = null;
+                for(Department d : departments) {
+                    if(d.getName().equals(deptName)) {
+                        targetDepartment = d;
+                    }
+                }
+                JFrame dayListFrame = new JFrame("Department Schedule Report: " + targetDepartment.getName());
+                dayListFrame.setSize(850,100);
+                dayListFrame.setLayout(new FlowLayout());
+
+                JLabel sel = new JLabel("Select day:");
+                JButton sun = new JButton("Sunday");
+                JButton mon = new JButton("Monday");
+                JButton tue = new JButton("Tuesday");
+                JButton wed = new JButton("Wednesday");
+                JButton thu = new JButton("Thursday");
+                JButton fri = new JButton("Friday");
+                JButton sat = new JButton("Saturday");
+
+                dayListFrame.add(sel);
+                dayListFrame.add(sun);
+                dayListFrame.add(mon);
+                dayListFrame.add(tue);
+                dayListFrame.add(wed);
+                dayListFrame.add(thu);
+                dayListFrame.add(fri);
+                dayListFrame.add(sat);
+
+                dayListFrame.setVisible(true);
             }
-        });*/
+        });
 
         frame.add(userList);
         frame.add(depCB);
-        //frame.add(conf);
+        frame.add(conf);
     }
     void goodbye(){
         JFrame goodbye = new JFrame();
