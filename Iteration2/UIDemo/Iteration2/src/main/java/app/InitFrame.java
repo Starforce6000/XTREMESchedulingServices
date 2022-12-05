@@ -25,7 +25,7 @@ public class InitFrame {
     JButton right = new JButton(">");
     JTextField week = new JTextField("Week of: 12/04 - 12/10");
 
-    ArrayList<Request> requests;
+    ArrayList<Request> requests = new ArrayList<>();
     public InitFrame(JFrame frame,
                      JTable theTable,
                      SpringLayout layout,
@@ -37,7 +37,7 @@ public class InitFrame {
         this.layout = layout;
         this.logged = logged;
         this.admin = admin;
-        this.requests = requests;
+        this.requests.addAll(requests);
     }
     void initFrame(){
         frame.setVisible(true);
