@@ -577,16 +577,25 @@ public class InitFrame extends JFrame{
         employeeFrame.setVisible(true);
         employeeFrame.setSize(600,300);
         employeeFrame.setLayout(new FlowLayout());
-        JTextField dayShift = new JTextField("Day Shift");
-        JTextField swingShift = new JTextField("Swing Shift");
-        JTextField nightShift = new JTextField("Night Shift");
+        JTextArea dayShift = new JTextArea("Day Shift:\n");
+        JTextArea swingShift = new JTextArea("Swing Shift:\n");
+        JTextArea nightShift = new JTextArea("Night Shift:\n");
+        dayShift.setPreferredSize(new Dimension(175, 200));
+        dayShift.setEditable(false);
+        swingShift.setPreferredSize(new Dimension(175, 200));
+        swingShift.setEditable(false);
+        nightShift.setPreferredSize(new Dimension(175, 200));
+        nightShift.setEditable(false);
 
-        dayShift.setPreferredSize(new Dimension(175, 280));
-        dayShift.setHorizontalAlignment(SwingConstants.CENTER);
-        swingShift.setPreferredSize(new Dimension(175, 280));
-        swingShift.setHorizontalAlignment(SwingConstants.CENTER);
-        nightShift.setPreferredSize(new Dimension(175, 280));
-        nightShift.setHorizontalAlignment(SwingConstants.CENTER);
+        for(String s : shiftD) {
+            dayShift.setText(dayShift.getText() + s + "\n");
+        }
+        for(String s : shiftS) {
+            swingShift.setText(swingShift.getText() + s + "\n");
+        }
+        for(String s : shiftN) {
+            nightShift.setText(nightShift.getText() + s + "\n");
+        }
 
         employeeFrame.add(dayShift);
         employeeFrame.add(swingShift);
