@@ -134,7 +134,7 @@ public class ManageRequests extends JPanel {
         //this.requests.addAll(reqs);
         dao = new RequestDAO(employees);
         try {
-            requests = (dao.loadRequestsFromFile(new File("/requests.csv")));
+            requests = (dao.loadRequestsFromFile(new File("src/main/resources/requests.csv")));
         }catch (IOException ex) {
             ex.printStackTrace();
         }

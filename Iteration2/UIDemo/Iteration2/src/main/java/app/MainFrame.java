@@ -36,15 +36,15 @@ public class MainFrame extends JFrame {
     SpringLayout layout = new SpringLayout();
 
     public MainFrame() throws IOException {
-        employees.addAll(employeeDAO.loadEmployeesFromFile(new File("/employee.csv")));
+        employees.addAll(employeeDAO.loadEmployeesFromFile(new File("src/main/resources/employee.csv")));
         departmentDAO = new DepartmentDAO(employees);
         requestDAO = new RequestDAO(employees);
 
         departments = new ArrayList<>();
-        departments.addAll(departmentDAO.loadDepartmentFromFile(new File("/department.csv")));
+        departments.addAll(departmentDAO.loadDepartmentFromFile(new File("src/main/resources/department.csv")));
 
         requests = new ArrayList<>();
-        requests.addAll(requestDAO.loadRequestsFromFile(new File("/requests.csv")));
+        requests.addAll(requestDAO.loadRequestsFromFile(new File("src/main/resources/requests.csv")));
     }
 
     void run(){
