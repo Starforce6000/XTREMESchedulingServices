@@ -357,6 +357,7 @@ public class InitFrame extends JFrame{
                         userList.setModel(temp);
 
                         updateScheduleTable();
+                        removeFrame.dispose();
                     }
                 });
 
