@@ -572,6 +572,25 @@ public class InitFrame extends JFrame{
                 }
             }
         }
+
+        JFrame employeeFrame = new JFrame("Schedule report for " + target.getName() + ", " + toDisplay.toString());
+        employeeFrame.setVisible(true);
+        employeeFrame.setSize(600,300);
+        employeeFrame.setLayout(new FlowLayout());
+        JTextField dayShift = new JTextField("Day Shift");
+        JTextField swingShift = new JTextField("Swing Shift");
+        JTextField nightShift = new JTextField("Night Shift");
+
+        dayShift.setPreferredSize(new Dimension(175, 280));
+        dayShift.setHorizontalAlignment(SwingConstants.CENTER);
+        swingShift.setPreferredSize(new Dimension(175, 280));
+        swingShift.setHorizontalAlignment(SwingConstants.CENTER);
+        nightShift.setPreferredSize(new Dimension(175, 280));
+        nightShift.setHorizontalAlignment(SwingConstants.CENTER);
+
+        employeeFrame.add(dayShift);
+        employeeFrame.add(swingShift);
+        employeeFrame.add(nightShift);
     }
 
     void updateScheduleTable() {
