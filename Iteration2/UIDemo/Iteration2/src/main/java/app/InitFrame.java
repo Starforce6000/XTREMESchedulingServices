@@ -299,7 +299,7 @@ public class InitFrame extends JFrame{
                         target = d;
                     }
                 }
-                JFrame employeeAdd = new JFrame(": add new employee");
+                JFrame employeeAdd = new JFrame(target.getName() + ": add new employee");
                 employeeAdd.setLayout(new GridLayout(5,2));
                 employeeAdd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
                 JLabel empName = new JLabel("Employee Name:");
@@ -314,9 +314,87 @@ public class InitFrame extends JFrame{
                 JButton cancelAdd = new JButton("Cancel");
 
                 employeeAdd.add(empName);
+                employeeAdd.add(nameF);
                 employeeAdd.add(empEmail);
+                employeeAdd.add(emailF);
+                employeeAdd.add(empDays);
+                employeeAdd.add(daysF);
+                employeeAdd.add(empShift);
+                employeeAdd.add(shiftF);
+                employeeAdd.add(addEmp);
+                employeeAdd.add(cancelAdd);
+
+                cancelAdd.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        employeeAdd.dispose();
+                    }
+                });
+                addEmp.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Department td = null;
+                        for(Department d : departments) {
+                            if(d.getName().equals(deptName)) {
+                                td = d;
+                            }
+                        }
+
+                        Shift s = null;
+                        List<Day> d = new ArrayList<>();
+                        String txt = shiftF.getText();
+                        if(txt.equalsIgnoreCase("Day")) {
+                            s = Shift.Day;
+                        } else if(txt.equalsIgnoreCase("Swing")) {
+                            s = Shift.Swing;
+                        } else if(txt.equalsIgnoreCase("Night")) {
+                            s = Shift.Night;
+                        }
+                        for(String str : daysF.getText().split(",")) {
+                            if(str.equals("M")) {
+                                if(!d.contains(Day.MONDAY)) {
+                                    d.add(Day.MONDAY);
+                                }
+                            } else if(str.equals("T")) {
+                                if(!d.contains(Day.TUESDAY)) {
+                                    d.add(Day.TUESDAY);
+                                }
+                            } else if(str.equals("W")) {
+                                if(!d.contains(Day.WEDNESDAY)) {
+                                    d.add(Day.WEDNESDAY);
+                                }
+                            } else if(str.equals("TR")) {
+                                if(!d.contains(Day.THURSDAY)) {
+                                    d.add(Day.THURSDAY);
+                                }
+                            } else if(str.equals("F")) {
+                                if(!d.contains(Day.FRIDAY)) {
+                                    d.add(Day.FRIDAY);
+                                }
+                            } else if(str.equalsIgnoreCase("Sat")) {
+                                if(!d.contains(Day.SATURDAY)) {
+                                    d.add(Day.SATURDAY);
+                                }
+                            } else if(str.equalsIgnoreCase("Sun")) {
+                                if(!d.contains(Day.SUNDAY)) {
+                                    d.add(Day.SUNDAY);
+                                }
+                            }
+                        }
+                        if(s != null && d.size() > 0) {
+                            Employee newE = new Employee();
+                            newE.setName(nameF.getText());
+                            newE.setEmail(nameF.getText());
+                            Availability newA = new Availability(d, s);
+                            newE.setAvailability(newA);
+                            td.addEmployee(newE);
+                            employeeAdd.dispose();
+                        }
+                    }
+                });
 
                 employeeAdd.setVisible(true);
+                employeeAdd.setSize(400,400);
             }
         });
 
