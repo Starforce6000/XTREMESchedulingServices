@@ -78,4 +78,10 @@ public class Department {
     public Schedule getActiveSchedule() {
         return activeSchedule;
     }
+
+    public void addEmployee(Employee e) {
+        if(!employeeList.contains(e)) {
+            employeeList.add(e);
+        }
+    }
 }
