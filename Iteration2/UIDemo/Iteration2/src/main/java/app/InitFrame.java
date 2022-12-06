@@ -233,7 +233,7 @@ public class InitFrame extends JFrame{
                         throw new RuntimeException(ex);
                     }
                     try {
-                        requestDAO.saveRequestsToFile(new File("requests.csv"), requests);
+                        requestDAO.saveRequestsToFile(new File("/requests.csv"), requests);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }

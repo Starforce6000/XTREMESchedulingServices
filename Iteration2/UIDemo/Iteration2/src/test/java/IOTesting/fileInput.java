@@ -16,7 +16,7 @@ public class fileInput {
     @Test
     void somethingBroke(){
         try {
-            dao.loadEmployeesFromFile(new File("noWorky.csv"));
+            dao.loadEmployeesFromFile(new File("/noWorky.csv"));
         }catch (IOException e){
             assertEquals(true, true);
         }
@@ -25,7 +25,7 @@ public class fileInput {
     @Test
     void somethingProper(){
         try {
-            dao.loadEmployeesFromFile(new File("employee.csv"));
+            dao.loadEmployeesFromFile(new File("/employee.csv"));
         }catch (IOException e){
             assertEquals(false, true);
         }
