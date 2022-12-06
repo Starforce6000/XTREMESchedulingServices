@@ -232,11 +232,14 @@ public class InitFrame extends JFrame{
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                    /*
                     try {
                         requestDAO.saveRequestsToFile(new File("src/main/resources/requests.csv"), requests);
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
+
+                     */
                 }
 
             }
