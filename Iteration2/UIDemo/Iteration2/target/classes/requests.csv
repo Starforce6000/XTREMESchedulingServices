@@ -4,7 +4,6 @@ John Rambo,PENDING,OVERTIME,WEDNESDAY,Swing,previous event canceled new free tim
 Chuck Norris,DENIED,SWAP,TUESDAY,Day,just felt like it,3
 Bruce Willis,APPROVED,PTO,SATURDAY,Night,pick up kids from school,4
 Bruce Lee,APPROVED,RESCHEDULE,FRIDAY,Swing,open whenever,5
-Tomas Cerny,PENDING,SELECT,MONDAY,Night,family stuff,6
-Tomas Cerny,PENDING,SELECT,SATURDAY,Night,testing new-ish feature,7
-John Cena,PENDING,SELECT,WEDNESDAY,Night,test,8
-Tomas Cerny,PENDING,SELECT,WEDNESDAY,Swing,Cause Family,9
+Tomas Cerny,PENDING,OVERTIME,WEDNESDAY,Night,Canceled preivoius appointment,11
+Tomas Cerny,PENDING,PTO,SATURDAY,Swing,Going on a CRUIIIIISE!,7
+Tomas Cerny,PENDING,PTO,SUNDAY,Night,taking a vacation,8

@@ -158,8 +158,13 @@ public class ManageRequests extends JPanel {
         done.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                try {
+                    dao.saveRequestsToFile(new File("src/main/resources/requests.csv"), requests);
+                    frame.setVisible(false);
+                    frame.dispose();
+                }catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         frame.add(done);
