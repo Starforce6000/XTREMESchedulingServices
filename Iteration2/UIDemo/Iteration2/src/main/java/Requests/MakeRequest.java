@@ -139,7 +139,7 @@ public class MakeRequest extends JFrame {
                 handler.setHours(time);
                 handler.setReason(reasonField.getText());
                 try {
-                    ArrayList<Request> tempReqs = dao.loadRequestsFromFile(new File("requests.csv"));
+                    ArrayList<Request> tempReqs = dao.loadRequestsFromFile(new File("src/main/resources/requests.csv"));
                     /*
                     for(Employee temp : emps) {
                         if(temp.getId() == user.getId()) {
@@ -150,7 +150,7 @@ public class MakeRequest extends JFrame {
                     handler.setEmployee(user);
                     handler.request.setId(tempReqs.size() + 1);
                     tempReqs.add(handler.request);
-                    dao.saveRequestsToFile(new File("requests.csv"), tempReqs);
+                    dao.saveRequestsToFile(new File("src/main/resources/requests.csv"), tempReqs);
                 }catch (IOException ex) {
                     ex.printStackTrace();
                 }

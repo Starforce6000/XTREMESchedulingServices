@@ -50,7 +50,7 @@ public class DepartmentDAO {
     public void saveDepartmentToFile(ArrayList<Department> departments) throws IOException {
         BufferedWriter writer = null;
         try{
-            writer = new BufferedWriter(new FileWriter(new File("/outdept.csv")));
+            writer = new BufferedWriter(new FileWriter(new File("src/main/resources/outdept.csv")));
             if(departments.size() == 0){
                 return;
             }
