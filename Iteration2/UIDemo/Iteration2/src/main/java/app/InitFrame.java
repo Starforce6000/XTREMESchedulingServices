@@ -99,6 +99,7 @@ public class InitFrame extends JFrame{
         JMenuItem saveAll = new JMenuItem("Save All");
         JMenuItem makeActive = new JMenuItem("Set Active");
         JMenuItem addEmployee = new JMenuItem("Add Employee");
+        JMenuItem removeEmployee = new JMenuItem("Remove Employee");
 
         if(!admin){
             request.setEnabled(false);
@@ -106,9 +107,8 @@ public class InitFrame extends JFrame{
             addSchedule.setEnabled(false);
             makeActive.setEnabled(false);
             addEmployee.setEnabled(false);
+            removeEmployee.setEnabled(false);
         }
-
-
 
         makeActive.addActionListener(new ActionListener() {
             @Override
@@ -291,6 +291,80 @@ public class InitFrame extends JFrame{
         menu.add(saveAll);
         menu.add(makeActive);
         menu.add(addEmployee);
+        menu.add(removeEmployee);
+
+        removeEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String deptName = depCB.getSelectedItem().toString();
+                String empName = userList.getSelectedItem().toString();
+                Department targetD = null;
+                Employee targetE = null;
+                for(Department d : departments) {
+                    if(d.getName().equals(deptName)) {
+                        targetD = d;
+                    }
+                }
+                for(Employee emp : targetD.getEmployees()) {
+                    if(emp.getName().equals(empName)) {
+                        targetE = emp;
+                    }
+                }
+                JFrame removeFrame = new JFrame(targetD.getName() + ": remove employee " + targetE.getName());
+                removeFrame.setLayout(new FlowLayout());
+                removeFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                removeFrame.setVisible(true);
+                removeFrame.setSize(500,100);
+                JLabel confirm = new JLabel("Are you sure you want to remove " + targetE.getName() + "?");
+                JButton remove = new JButton("Yes");
+                JButton deny = new JButton("No");
+
+                deny.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        removeFrame.dispose();
+                    }
+                });
+
+                remove.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String deptName = depCB.getSelectedItem().toString();
+                        String empName = userList.getSelectedItem().toString();
+                        Department targetD = null;
+                        Employee targetE = null;
+                        for(Department d : departments) {
+                            if(d.getName().equals(deptName)) {
+                                targetD = d;
+                            }
+                        }
+                        for(Employee emp : targetD.getEmployees()) {
+                            if(emp.getName().equals(empName)) {
+                                targetE = emp;
+                            }
+                        }
+
+                        targetD.removeEmployee(targetE);
+
+                        String[] strings = new String[targetD.getEmployees().size()];
+                        int count = 0;
+                        for(Employee employee:targetD.getEmployees()){
+                            strings[count] = employee.getName();
+                            count++;
+                        }
+
+                        ComboBoxModel<String> temp = new DefaultComboBoxModel<>(strings);
+                        userList.setModel(temp);
+
+                        updateScheduleTable();
+                    }
+                });
+
+                removeFrame.add(confirm);
+                removeFrame.add(remove);
+                removeFrame.add(deny);
+            }
+        });
 
         addEmployee.addActionListener(new ActionListener() {
             @Override

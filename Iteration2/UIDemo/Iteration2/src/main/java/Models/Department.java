@@ -84,4 +84,8 @@ public class Department {
             employeeList.add(e);
         }
     }
+
+    public void removeEmployee(Employee e) {
+        employeeList.remove(e);
+    }
 }
