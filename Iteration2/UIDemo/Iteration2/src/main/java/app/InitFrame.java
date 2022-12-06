@@ -98,14 +98,14 @@ public class InitFrame extends JFrame{
         JButton makeReq = new JButton("Make Request");
         JMenuItem saveAll = new JMenuItem("Save All");
         JMenuItem makeActive = new JMenuItem("Set Active");
-        //JButton addEmployee = new JButton("Add Employee");
+        JMenuItem addEmployee = new JMenuItem("Add Employee");
 
         if(!admin){
             request.setEnabled(false);
             saveAll.setEnabled(false);
             addSchedule.setEnabled(false);
             makeActive.setEnabled(false);
-            //addEmployee.setEnabled(false);
+            addEmployee.setEnabled(false);
         }
 
 
@@ -287,9 +287,40 @@ public class InitFrame extends JFrame{
         menu.addSeparator();
         menu.add(saveAll);
         menu.add(makeActive);
+        menu.add(addEmployee);
+
+        addEmployee.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String deptName = depCB.getSelectedItem().toString();
+                Department target = null;
+                for(Department d : departments) {
+                    if(d.getName().equals(deptName)) {
+                        target = d;
+                    }
+                }
+                JFrame employeeAdd = new JFrame(": add new employee");
+                employeeAdd.setLayout(new GridLayout(5,2));
+                employeeAdd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                JLabel empName = new JLabel("Employee Name:");
+                JLabel empEmail = new JLabel("Employee Email:");
+                JLabel empDays = new JLabel("Available Days:");
+                JLabel empShift = new JLabel("Available Shift:");
+                JTextField nameF = new JTextField("Enter name");
+                JTextField emailF = new JTextField("Enter email");
+                JTextField daysF = new JTextField("M,T,W,TR,F");
+                JTextField shiftF = new JTextField("Day");
+                JButton addEmp = new JButton("Confirm");
+                JButton cancelAdd = new JButton("Cancel");
+
+                employeeAdd.add(empName);
+                employeeAdd.add(empEmail);
+
+                employeeAdd.setVisible(true);
+            }
+        });
 
         menuBar.add(menu);
-        //menuBar.add(addEmployee);
         menuBar.add(addSchedule);
         menuBar.add(request);
         menuBar.add(makeReq);
@@ -433,6 +464,7 @@ public class InitFrame extends JFrame{
         frame.add(depCB);
         frame.add(conf);
     }
+
     void goodbye(){
         JFrame goodbye = new JFrame();
         JLabel bye = new JLabel("Thank you for using XTREME Scheduling Services.");
