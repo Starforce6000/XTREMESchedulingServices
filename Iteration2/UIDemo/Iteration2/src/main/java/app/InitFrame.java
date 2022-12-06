@@ -391,6 +391,17 @@ public class InitFrame extends JFrame{
                             Availability newA = new Availability(d, s);
                             newE.setAvailability(newA);
                             td.addEmployee(newE);
+
+                            String[] strings = new String[td.getEmployees().size()];
+                            int count = 0;
+                            for(Employee employee:td.getEmployees()){
+                                strings[count] = employee.getName();
+                                count++;
+                            }
+
+                            ComboBoxModel<String> temp = new DefaultComboBoxModel<>(strings);
+                            userList.setModel(temp);
+
                             employeeAdd.dispose();
                         }
                     }
