@@ -56,6 +56,7 @@ public class MakeRequest extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JComboBox cb = (JComboBox)e.getSource();
                 type = (RequestType) cb.getSelectedItem();
+                System.out.println();
             }
         });
 
@@ -78,6 +79,7 @@ public class MakeRequest extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 handler = new RequestHandler();
+                handler.setRequestType(type);
                 makeReq.setVisible(false);
                 try {
                     getReqDetails();
